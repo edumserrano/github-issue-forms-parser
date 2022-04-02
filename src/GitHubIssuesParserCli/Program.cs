@@ -1,6 +1,7 @@
 // See https://aka.ms/new-console-template for more information
 using System.Text;
 using System.Text.Json;
+using GitHubIssuesParserCli.IssueFormBody;
 
 // TODO use implict usings setting on directory build props?? what about tests?
 // TODO add enable global usings ?

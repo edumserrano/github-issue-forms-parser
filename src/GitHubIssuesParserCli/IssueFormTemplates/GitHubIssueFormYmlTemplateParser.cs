@@ -1,6 +1,6 @@
 using YamlDotNet.Serialization;
 
-namespace GitHubIssuesParserCli
+namespace GitHubIssuesParserCli.IssueFormTemplates
 {
     internal static class GitHubIssueFormYmlTemplateParser
     {
@@ -27,14 +27,6 @@ namespace GitHubIssuesParserCli
                 })
                 .ToList();
             return new GitHubIssueFormTemplate(formTemplateElements);
-        }
-    }
-
-    internal static class GitHubIssueFormYmlTemplateParserStringExtensions
-    {
-        public static GitHubIssueFormTemplate ToGitHubIssueFormTemplate(this string ymlTemplate)
-        {
-            return GitHubIssueFormYmlTemplateParser.Parse(ymlTemplate);
         }
     }
 }

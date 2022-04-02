@@ -1,4 +1,6 @@
-namespace GitHubIssuesParserCli
+using GitHubIssuesParserCli.IssueFormTemplates;
+
+namespace GitHubIssuesParserCli.IssueFormBody
 {
     internal static class GitHubIssueFormItemFactory
     {

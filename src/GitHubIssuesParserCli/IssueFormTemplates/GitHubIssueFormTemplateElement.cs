@@ -1,4 +1,4 @@
-namespace GitHubIssuesParserCli
+namespace GitHubIssuesParserCli.IssueFormTemplates
 {
     internal record GitHubIssueFormTemplate(List<GitHubIssueFormTemplateElement> FormTemplateElements);
 

@@ -1,4 +1,4 @@
-namespace GitHubIssuesParserCli
+namespace GitHubIssuesParserCli.IssueFormBody
 {
     internal record GitHubIssueFormBody(List<GitHubIssueFormItem> Items);
 

@@ -1,6 +1,6 @@
 using YamlDotNet.Serialization;
 
-namespace GitHubIssuesParserCli
+namespace GitHubIssuesParserCli.IssueFormTemplates
 {
 #pragma warning disable CA1812 // Avoid uninstantiated internal classes. Used via generics on YML deserialization
 
