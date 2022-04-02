@@ -1,4 +1,4 @@
-﻿using YamlDotNet.Serialization;
+using YamlDotNet.Serialization;
 
 namespace GitHubIssuesParserCli
 {
@@ -21,7 +21,7 @@ namespace GitHubIssuesParserCli
                         GitHubIssueFormItemDtoTypes.Input => GitHubIssueFormTemplateElementTypes.Input,
                         GitHubIssueFormItemDtoTypes.Textarea => GitHubIssueFormTemplateElementTypes.Textarea,
                         GitHubIssueFormItemDtoTypes.Checkboxes => GitHubIssueFormTemplateElementTypes.Checkboxes,
-                        _ => GitHubIssueFormTemplateElementTypes.Unknown
+                        _ => throw new NotImplementedException()
                     };
                     return new GitHubIssueFormTemplateElement(issueFormItem.Id, type, issueFormItem.Attributes.Label);
                 })

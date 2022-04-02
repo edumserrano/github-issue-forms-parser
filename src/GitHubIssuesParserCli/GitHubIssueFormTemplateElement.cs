@@ -1,4 +1,4 @@
-﻿namespace GitHubIssuesParserCli
+namespace GitHubIssuesParserCli
 {
     internal record GitHubIssueFormTemplate(List<GitHubIssueFormTemplateElement> FormTemplateElements);
 
@@ -9,7 +9,6 @@
 
     internal enum GitHubIssueFormTemplateElementTypes
     {
-        Unknown,
         Dropdown,
         Markdown,
         Input,

@@ -4,6 +4,7 @@ using System.Text.Json;
 
 // TODO use implict usings setting on directory build props?? what about tests?
 // TODO add enable global usings ?
+// custom exceptions instead of throw new NotImplementedException
 
 namespace GitHubIssuesParserCli
 {

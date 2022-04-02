@@ -1,7 +1,9 @@
-﻿using YamlDotNet.Serialization;
+using YamlDotNet.Serialization;
 
 namespace GitHubIssuesParserCli
 {
+#pragma warning disable CA1812 // Avoid uninstantiated internal classes. Used via generics on YML deserialization
+
     internal class GitHubIssueFormTemplateDto
     {
         [YamlMember(Alias = "body")]
@@ -14,7 +16,7 @@ namespace GitHubIssuesParserCli
         public string Id { get; init; } = default!;
 
         [YamlMember(Alias = "type")]
-        public GitHubIssueFormItemDtoTypes Type { get; init; } = GitHubIssueFormItemDtoTypes.Unknown;
+        public GitHubIssueFormItemDtoTypes Type { get; init; }
 
         [YamlMember(Alias = "attributes")]
         public GitHubIssueFormItemAttributesDto Attributes { get; init; } = default!;
@@ -28,11 +30,13 @@ namespace GitHubIssuesParserCli
 
     internal enum GitHubIssueFormItemDtoTypes
     {
-        Unknown,
         Dropdown,
         Markdown,
         Input,
         Textarea,
         Checkboxes,
     }
+
+#pragma warning restore CA1812 // Avoid uninstantiated internal classes. Used via generics on YML deserialization
+
 }

@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace GitHubIssuesParserCli
@@ -12,6 +12,7 @@ namespace GitHubIssuesParserCli
             {
                 writer.WriteGitHubIssueFormItem(item);
             }
+
             writer.WriteEndObject();
         }
 
@@ -42,6 +43,7 @@ namespace GitHubIssuesParserCli
             {
                 writer.WriteBoolean(option.Name, option.Checked);
             }
+
             writer.WriteEndObject();
         }
     }

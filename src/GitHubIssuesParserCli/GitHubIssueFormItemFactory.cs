@@ -13,6 +13,7 @@ namespace GitHubIssuesParserCli
                     or GitHubIssueFormTemplateElementTypes.Input
                     or GitHubIssueFormTemplateElementTypes.Textarea => CreateIssueFormText(id, value),
                 GitHubIssueFormTemplateElementTypes.Checkboxes => CreateIssueFormCheckboxes(id, value),
+                GitHubIssueFormTemplateElementTypes.Markdown => throw new NotImplementedException($"Cannot {typeof(GitHubIssueFormItem)}. Unexpected {typeof(GitHubIssueFormTemplateElementTypes)}: {type}"),
                 _ => throw new NotImplementedException($"Cannot {typeof(GitHubIssueFormItem)}. Unexpected {typeof(GitHubIssueFormTemplateElementTypes)}: {type}")
             };
         }
