@@ -6,10 +6,18 @@
   -->
   <PropertyGroup>
     <ParentDirectoryBuildPropsPath>$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)..\'))</ParentDirectoryBuildPropsPath>
+    <ParentDirectoryBuildPropsPath>$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)..\'))</ParentDirectoryBuildPropsPath>
   </PropertyGroup>
   <ImportGroup>
     <Import Project="$(ParentDirectoryBuildPropsPath)" />
   </ImportGroup>
+  <!--
+    Idea taken from https://blog.jetbrains.com/dotnet/2021/11/18/global-usings-in-csharp-10/.
+    Declare a GlobalUsings.Tests.cs in the one place and use it for all tests.
+  -->
+  <ItemGroup>
+    <Compile Include="$(SolutionDir)\src\GitHubIssuesParserCli\GlobalUsings.cs" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="coverlet.msbuild" Version="3.1.2">
       <PrivateAssets>all</PrivateAssets>

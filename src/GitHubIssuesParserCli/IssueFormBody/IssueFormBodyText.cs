@@ -6,6 +6,11 @@ internal record IssueFormBodyText
 
     public IssueFormBodyText(string value)
     {
+        if (string.IsNullOrEmpty(value))
+        {
+            throw new ArgumentNullException(nameof(value));
+        }
+
         _value = value;
     }
 

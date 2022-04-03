@@ -6,6 +6,11 @@ internal record IssueFormYmlTemplateText
 
     public IssueFormYmlTemplateText(string value)
     {
+        if (string.IsNullOrEmpty(value))
+        {
+            throw new ArgumentNullException(nameof(value));
+        }
+
         _value = value;
     }
 

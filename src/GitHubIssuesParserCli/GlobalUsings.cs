@@ -1,4 +1,8 @@
-﻿global using System.Text.Json;
+/*
+ * This file is also imported to all test projects by the Directory.Build.props file in the tests folder.
+ */
+
+global using System.Text.Json;
 global using System.Text.Json.Serialization;
 global using CliFx;
 global using CliFx.Attributes;
@@ -11,3 +15,4 @@ global using GitHubIssuesParserCli.IssueFormBody.JsonSerialization;
 global using GitHubIssuesParserCli.IssueFormBody.Parser;
 global using GitHubIssuesParserCli.IssueFormTemplates;
 global using YamlDotNet.Serialization;
+
