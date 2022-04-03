@@ -1,6 +1,6 @@
-﻿using GitHubIssuesParserCli.IssueFormTemplates;
+using GitHubIssuesParserCli.IssueFormTemplates;
 
-namespace GitHubIssuesParserCli.IssueFormBody
+namespace GitHubIssuesParserCli.IssueFormBody.Parser
 {
     internal static class GitHubIssueFormBodyParserExtensions
     {

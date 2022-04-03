@@ -9,24 +9,7 @@ namespace GitHubIssuesParserCli.IssueFormTemplates
             var deserializer = new DeserializerBuilder()
                 .IgnoreUnmatchedProperties()
                 .Build();
-            var issueTemplate = deserializer.Deserialize<GitHubIssueFormTemplateDto>(ymlTemplate);
-            var formTemplateElements = issueTemplate.Body
-                .Where(issueFormItem => issueFormItem.Type is not GitHubIssueFormItemDtoTypes.Markdown)
-                .Select(issueFormItem =>
-                {
-                    var type = issueFormItem.Type switch
-                    {
-                        GitHubIssueFormItemDtoTypes.Dropdown => GitHubIssueFormTemplateElementTypes.Dropdown,
-                        GitHubIssueFormItemDtoTypes.Markdown => GitHubIssueFormTemplateElementTypes.Markdown,
-                        GitHubIssueFormItemDtoTypes.Input => GitHubIssueFormTemplateElementTypes.Input,
-                        GitHubIssueFormItemDtoTypes.Textarea => GitHubIssueFormTemplateElementTypes.Textarea,
-                        GitHubIssueFormItemDtoTypes.Checkboxes => GitHubIssueFormTemplateElementTypes.Checkboxes,
-                        _ => throw new NotImplementedException()
-                    };
-                    return new GitHubIssueFormTemplateElement(issueFormItem.Id, type, issueFormItem.Attributes.Label);
-                })
-                .ToList();
-            return new GitHubIssueFormTemplate(formTemplateElements);
+            return deserializer.Deserialize<GitHubIssueFormTemplate>(ymlTemplate);
         }
     }
 }

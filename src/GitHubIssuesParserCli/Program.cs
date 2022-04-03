@@ -1,11 +1,20 @@
 // See https://aka.ms/new-console-template for more information
 using System.Text;
 using System.Text.Json;
-using GitHubIssuesParserCli.IssueFormBody;
+using GitHubIssuesParserCli.IssueFormBody.JsonSerialization;
+using GitHubIssuesParserCli.IssueFormBody.Parser;
 
 // TODO use implict usings setting on directory build props?? what about tests?
 // TODO add enable global usings ?
 // custom exceptions instead of throw new NotImplementedException
+// todo add cli library to handle args
+//  - should accept file path to template file and string with github issue body
+// todo create some classes to represent important types (?):
+//  - one for issue form body
+//  - one for template file
+//  - one for issue form value (this could handle the sanitization issues)
+//    - one for checkbox option
+//    - one for the rest
 
 namespace GitHubIssuesParserCli
 {

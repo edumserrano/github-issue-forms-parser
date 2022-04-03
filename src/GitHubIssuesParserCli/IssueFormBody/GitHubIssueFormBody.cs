@@ -1,20 +1,26 @@
+using System.Text.Json;
+using GitHubIssuesParserCli.IssueFormBody.IssueFormItems;
+
 namespace GitHubIssuesParserCli.IssueFormBody
 {
-    internal record GitHubIssueFormBody(List<GitHubIssueFormItem> Items);
-
-    internal abstract record GitHubIssueFormItem(string Id, GitHubIssueFormItemTypes Type);
-
-    internal record GitHubIssueFormText(string Id, string Text)
-        : GitHubIssueFormItem(Id, GitHubIssueFormItemTypes.Text);
-
-    internal record GitHubIssueFormCheckboxes(string Id, List<GitHubIssueFormCheckboxOption> Options)
-        : GitHubIssueFormItem(Id, GitHubIssueFormItemTypes.Checkboxes);
-
-    internal record GitHubIssueFormCheckboxOption(string Name, bool Checked);
-
-    internal enum GitHubIssueFormItemTypes
+    internal class GitHubIssueFormBody
     {
-        Text,
-        Checkboxes,
+        public GitHubIssueFormBody(List<GitHubIssueFormItem> items)
+        {
+            Items = items;
+        }
+
+        public List<GitHubIssueFormItem> Items { get; }
+
+        public void WriteAsJson(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            foreach (var item in Items)
+            {
+                item.WriteAsJson(writer);
+            }
+
+            writer.WriteEndObject();
+        }
     }
 }

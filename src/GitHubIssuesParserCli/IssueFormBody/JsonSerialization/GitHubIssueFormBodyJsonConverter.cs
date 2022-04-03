@@ -1,7 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace GitHubIssuesParserCli.IssueFormBody
+namespace GitHubIssuesParserCli.IssueFormBody.JsonSerialization
 {
     internal class GitHubIssueFormBodyJsonConverter : JsonConverter<GitHubIssueFormBody>
     {
@@ -18,7 +18,7 @@ namespace GitHubIssuesParserCli.IssueFormBody
             GitHubIssueFormBody value,
             JsonSerializerOptions options)
         {
-            writer.WriteGitHubIssueFormBody(value);
+            value.WriteAsJson(writer);
         }
     }
 }
