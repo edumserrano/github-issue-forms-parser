@@ -1,17 +1,16 @@
-namespace GitHubIssuesParserCli.IssueFormBody
+namespace GitHubIssuesParserCli.IssueFormBody;
+
+internal record IssueFormBodyText
 {
-    internal record IssueFormBodyText
+    private readonly string _value;
+
+    public IssueFormBodyText(string value)
     {
-        private readonly string _value;
+        _value = value;
+    }
 
-        public IssueFormBodyText(string value)
-        {
-            _value = value;
-        }
-
-        public static implicit operator string(IssueFormBodyText issueFormBodyText)
-        {
-            return issueFormBodyText._value;
-        }
+    public static implicit operator string(IssueFormBodyText issueFormBodyText)
+    {
+        return issueFormBodyText._value;
     }
 }

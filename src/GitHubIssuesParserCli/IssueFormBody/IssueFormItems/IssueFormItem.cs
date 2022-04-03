@@ -1,19 +1,18 @@
 using System.Text.Json;
 
-namespace GitHubIssuesParserCli.IssueFormBody.IssueFormItems
+namespace GitHubIssuesParserCli.IssueFormBody.IssueFormItems;
+
+internal abstract class IssueFormItem
 {
-    internal abstract class IssueFormItem
+    protected IssueFormItem(string id, IssueFormItemTypes type)
     {
-        protected IssueFormItem(string id, IssueFormItemTypes type)
-        {
-            Id = id;
-            Type = type;
-        }
-
-        public string Id { get; }
-
-        public IssueFormItemTypes Type { get; }
-
-        public abstract void WriteAsJson(Utf8JsonWriter writer);
+        Id = id;
+        Type = type;
     }
+
+    public string Id { get; }
+
+    public IssueFormItemTypes Type { get; }
+
+    public abstract void WriteAsJson(Utf8JsonWriter writer);
 }

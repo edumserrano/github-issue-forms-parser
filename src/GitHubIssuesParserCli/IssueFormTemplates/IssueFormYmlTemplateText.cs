@@ -1,17 +1,16 @@
-namespace GitHubIssuesParserCli.IssueFormTemplates
+namespace GitHubIssuesParserCli.IssueFormTemplates;
+
+internal record IssueFormYmlTemplateText
 {
-    internal record IssueFormYmlTemplateText
+    private readonly string _value;
+
+    public IssueFormYmlTemplateText(string value)
     {
-        private readonly string _value;
+        _value = value;
+    }
 
-        public IssueFormYmlTemplateText(string value)
-        {
-            _value = value;
-        }
-
-        public static implicit operator string(IssueFormYmlTemplateText issueFormTemplateText)
-        {
-            return issueFormTemplateText._value;
-        }
+    public static implicit operator string(IssueFormYmlTemplateText issueFormTemplateText)
+    {
+        return issueFormTemplateText._value;
     }
 }

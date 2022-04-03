@@ -1,26 +1,39 @@
 using System.Text.Json;
 using GitHubIssuesParserCli.IssueFormBody.IssueFormItems;
+using GitHubIssuesParserCli.IssueFormBody.JsonSerialization;
 
-namespace GitHubIssuesParserCli.IssueFormBody
+namespace GitHubIssuesParserCli.IssueFormBody;
+
+internal class IssueFormBody
 {
-    internal class IssueFormBody
+    public IssueFormBody(List<IssueFormItem> items)
     {
-        public IssueFormBody(List<IssueFormItem> items)
-        {
-            Items = items;
-        }
+        Items = items;
+    }
 
-        public List<IssueFormItem> Items { get; }
+    public List<IssueFormItem> Items { get; }
 
-        public void WriteAsJson(Utf8JsonWriter writer)
+    public string ToJson()
+    {
+        var serializeOptions = new JsonSerializerOptions
         {
-            writer.WriteStartObject();
-            foreach (var item in Items)
+            WriteIndented = true, // TODO change to false
+            Converters =
             {
-                item.WriteAsJson(writer);
-            }
+                new IssueFormBodyJsonConverter(),
+            },
+        };
+        return JsonSerializer.Serialize(this, serializeOptions);
+    }
 
-            writer.WriteEndObject();
+    public void WriteAsJson(Utf8JsonWriter writer)
+    {
+        writer.WriteStartObject();
+        foreach (var item in Items)
+        {
+            item.WriteAsJson(writer);
         }
+
+        writer.WriteEndObject();
     }
 }
