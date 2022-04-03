@@ -13,8 +13,8 @@ internal static class IssueFormItemFactory
                 or IssueFormYmlTemplateItemTypes.Input
                 or IssueFormYmlTemplateItemTypes.Textarea => CreateIssueFormText(id, value),
             IssueFormYmlTemplateItemTypes.Checkboxes => CreateIssueFormCheckboxesItem(id, value),
-            IssueFormYmlTemplateItemTypes.Markdown => throw new NotImplementedException($"Cannot {typeof(IssueFormItem)}. {IssueFormYmlTemplateItemTypes.Markdown} template items are not part of the issue form body"),
-            _ => throw new NotImplementedException($"Cannot {typeof(IssueFormItem)}. Unexpected {typeof(IssueFormYmlTemplateItemTypes)}: {type}")
+            IssueFormYmlTemplateItemTypes.Markdown => throw CreateIssueFormItemException.Markdown(),
+            _ => throw CreateIssueFormItemException.UnexpectedType(type),
         };
     }
 
