@@ -3,31 +3,31 @@ using YamlDotNet.Serialization;
 namespace GitHubIssuesParserCli.IssueFormTemplates
 {
 #pragma warning disable CA1812 // Avoid uninstantiated internal classes. Used via generics on YML deserialization
-    internal class GitHubIssueFormTemplate
+    internal class IssueFormYmlTemplate
     {
         [YamlMember(Alias = "body")]
-        public List<GitHubIssueFormTemplateItem> Body { get; init; } = default!;
+        public List<IssueFormYmlTemplateItem> Body { get; init; } = default!;
     }
 
-    internal class GitHubIssueFormTemplateItem
+    internal class IssueFormYmlTemplateItem
     {
         [YamlMember(Alias = "id")]
         public string Id { get; init; } = default!;
 
         [YamlMember(Alias = "type")]
-        public GitHubIssueFormTemplateItemTypes Type { get; init; }
+        public IssueFormYmlTemplateItemTypes Type { get; init; }
 
         [YamlMember(Alias = "attributes")]
-        public GitHubIssueFormTemplateItemAttributes Attributes { get; init; } = default!;
+        public IssueFormYmlTemplateItemAttributes Attributes { get; init; } = default!;
     }
 
-    internal class GitHubIssueFormTemplateItemAttributes
+    internal class IssueFormYmlTemplateItemAttributes
     {
         [YamlMember(Alias = "label")]
         public string Label { get; init; } = default!;
     }
 
-    internal enum GitHubIssueFormTemplateItemTypes
+    internal enum IssueFormYmlTemplateItemTypes
     {
         Dropdown,
         Markdown,

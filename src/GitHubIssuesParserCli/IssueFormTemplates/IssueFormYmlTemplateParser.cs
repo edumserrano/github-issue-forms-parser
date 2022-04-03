@@ -2,14 +2,14 @@ using YamlDotNet.Serialization;
 
 namespace GitHubIssuesParserCli.IssueFormTemplates
 {
-    internal static class GitHubIssueFormYmlTemplateParser
+    internal static class IssueFormYmlTemplateParser
     {
-        public static GitHubIssueFormTemplate Parse(string ymlTemplate)
+        public static IssueFormYmlTemplate Parse(IssueFormYmlTemplateText ymlTemplate)
         {
             var deserializer = new DeserializerBuilder()
                 .IgnoreUnmatchedProperties()
                 .Build();
-            return deserializer.Deserialize<GitHubIssueFormTemplate>(ymlTemplate);
+            return deserializer.Deserialize<IssueFormYmlTemplate>(ymlTemplate);
         }
     }
 }

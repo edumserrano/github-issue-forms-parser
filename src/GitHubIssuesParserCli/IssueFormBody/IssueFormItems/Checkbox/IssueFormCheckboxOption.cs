@@ -1,8 +1,8 @@
 namespace GitHubIssuesParserCli.IssueFormBody.IssueFormItems.Checkbox
 {
-    internal class GitHubIssueFormCheckboxOption
+    internal class IssueFormCheckboxOption
     {
-        public GitHubIssueFormCheckboxOption(string name, bool isChecked)
+        public IssueFormCheckboxOption(string name, bool isChecked)
         {
             Name = name;
             IsChecked = isChecked;

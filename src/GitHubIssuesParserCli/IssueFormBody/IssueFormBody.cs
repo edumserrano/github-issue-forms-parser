@@ -3,14 +3,14 @@ using GitHubIssuesParserCli.IssueFormBody.IssueFormItems;
 
 namespace GitHubIssuesParserCli.IssueFormBody
 {
-    internal class GitHubIssueFormBody
+    internal class IssueFormBody
     {
-        public GitHubIssueFormBody(List<GitHubIssueFormItem> items)
+        public IssueFormBody(List<IssueFormItem> items)
         {
             Items = items;
         }
 
-        public List<GitHubIssueFormItem> Items { get; }
+        public List<IssueFormItem> Items { get; }
 
         public void WriteAsJson(Utf8JsonWriter writer)
         {

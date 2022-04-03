@@ -1,6 +1,6 @@
 namespace GitHubIssuesParserCli.IssueFormBody.IssueFormItems
 {
-    internal enum GitHubIssueFormItemTypes
+    internal enum IssueFormItemTypes
     {
         Text,
         Checkboxes,

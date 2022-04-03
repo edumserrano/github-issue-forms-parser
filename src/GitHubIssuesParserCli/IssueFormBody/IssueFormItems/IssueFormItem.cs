@@ -2,9 +2,9 @@ using System.Text.Json;
 
 namespace GitHubIssuesParserCli.IssueFormBody.IssueFormItems
 {
-    internal abstract class GitHubIssueFormItem
+    internal abstract class IssueFormItem
     {
-        protected GitHubIssueFormItem(string id, GitHubIssueFormItemTypes type)
+        protected IssueFormItem(string id, IssueFormItemTypes type)
         {
             Id = id;
             Type = type;
@@ -12,7 +12,7 @@ namespace GitHubIssuesParserCli.IssueFormBody.IssueFormItems
 
         public string Id { get; }
 
-        public GitHubIssueFormItemTypes Type { get; }
+        public IssueFormItemTypes Type { get; }
 
         public abstract void WriteAsJson(Utf8JsonWriter writer);
     }

@@ -3,6 +3,7 @@ using System.Text;
 using System.Text.Json;
 using GitHubIssuesParserCli.IssueFormBody.JsonSerialization;
 using GitHubIssuesParserCli.IssueFormBody.Parser;
+using GitHubIssuesParserCli.IssueFormTemplates;
 
 // TODO use implict usings setting on directory build props?? what about tests?
 // TODO add enable global usings ?
@@ -22,15 +23,23 @@ namespace GitHubIssuesParserCli
     {
         public static async Task Main(string[] args)
         {
-            var ymlTemplate = await File.ReadAllTextAsync("template.yml");
+            var ymlTemplateAsString = await File.ReadAllTextAsync("template.yml");
             var issueBodyAsString = await File.ReadAllTextAsync("issue2.md", Encoding.UTF8);
-            var issueFormBody = issueBodyAsString.ToGitHubIssueFormBody(ymlTemplate);
+
+            var issueFormBodyText = new IssueFormBodyText(issueBodyAsString);
+            var issueFormTemplateText = new IssueFormYmlTemplateText(ymlTemplateAsString);
+            
+            var issueFormTemplate = IssueFormYmlTemplateParser.Parse(issueFormTemplateText);
+            var issueFormBody = IssueFormBodyParser.Parse(issueFormBodyText, issueFormTemplate);
+
+
+            //var issueFormBody = issueBodyAsString.ToGitHubIssueFormBody(ymlTemplateAsString);
             var serializeOptions = new JsonSerializerOptions
             {
                 WriteIndented = true, // TODO change to false
                 Converters =
                 {
-                    new GitHubIssueFormBodyJsonConverter(),
+                    new IssueFormBodyJsonConverter(),
                 },
             };
             var jsonString = JsonSerializer.Serialize(issueFormBody, serializeOptions);
