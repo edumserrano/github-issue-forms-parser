@@ -1,7 +1,3 @@
-using GitHubIssuesParserCli.IssueFormBody.IssueFormItems.Checkboxes;
-using GitHubIssuesParserCli.IssueFormBody.IssueFormItems.Text;
-using GitHubIssuesParserCli.IssueFormTemplates;
-
 namespace GitHubIssuesParserCli.IssueFormBody.IssueFormItems;
 
 internal static class IssueFormItemFactory

@@ -1,6 +1,3 @@
-using System.Text.Json;
-using System.Text.Json.Serialization;
-
 namespace GitHubIssuesParserCli.IssueFormBody.JsonSerialization;
 
 internal class IssueFormBodyJsonConverter : JsonConverter<IssueFormBody>

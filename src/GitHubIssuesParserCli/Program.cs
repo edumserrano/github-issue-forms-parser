@@ -1,8 +1,4 @@
-using CliFx;
-
-// TODO use implict usings setting on directory build props?? what about tests?
-// TODO add enable global usings ?
-// custom exceptions instead of throw new NotImplementedException
+// tests (how do global/implicit usings work there? see https://blog.jetbrains.com/dotnet/2021/11/18/global-usings-in-csharp-10/)
 
 namespace GitHubIssuesParserCli;
 

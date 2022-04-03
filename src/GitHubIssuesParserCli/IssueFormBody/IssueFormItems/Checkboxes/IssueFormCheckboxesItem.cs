@@ -1,5 +1,3 @@
-using System.Text.Json;
-
 namespace GitHubIssuesParserCli.IssueFormBody.IssueFormItems.Checkboxes;
 
 internal sealed class IssueFormCheckboxesItem : IssueFormItem

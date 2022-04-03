@@ -1,5 +1,3 @@
-using System.Text.Json;
-
 namespace GitHubIssuesParserCli.IssueFormBody.IssueFormItems;
 
 internal abstract class IssueFormItem

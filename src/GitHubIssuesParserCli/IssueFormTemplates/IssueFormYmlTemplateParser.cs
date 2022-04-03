@@ -1,5 +1,3 @@
-using YamlDotNet.Serialization;
-
 namespace GitHubIssuesParserCli.IssueFormTemplates;
 
 internal static class IssueFormYmlTemplateParser

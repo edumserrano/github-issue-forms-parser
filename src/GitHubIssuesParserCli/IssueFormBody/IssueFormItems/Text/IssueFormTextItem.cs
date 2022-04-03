@@ -1,5 +1,3 @@
-using System.Text.Json;
-
 namespace GitHubIssuesParserCli.IssueFormBody.IssueFormItems.Text;
 
 internal sealed class IssueFormTextItem : IssueFormItem

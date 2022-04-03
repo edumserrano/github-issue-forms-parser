@@ -1,4 +1,4 @@
-namespace GitHubIssuesParserCli;
+namespace GitHubIssuesParserCli.IssueFormBody.IssueFormItems;
 
 internal static class NewLines
 {

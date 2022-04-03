@@ -1,7 +1,3 @@
-using System.Text.Json;
-using GitHubIssuesParserCli.IssueFormBody.IssueFormItems;
-using GitHubIssuesParserCli.IssueFormBody.JsonSerialization;
-
 namespace GitHubIssuesParserCli.IssueFormBody;
 
 internal class IssueFormBody

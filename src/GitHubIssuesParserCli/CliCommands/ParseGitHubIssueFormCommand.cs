@@ -1,11 +1,4 @@
-using CliFx;
-using CliFx.Attributes;
-using CliFx.Infrastructure;
-using GitHubIssuesParserCli.IssueFormBody;
-using GitHubIssuesParserCli.IssueFormBody.Parser;
-using GitHubIssuesParserCli.IssueFormTemplates;
-
-namespace GitHubIssuesParserCli;
+namespace GitHubIssuesParserCli.CliCommands;
 
 [Command]
 public class ParseGitHubIssueFormCommand : ICommand
