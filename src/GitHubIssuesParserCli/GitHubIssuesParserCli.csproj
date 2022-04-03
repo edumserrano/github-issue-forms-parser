@@ -9,17 +9,5 @@
     <PackageReference Include="CliFx" Version="2.2.2" />
     <PackageReference Include="YamlDotNet" Version="11.2.1" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <None Update="issue.md">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="issue2.md">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="template.yml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
 
 </Project>
