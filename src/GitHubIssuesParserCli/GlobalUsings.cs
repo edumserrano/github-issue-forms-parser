@@ -15,4 +15,3 @@ global using GitHubIssuesParserCli.IssueFormBody.JsonSerialization;
 global using GitHubIssuesParserCli.IssueFormBody.Parser;
 global using GitHubIssuesParserCli.IssueFormTemplates;
 global using YamlDotNet.Serialization;
-

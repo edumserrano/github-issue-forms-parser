@@ -4,6 +4,16 @@ internal static class IssueFormBodyParser
 {
     public static IssueFormBody Parse(IssueFormBodyText issueFormBodyText, IssueFormYmlTemplate issueFormTemplate)
     {
+        if (issueFormBodyText is null)
+        {
+            throw new ArgumentNullException(nameof(issueFormBodyText));
+        }
+
+        if (issueFormTemplate is null)
+        {
+            throw new ArgumentNullException(nameof(issueFormTemplate));
+        }
+
         // markdown template item types do NOT show in the issue form body, they are only used
         // to show some markdown text when creating the issue.
         var templateItems = issueFormTemplate.Body

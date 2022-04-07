@@ -1,4 +1,4 @@
-﻿### What NuGet package do you want to release?
+### What NuGet package do you want to release?
 
 dotnet-sdk-extensions
 
@@ -10,9 +10,13 @@ dotnet-sdk-extensions
 
 Yes
 
+### Auto-generate release notes optional?
+
+_No response_
+
 ### Custom release notes?
 
-## title 
+## Custom release notes 
 
 Test 123
 

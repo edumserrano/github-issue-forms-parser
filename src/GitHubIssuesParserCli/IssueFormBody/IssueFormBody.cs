@@ -4,7 +4,7 @@ internal class IssueFormBody
 {
     public IssueFormBody(List<IssueFormItem> items)
     {
-        Items = items;
+        Items = items ?? throw new ArgumentNullException(nameof(items));
     }
 
     public List<IssueFormItem> Items { get; }

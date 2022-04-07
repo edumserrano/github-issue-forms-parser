@@ -6,6 +6,11 @@ internal record IssueFormText
 
     public IssueFormText(string value)
     {
+        if (string.IsNullOrEmpty(value))
+        {
+            throw new ArgumentException($"'{nameof(value)}' cannot be null or empty.", nameof(value));
+        }
+
         _value = Sanitize(value);
     }
 

@@ -5,6 +5,11 @@ internal sealed class IssueFormCheckboxesItem : IssueFormItem
     public IssueFormCheckboxesItem(string id, IssueFormCheckBoxesText text)
         : base(id, IssueFormItemTypes.Checkboxes)
     {
+        if (string.IsNullOrEmpty(id))
+        {
+            throw new ArgumentException($"'{nameof(id)}' cannot be null or empty.", nameof(id));
+        }
+
         Options = text.Options;
     }
 

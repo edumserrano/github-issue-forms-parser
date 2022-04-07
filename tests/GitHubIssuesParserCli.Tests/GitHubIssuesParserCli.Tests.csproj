@@ -23,13 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="issue.md">
+    <None Update="TestFiles\IssueBody.md">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="issue2.md">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="template.yml">
+    <None Update="TestFiles\Template.yml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -1,7 +1,6 @@
-﻿name: Release NuGet package
+name: Release NuGet package
 description: Release a NuGet package.
 title: Release NuGet package
-labels: [nuget-release]
 body:
   - type: markdown
     attributes:
@@ -35,6 +34,14 @@ body:
         - 'No'
     validations:
       required: true
+  - type: dropdown
+    id: auto-generate-release-notes-optional
+    attributes:
+      label: Auto-generate release notes optional?
+      description: Automatically add the markdown for all the merged pull requests from this diff and contributors of this release.
+      options:
+        - 'Yes'
+        - 'No'
   - type: textarea
     id: custom-release-notes
     attributes:
