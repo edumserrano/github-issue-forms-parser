@@ -14,7 +14,7 @@ internal record IssueFormYmlTemplateItem
 {
     public IssueFormYmlTemplateItem(string id, IssueFormYamlTemplateItemTypes type, string label)
     {
-        Id = id.NotNullOrWhiteSpace();
+        Id = id.NotNull();
         Type = type;
         Label = new IssueFormYmlTemplateItemLabel(label);
     }
@@ -37,4 +37,12 @@ internal record IssueFormYmlTemplateItemLabel
     public string Value { get; }
 
     public string H3HeaderValue { get; }
+}
+
+internal enum IssueFormYamlTemplateItemTypes
+{
+    Dropdown,
+    Input,
+    Textarea,
+    Checkboxes,
 }

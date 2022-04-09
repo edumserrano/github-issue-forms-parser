@@ -2,13 +2,13 @@ namespace GitHubIssuesParserCli.IssueFormBody.IssueFormItems.Checkboxes;
 
 internal class IssueFormCheckboxOption
 {
-    public IssueFormCheckboxOption(string name, bool isChecked)
+    public IssueFormCheckboxOption(string label, bool isChecked)
     {
-        Name = name.NotNullOrWhiteSpace();
+        Label = label.NotNullOrWhiteSpace();
         IsChecked = isChecked;
     }
 
-    public string Name { get; }
+    public string Label { get; }
 
     public bool IsChecked { get; }
 }

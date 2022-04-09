@@ -13,7 +13,6 @@ internal static class IssueFormItemFactory
                 or IssueFormYamlTemplateItemTypes.Input
                 or IssueFormYamlTemplateItemTypes.Textarea => CreateIssueFormText(id, value),
             IssueFormYamlTemplateItemTypes.Checkboxes => CreateIssueFormCheckboxesItem(id, value),
-            IssueFormYamlTemplateItemTypes.Markdown => throw CreateIssueFormItemException.Markdown(),
             _ => throw CreateIssueFormItemException.UnexpectedType(type),
         };
     }

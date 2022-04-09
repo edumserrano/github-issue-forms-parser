@@ -16,25 +16,25 @@ internal record IssueFormCheckBoxesText
             .Split(new string[] { NewLines.UnixNewline, NewLines.WindowsNewline }, StringSplitOptions.RemoveEmptyEntries)
             .Select(check =>
             {
-                string name;
+                string label;
                 bool isChecked;
                 if (check.StartsWith("- [X]", StringComparison.Ordinal))
                 {
                     // TODO use sanitize method on string instead of just trim? Or create another sanite method?
-                    name = check
+                    label = check
                         .TrimStart("- [X]".ToArray())
                         .Trim();
                     isChecked = true;
                 }
                 else
                 {
-                    name = check
+                    label = check
                         .TrimStart("- [ ]".ToArray())
                         .Trim();
                     isChecked = false;
                 }
 
-                return new IssueFormCheckboxOption(name, isChecked);
+                return new IssueFormCheckboxOption(label, isChecked);
             })
             .ToList();
     }

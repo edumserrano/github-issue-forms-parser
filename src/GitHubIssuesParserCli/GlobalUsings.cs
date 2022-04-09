@@ -14,6 +14,7 @@ global using GitHubIssuesParserCli.IssueFormBody.IssueFormItems;
 global using GitHubIssuesParserCli.IssueFormBody.IssueFormItems.Checkboxes;
 global using GitHubIssuesParserCli.IssueFormBody.IssueFormItems.Text;
 global using GitHubIssuesParserCli.IssueFormBody.JsonSerialization;
-global using GitHubIssuesParserCli.IssueFormBody.Parser;
+global using GitHubIssuesParserCli.IssueFormBody.Parsing;
 global using GitHubIssuesParserCli.IssueFormTemplates;
+global using SlugGenerator;
 global using YamlDotNet.Serialization;

@@ -24,13 +24,13 @@ internal class IssueFormTestModel
 
 internal class OperatingSystems
 {
-    [JsonPropertyName("macOS")]
+    [JsonPropertyName("macos")]
     public bool MacOS { get; set; }
 
-    [JsonPropertyName("Windows")]
+    [JsonPropertyName("windows")]
     public bool Windows { get; set; }
 
-    [JsonPropertyName("Linux")]
+    [JsonPropertyName("linux")]
     public bool Linux { get; set; }
 }
 #pragma warning restore CA1812 // Avoid uninstantiated internal classes. Used via generics on JSON deserialization

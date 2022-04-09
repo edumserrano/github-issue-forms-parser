@@ -18,7 +18,8 @@ internal sealed class IssueFormCheckboxesItem : IssueFormItem
         writer.WriteStartObject(Id);
         foreach (var option in Options)
         {
-            writer.WriteBoolean(option.Name, option.IsChecked);
+            var slugifiedLabel = option.Label.GenerateSlug();
+            writer.WriteBoolean(slugifiedLabel, option.IsChecked);
         }
 
         writer.WriteEndObject();

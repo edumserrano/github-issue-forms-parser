@@ -1,4 +1,4 @@
-namespace GitHubIssuesParserCli.IssueFormBody.Parser;
+namespace GitHubIssuesParserCli.IssueFormBody.Parsing;
 
 internal static class IssueFormBodyParser
 {
@@ -7,11 +7,7 @@ internal static class IssueFormBodyParser
         issueFormBodyText.NotNull();
         issueFormTemplate.NotNull();
 
-        // markdown template item types do NOT show in the issue form body, they are only used
-        // to show some markdown text when creating the issue.
-        var templateItems = issueFormTemplate.Items
-            .Where(x => x.Type is not IssueFormYamlTemplateItemTypes.Markdown)
-            .ToList();
+        var templateItems = issueFormTemplate.Items;
         var issueFormItems = new List<IssueFormItem>();
         for (var i = 0; i < templateItems.Count; i++)
         {
