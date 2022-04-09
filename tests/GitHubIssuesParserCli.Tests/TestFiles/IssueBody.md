@@ -30,3 +30,4 @@ Another line:
 - [X] macOS
 - [X] Windows
 - [ ] Linux
+- [ ] I don't know

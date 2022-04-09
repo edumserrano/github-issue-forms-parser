@@ -21,9 +21,14 @@ public class ParseGitHubIssueFormCommandTests
         issueFormJson.AutoGenerateReleaseNotes.ShouldBe("Yes");
         issueFormJson.AutoGenerateReleaseNotesOptional.ShouldBeEmpty();
         issueFormJson.CustomReleaseNotes.ShouldBe("## Custom release notes \r\n\r\nTest 123\r\n\r\nAnother line:\r\n- point 1\r\n- point 2\r\n- point 3");
-        issueFormJson.OperatingSystems?.MacOS.ShouldBeTrue();
-        issueFormJson.OperatingSystems?.Windows.ShouldBeTrue();
-        issueFormJson.OperatingSystems?.Linux.ShouldBeFalse();
+        issueFormJson.OperatingSystems?.MacOS.ShouldNotBeNull();
+        issueFormJson.OperatingSystems?.MacOS?.ShouldBeTrue();
+        issueFormJson.OperatingSystems?.Windows.ShouldNotBeNull();
+        issueFormJson.OperatingSystems?.Windows?.ShouldBeTrue();
+        issueFormJson.OperatingSystems?.Linux.ShouldNotBeNull();
+        issueFormJson.OperatingSystems?.Linux?.ShouldBeFalse();
+        issueFormJson.OperatingSystems?.Unknown.ShouldNotBeNull();
+        issueFormJson.OperatingSystems?.Unknown?.ShouldBeFalse();
     }
 
     // test passing nulls, validation etc
