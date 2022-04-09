@@ -2,29 +2,22 @@ namespace GitHubIssuesParserCli.IssueFormBody.Parser;
 
 internal static class IssueFormBodyParser
 {
-    public static IssueFormBody Parse(IssueFormBodyText issueFormBodyText, IssueFormYmlTemplate issueFormTemplate)
+    public static IssueFormBody Parse(IssueFormBodyText issueFormBodyText, IssueFormYamlTemplate issueFormTemplate)
     {
-        if (issueFormBodyText is null)
-        {
-            throw new ArgumentNullException(nameof(issueFormBodyText));
-        }
-
-        if (issueFormTemplate is null)
-        {
-            throw new ArgumentNullException(nameof(issueFormTemplate));
-        }
+        issueFormBodyText.NotNull();
+        issueFormTemplate.NotNull();
 
         // markdown template item types do NOT show in the issue form body, they are only used
         // to show some markdown text when creating the issue.
-        var templateItems = issueFormTemplate.Body
-            .Where(x => x.Type is not IssueFormYmlTemplateItemTypes.Markdown)
+        var templateItems = issueFormTemplate.Items
+            .Where(x => x.Type is not IssueFormYamlTemplateItemTypes.Markdown)
             .ToList();
         var issueFormItems = new List<IssueFormItem>();
         for (var i = 0; i < templateItems.Count; i++)
         {
             var currentTemplateItem = templateItems[i];
             var nextTemplateItem = templateItems.GetNextTemplateElement(i);
-            var (startIdx, valueLength) = GetLevel3HeaderValueIndexes(currentTemplateItem, nextTemplateItem, issueFormBodyText);
+            var (startIdx, valueLength) = GetLevel3HeaderValueIndexes(currentTemplateItem.Label, nextTemplateItem?.Label, issueFormBodyText);
             var bodyAsString = (string)issueFormBodyText;
             var value = bodyAsString.Substring(startIdx, valueLength);
             var issueFormItem = IssueFormItemFactory.CreateFormItem(currentTemplateItem.Id, currentTemplateItem.Type, value);
@@ -40,25 +33,15 @@ internal static class IssueFormBodyParser
     }
 
     private static (int startIdx, int valueLength) GetLevel3HeaderValueIndexes(
-        IssueFormYmlTemplateItem currentTemplateElement,
-        IssueFormYmlTemplateItem? nextTemplateElement,
+        IssueFormYmlTemplateItemLabel currentH3Header,
+        IssueFormYmlTemplateItemLabel? nextH3Header,
         IssueFormBodyText issueFormBodyText)
     {
         var bodyAsString = (string)issueFormBodyText;
-        var currentLevel3Header = $"### {currentTemplateElement.Attributes.Label}";
-        var startIdx = bodyAsString.IndexOf(currentLevel3Header, StringComparison.Ordinal) + currentLevel3Header.Length;
-
-        int endIdx;
-        if (nextTemplateElement is null)
-        {
-            endIdx = bodyAsString.Length - 1;
-        }
-        else
-        {
-            var nextLevel3Header = $"### {nextTemplateElement.Attributes.Label}";
-            endIdx = bodyAsString.IndexOf(nextLevel3Header, StringComparison.Ordinal) - 1;
-        }
-
+        var startIdx = bodyAsString.IndexOf(currentH3Header.H3HeaderValue, StringComparison.Ordinal) + currentH3Header.H3HeaderValue.Length;
+        var endIdx = nextH3Header is null
+            ? bodyAsString.Length - 1
+            : bodyAsString.IndexOf(nextH3Header.H3HeaderValue, StringComparison.Ordinal) - 1;
         var valueLength = endIdx - startIdx + 1;
         return (startIdx, valueLength);
     }

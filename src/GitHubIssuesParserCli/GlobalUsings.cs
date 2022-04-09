@@ -2,11 +2,13 @@
  * This file is also imported to all test projects by the Directory.Build.props file in the tests folder.
  */
 
+global using System.Runtime.CompilerServices;
 global using System.Text.Json;
 global using System.Text.Json.Serialization;
 global using CliFx;
 global using CliFx.Attributes;
 global using CliFx.Infrastructure;
+global using GitHubIssuesParserCli.ArgumentValidations;
 global using GitHubIssuesParserCli.IssueFormBody;
 global using GitHubIssuesParserCli.IssueFormBody.IssueFormItems;
 global using GitHubIssuesParserCli.IssueFormBody.IssueFormItems.Checkboxes;

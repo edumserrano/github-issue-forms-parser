@@ -4,7 +4,7 @@ internal class IssueFormCheckboxOption
 {
     public IssueFormCheckboxOption(string name, bool isChecked)
     {
-        Name = name;
+        Name = name.NotNullOrWhiteSpace();
         IsChecked = isChecked;
     }
 

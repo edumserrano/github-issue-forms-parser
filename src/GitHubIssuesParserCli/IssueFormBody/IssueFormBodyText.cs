@@ -6,12 +6,7 @@ internal record IssueFormBodyText
 
     public IssueFormBodyText(string value)
     {
-        if (string.IsNullOrEmpty(value))
-        {
-            throw new ArgumentNullException(nameof(value));
-        }
-
-        _value = value;
+        _value = value.NotNullOrWhiteSpace();
     }
 
     public static implicit operator string(IssueFormBodyText issueFormBodyText)

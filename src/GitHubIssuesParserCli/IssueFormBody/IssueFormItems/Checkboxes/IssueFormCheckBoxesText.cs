@@ -4,11 +4,7 @@ internal record IssueFormCheckBoxesText
 {
     public IssueFormCheckBoxesText(string value)
     {
-        if (string.IsNullOrEmpty(value))
-        {
-            throw new ArgumentException($"'{nameof(value)}' cannot be null or empty.", nameof(value));
-        }
-
+        value.NotNullOrWhiteSpace();
         Options = CreateCheckboxOptions(value);
     }
 

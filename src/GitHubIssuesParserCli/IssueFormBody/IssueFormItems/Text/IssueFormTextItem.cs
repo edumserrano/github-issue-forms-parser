@@ -5,7 +5,7 @@ internal sealed class IssueFormTextItem : IssueFormItem
     public IssueFormTextItem(string id, IssueFormText text)
         : base(id, IssueFormItemTypes.Text)
     {
-        Text = text;
+        Text = text.NotNull();
     }
 
     public string Text { get; }

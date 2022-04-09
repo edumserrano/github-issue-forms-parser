@@ -4,16 +4,16 @@ internal static class IssueFormItemFactory
 {
     public static IssueFormItem CreateFormItem(
         string id,
-        IssueFormYmlTemplateItemTypes type,
+        IssueFormYamlTemplateItemTypes type,
         string value)
     {
         return type switch
         {
-            IssueFormYmlTemplateItemTypes.Dropdown
-                or IssueFormYmlTemplateItemTypes.Input
-                or IssueFormYmlTemplateItemTypes.Textarea => CreateIssueFormText(id, value),
-            IssueFormYmlTemplateItemTypes.Checkboxes => CreateIssueFormCheckboxesItem(id, value),
-            IssueFormYmlTemplateItemTypes.Markdown => throw CreateIssueFormItemException.Markdown(),
+            IssueFormYamlTemplateItemTypes.Dropdown
+                or IssueFormYamlTemplateItemTypes.Input
+                or IssueFormYamlTemplateItemTypes.Textarea => CreateIssueFormText(id, value),
+            IssueFormYamlTemplateItemTypes.Checkboxes => CreateIssueFormCheckboxesItem(id, value),
+            IssueFormYamlTemplateItemTypes.Markdown => throw CreateIssueFormItemException.Markdown(),
             _ => throw CreateIssueFormItemException.UnexpectedType(type),
         };
     }
