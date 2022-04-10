@@ -21,7 +21,6 @@ public class ParseIssueFormCommandValidationTests
         exception.InnerException.Message.ShouldBe("IssueFormBody cannot be null or whitespace.");
     }
 
-
     [Theory]
     [InlineData(null)]
     [InlineData("")]
