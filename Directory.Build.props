@@ -10,6 +10,7 @@
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>    <!-- Force code analysis to run on build. If this starts to slow down the build or Visual Studio consider enabling it only in CI. https://docs.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props#enforcecodestyleinbuild -->
     <EnableNETAnalyzers>true</EnableNETAnalyzers>    <!-- .NET code quality analysis is only enabled by default for projects that target .NET 5.0 or later. https://docs.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props#enablenetanalyzers -->
   </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.1.46">
       <PrivateAssets>all</PrivateAssets>
@@ -32,4 +33,18 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
+
+  <ItemGroup Condition="'$(IsTestProject)' == 'true'">
+    <PackageReference Include="coverlet.msbuild" Version="3.1.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="NSubstitute" Version="4.3.0" />
+    <PackageReference Include="Shouldly" Version="4.0.3" />
+    <PackageReference Include="xunit.analyzers" Version="0.10.0" />
+    <PackageReference Include="NSubstitute.Analyzers.CSharp" Version="1.0.15" />
+    <PackageReference Include="GitHubActionsTestLogger" Version="1.3.0" />
+    <PackageReference Include="LiquidTestReports.Custom" Version="1.0.9" />
+  </ItemGroup>
+
 </Project>
