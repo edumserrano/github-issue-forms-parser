@@ -1,16 +1,13 @@
-using GitHubIssuesParserCli.IssueFormBody.Parsing;
-using GitHubIssuesParserCli.IssueFormTemplates.Parsing;
-
 namespace GitHubIssuesParserCli.CliCommands;
 
 [Command]
-public class ParseGitHubIssueFormCommand : ICommand
+public class ParseIssueFormCommand : ICommand
 {
     [CommandOption("issue-body", 'i', Description = "The body of the GitHub issue form.")]
-    public string IssueFormBody { get; init; } = default!;
+    public string? IssueFormBody { get; init; }
 
     [CommandOption("template-filepath", 't', Description = "The filepath for the GitHub issue form YAML template.")]
-    public string TemplateFilepath { get; init; } = default!;
+    public string? TemplateFilepath { get; init; }
 
     public async ValueTask ExecuteAsync(IConsole console)
     {
@@ -25,8 +22,8 @@ public class ParseGitHubIssueFormCommand : ICommand
             var issueFormTemplateText = new IssueFormYamlTemplateText(yamlTemplateAsString);
             var issueFormTemplate = IssueFormYamlTemplateParser.Parse(issueFormTemplateText);
             var issueFormBody = IssueFormBodyParser.Parse(issueFormBodyText, issueFormTemplate);
-            var jsonString = issueFormBody.ToJson();
-            await console.Output.WriteLineAsync(jsonString);
+            var issueFormBodyAsJson = issueFormBody.ToJson();
+            await console.Output.WriteLineAsync(issueFormBodyAsJson);
         }
         catch (Exception e)
         {

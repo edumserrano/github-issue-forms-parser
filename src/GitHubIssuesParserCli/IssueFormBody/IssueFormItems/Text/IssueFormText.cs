@@ -17,10 +17,7 @@ internal record IssueFormText
 
     private static string Sanitize(string value)
     {
-        var sanitezedValue = value
-            .Trim()
-            .Trim(NewLines.UnixNewlineChars)
-            .Trim(NewLines.WindowsNewlineChars);
+        var sanitezedValue = value.TrimIssueText();
         return sanitezedValue.IsNoResponse() ? string.Empty : sanitezedValue;
     }
 }

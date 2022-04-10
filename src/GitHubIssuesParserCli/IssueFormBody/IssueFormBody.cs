@@ -13,7 +13,7 @@ internal class IssueFormBody
     {
         var serializeOptions = new JsonSerializerOptions
         {
-            WriteIndented = true, // TODO change to false
+            WriteIndented = false,
             Converters =
             {
                 new IssueFormBodyJsonConverter(),

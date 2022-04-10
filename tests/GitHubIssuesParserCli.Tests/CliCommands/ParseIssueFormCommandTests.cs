@@ -1,12 +1,13 @@
 namespace GitHubIssuesParserCli.Tests.CliCommands;
 
-public class ParseGitHubIssueFormCommandTests
+[Trait("Category", XUnitCategories.Commands)]
+public class ParseIssueFormCommandTests
 {
     [Fact]
-    public async Task ParseGitHubIssueFormCommandTest1()
+    public async Task ParseIssueFormCommandTest1()
     {
         using var console = new FakeInMemoryConsole();
-        var command = new ParseGitHubIssueFormCommand
+        var command = new ParseIssueFormCommand
         {
             IssueFormBody = File.ReadAllText("./TestFiles/IssueBody.md"),
             TemplateFilepath = "./TestFiles/Template.yml",
@@ -30,6 +31,4 @@ public class ParseGitHubIssueFormCommandTests
         issueFormJson.OperatingSystems?.Unknown.ShouldNotBeNull();
         issueFormJson.OperatingSystems?.Unknown?.ShouldBeFalse();
     }
-
-    // test passing nulls, validation etc
 }

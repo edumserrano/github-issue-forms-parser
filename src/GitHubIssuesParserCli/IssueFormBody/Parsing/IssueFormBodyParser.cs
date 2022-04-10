@@ -34,11 +34,25 @@ internal static class IssueFormBodyParser
         IssueFormBodyText issueFormBodyText)
     {
         var bodyAsString = (string)issueFormBodyText;
-        var startIdx = bodyAsString.IndexOf(currentH3Header.H3HeaderValue, StringComparison.Ordinal) + currentH3Header.H3HeaderValue.Length;
+        var startIdx = issueFormBodyText.GetStartIndex(currentH3Header.H3HeaderValue) + currentH3Header.H3HeaderValue.Length;
         var endIdx = nextH3Header is null
             ? bodyAsString.Length - 1
-            : bodyAsString.IndexOf(nextH3Header.H3HeaderValue, StringComparison.Ordinal) - 1;
+            : issueFormBodyText.GetStartIndex(nextH3Header.H3HeaderValue) - 1;
+        if (endIdx <= startIdx)
+        {
+            throw IssueFormBodyParserException.InvalidH3HeaderValue(currentH3Header, nextH3Header);
+        }
+
         var valueLength = endIdx - startIdx + 1;
         return (startIdx, valueLength);
+    }
+
+    private static int GetStartIndex(this IssueFormBodyText issueFormBodyText, string h3HeaderValue)
+    {
+        var bodyAsString = (string)issueFormBodyText;
+        var startIdx = bodyAsString.IndexOf(h3HeaderValue, StringComparison.Ordinal);
+        return startIdx is -1
+            ? throw IssueFormBodyParserException.H3HeaderNotFound(h3HeaderValue)
+            : startIdx;
     }
 }
