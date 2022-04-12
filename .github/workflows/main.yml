@@ -16,10 +16,16 @@ jobs:
         run: |
           $templateFilepath = './GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/Template.yml'
           $issueBody = Get-Content ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md
+          Write-Host $issueBody
           $issueBody = $issueBody -replace "`n","%0A" # The content must be escaped to preserve newlines. See https://github.community/t/set-output-truncates-multiline-strings/16852/3
           Write-Host "::set-output name=issue-body::$issueBody"
           Write-Host "::set-output name=template-filepath::$templateFilepath"
-      - id: foo
+      - name: Dump outputs from previous step
+        shell: pwsh
+        env:
+          STEP_OUTPUT: ${{ toJSON(steps.input.outputs) }}
+        run: $env:STEP_OUTPUT
+      - name: Run GitHub issue form parser
         uses: edumserrano/github-issue-forms-parser@v1
         with:
           template-filepath: '${{ steps.input.outputs.template-filepath }}'
