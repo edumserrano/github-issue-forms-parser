@@ -6,9 +6,9 @@ jobs:
     runs-on: ubuntu-latest
     name: Test
     steps:
-      - uses: actions/checkout@v3
+      # - uses: actions/checkout@v3
       - id: foo
-        uses: edumserrano/github-issue-forms-parsern@v1
+        uses: edumserrano/github-issue-forms-parser@v1
       #   with:
       #     who-to-greet: 'Mona the Octocat'
       # - run: echo random-number ${{ steps.foo.outputs.random-number }}
