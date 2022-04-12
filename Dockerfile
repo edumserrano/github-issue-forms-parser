@@ -7,7 +7,7 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /github-issue-forms-parser
 COPY ["GitHubIssueFormsParser/NuGet.Config", "GitHubIssueFormsParser/"]
 COPY ["GitHubIssueFormsParser/src/GitHubIssuesParserCli/GitHubIssuesParserCli.csproj", "GitHubIssueFormsParser/src/GitHubIssuesParserCli/"]
-RUN dotnet restore "GitHubIssuesParserCli/GitHubIssuesParserCli.csproj"
+RUN dotnet restore "GitHubIssueFormsParser/src/GitHubIssuesParserCli/GitHubIssuesParserCli.csproj"
 COPY . .
 WORKDIR "/github-issue-forms-parser/GitHubIssueFormsParser/src/GitHubIssuesParserCli"
 RUN dotnet build "GitHubIssuesParserCli.csproj" -c Release -o /app/build
