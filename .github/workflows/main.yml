@@ -1,15 +1,25 @@
 on:
   workflow_dispatch:
 
+defaults:
+  run:
+    shell: pwsh
+
 jobs:
   main:
     runs-on: ubuntu-latest
     name: Test
     steps:
-      # - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+      - name: Get test input args
+        id: input
+        run: |
+          $issueBody = Get-Content ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md
+          $templateFilepath = './GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/Template.yml'
+          Write-Host "::set-output name=issue-body::$issueBody"
+          Write-Host "::set-output name=template-filepath::$templateFilepath"
       - id: foo
         uses: edumserrano/github-issue-forms-parser@v1
-      #   with:
-      #     who-to-greet: 'Mona the Octocat'
-      # - run: echo random-number ${{ steps.foo.outputs.random-number }}
-      #   shell: bash
+        with:
+          template-filepath: '${{ steps.input.outputs.template-filepath }}'
+          issue-form-body: '${{ steps.input.outputs.issue-body }}'

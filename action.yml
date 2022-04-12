@@ -1,18 +1,21 @@
 name: 'GitHub issues form parser'
 description: 'Parses a GitHub issue form body and outputs a JSON representation.'
-# inputs:
-#   who-to-greet:  # id of input
-#     description: 'Who to greet'
-#     required: true
-#     default: 'World'
-# outputs:
-#   time: # id of output
-#     description: 'The time we greeted you'
+inputs:
+  template-filepath:
+    description: 'The filepath for the GitHub issue form template.'
+    required: true
+  issue-form-body:
+    description: 'The issue form body.'
+    required: true
+outputs:
+  time:
+    description: 'The time we greeted you'
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  # args:
-  #   - ${{ inputs.who-to-greet }}
+  args:
+    - ${{ inputs.template-filepath }}
+    - ${{ inputs.issue-form-body }}
 # runs:
 #   using: 'composite'
 #   steps:

@@ -5,6 +5,7 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /github-issue-forms-parser
+COPY ["entrypoint.ps1", "."]
 COPY ["GitHubIssueFormsParser/NuGet.Config", "GitHubIssueFormsParser/"]
 COPY ["GitHubIssueFormsParser/src/GitHubIssuesParserCli/GitHubIssuesParserCli.csproj", "GitHubIssueFormsParser/src/GitHubIssuesParserCli/"]
 RUN dotnet restore "GitHubIssueFormsParser/src/GitHubIssuesParserCli/GitHubIssuesParserCli.csproj"
@@ -19,4 +20,5 @@ RUN dotnet publish "GitHubIssuesParserCli.csproj" -c Release -p:OutDir=/app/buil
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "/app/GitHubIssuesParserCli.dll"]
+# ENTRYPOINT ["dotnet", "/app/GitHubIssuesParserCli.dll"]
+ENTRYPOINT ["/entrypoint.ps1"]
