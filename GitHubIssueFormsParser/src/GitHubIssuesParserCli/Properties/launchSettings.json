@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "GitHubIssuesParserCli": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

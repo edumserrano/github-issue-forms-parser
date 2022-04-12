@@ -1,6 +1,6 @@
 namespace GitHubIssuesParserCli.CliCommands;
 
-[Command]
+[Command("parse-issue-form")]
 public class ParseIssueFormCommand : ICommand
 {
     [CommandOption("issue-body", 'i', Description = "The body of the GitHub issue form.")]

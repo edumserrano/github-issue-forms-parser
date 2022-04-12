@@ -23,6 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="TestFiles\CliOutputNoArgs.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="TestFiles\IssueBodyWithMangledCheckbox.md">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
