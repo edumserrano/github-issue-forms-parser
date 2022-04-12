@@ -19,4 +19,4 @@ RUN dotnet publish "GitHubIssuesParserCli.csproj" -c Release -p:OutDir=/app/buil
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "GitHubIssuesParserCli.dll"]
+ENTRYPOINT ["dotnet", "/app/GitHubIssuesParserCli.dll"]
