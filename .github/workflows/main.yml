@@ -15,7 +15,7 @@ jobs:
         id: input
         run: |
           $templateFilepath = './GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/Template.yml'
-          $issueBody = Get-Content ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md
+          $issueBody = Get-Content ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md -Raw
           $issueBody = $issueBody -replace "\n","%0A" # The content must be escaped to preserve newlines. See https://github.community/t/set-output-truncates-multiline-strings/16852/3
           Write-Output "::set-output name=issue-body::$issueBody"
           Write-Output "::set-output name=template-filepath::$templateFilepath"
