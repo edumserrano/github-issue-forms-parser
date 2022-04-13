@@ -14,3 +14,12 @@ Write-Output "::group::Run dotnet GitHub issue form parser"
 $output = dotnet '/app/GitHubIssuesParserCli.dll' parse-issue-form -t $templateFilepath -i $issueFormBody
 Write-Output "::set-output name=parsed-issue::$output"
 Write-Output "::endgroup::"
+
+Write-Output "::group::dotnet GitHub issue form parser output"
+Write-Output $output
+Write-Output "::endgroup::"
+
+Write-Output "::group::dotnet GitHub issue form parser output as json"
+$outputAsJson = ConvertFrom-Json $output
+COnvertTo-Json $outputAsJson
+Write-Output "::endgroup::"
