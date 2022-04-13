@@ -25,6 +25,10 @@ jobs:
         shell: pwsh
         run: |
           cat ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md
+      - name: cat 2
+        shell: pwsh
+        run: |
+          cat -e ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md
       - name: Get-Content 1
         shell: pwsh
         run: |
