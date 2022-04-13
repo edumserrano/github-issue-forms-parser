@@ -8,27 +8,11 @@ inputs:
     description: 'The issue form body.'
     required: true
 outputs:
-  time:
-    description: 'The time we greeted you'
+  parsed-issue:
+    description: 'The parsed issue form as a JSON string.'
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
     - ${{ inputs.template-filepath }}
     - ${{ inputs.issue-form-body }}
-# runs:
-#   using: 'composite'
-#   steps:
-#     - name: docker build
-#       id: build
-#       shell: pwsh
-#       run: |
-#         $imageTag = 'gh-issues-parser:latest'
-#         docker build -t $imageTag -f /GitHubIssueFormsParser/src/GitHubIssuesParserCli/Dockerfile ./GitHubIssueFormsParser
-#         Write-Host "::set-output name=image-tag::$imageTag"
-#     - name: docker run
-#       shell: pwsh
-#       run: |
-#         $imageTag = '${{ steps.build.outputs.image-tag }}'
-#         # docker run --rm -v ${{ github.workspace }}:/github/workspace --workdir /github/workspace $imageTag
-#         docker run --rm $imageTag

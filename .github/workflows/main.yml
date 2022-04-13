@@ -15,21 +15,21 @@ jobs:
         id: input
         run: |
           $templateFilepath = './GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/Template.yml'
-          # $issueBody = cat ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md
-          $issueBody = Get-Content ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md -Raw
+          $issueBody = Get-Content ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md
           $issueBody = $issueBody -replace "\n","%0A" # The content must be escaped to preserve newlines. See https://github.community/t/set-output-truncates-multiline-strings/16852/3
           Write-Output "::set-output name=issue-body::$issueBody"
           Write-Output "::set-output name=template-filepath::$templateFilepath"
-      - name: Debug
-        run: |
-          $issueBody = Get-Content ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md -Raw
-          $issueBody | ConvertTo-Json
       - name: Dump outputs from previous step
         env:
           STEP_OUTPUT: ${{ toJSON(steps.input.outputs) }}
         run: $env:STEP_OUTPUT
       - name: Run GitHub issue form parser
+        id: parser
         uses: edumserrano/github-issue-forms-parser@v1
         with:
           template-filepath: '${{ steps.input.outputs.template-filepath }}'
           issue-form-body: '${{ steps.input.outputs.issue-body }}'
+      - name: Dump outputs from previous step
+        env:
+          STEP_OUTPUT: ${{ toJSON(steps.parser.outputs) }}
+        run: $env:STEP_OUTPUT

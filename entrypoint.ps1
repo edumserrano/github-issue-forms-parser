@@ -1,6 +1,16 @@
 param ($templateFilepath, $issueFormBody)
-Write-Host 'Starting dotnet cli tool'
-Write-Host "templateFilepath $templateFilepath"
-Write-Host "issueFormBody $issueFormBody"
-cat $templateFilepath
-dotnet '/app/GitHubIssuesParserCli.dll' parse-issue-form -t $templateFilepath -i $issueFormBody
+
+Write-Output "::group::GitHub issue form template"
+Write-Output "Template filepath: '$templateFilepath'"
+$template = Get-Content $templateFilepath
+Write-Output $template
+Write-Output "::endgroup::"
+
+Write-Output "::group::GitHub issue form body"
+Write-Output $issueFormBody
+Write-Output "::endgroup::"
+
+Write-Output "::group::Run dotnet GitHub issue form parser"
+$output = dotnet '/app/GitHubIssuesParserCli.dll' parse-issue-form -t $templateFilepath -i $issueFormBody
+Write-Output "::set-output name=parsed-issue::$output"
+Write-Output "::endgroup::"
