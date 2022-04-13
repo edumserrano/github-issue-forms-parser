@@ -15,52 +15,14 @@ jobs:
         id: input
         run: |
           $templateFilepath = './GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/Template.yml'
-          $issueBody = Get-Content ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md
-          cat ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md
-          Write-Output $issueBody
+          $issueBody = cat ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md
           $issueBody = $issueBody -replace "`n","%0A" # The content must be escaped to preserve newlines. See https://github.community/t/set-output-truncates-multiline-strings/16852/3
-          Write-Output $issueBody
           Write-Output "::set-output name=issue-body::$issueBody"
           Write-Output "::set-output name=template-filepath::$templateFilepath"
-      - name: cat
-        shell: bash
+      - name: Debug
         run: |
-          cat ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md
-      - name: cat 2
-        shell: bash
-        run: |
-          cat -e ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md
-      - name: Get-Content 0
-        run: |
-          $issueBody = Get-Content ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md
-          Write-Host $issueBody
-      - name: Get-Content 1
-        run: |
-          Get-Content ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md
-      - name: Get-Content 2
-        run: |
-          Get-Content ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md -Raw
-      - name: Get-Content 3
-        run: |
-          Get-Content ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md -Delimiter '`n'
-      - name: Get-Content 4
-        run: |
-          Get-Content ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md -Delimiter '\n\n'
-      - name: Get-Content 5
-        run: |
-          Get-Content ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md -Delimiter '`n`n'
-      - name: Get-Content 6
-        run: |
-          Get-Content ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md -Delimiter '\n'
-      - name: Get-Content 7
-        run: |
-          Get-Content ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md -Delimiter '\r'
-      - name: Get-Content 8
-        run: |
-          Get-Content ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md -Delimiter '`r'
-      - name: Get-Content 9
-        run: |
-          Get-Content ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md -Delimiter '\r\n'
+          $issueBody = Get-Content ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md -Raw
+          $issueBody | ConvertTo-Json
       - name: Dump outputs from previous step
         env:
           STEP_OUTPUT: ${{ toJSON(steps.input.outputs) }}
