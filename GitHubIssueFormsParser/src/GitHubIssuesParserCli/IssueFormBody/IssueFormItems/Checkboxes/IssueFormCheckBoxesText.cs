@@ -13,7 +13,7 @@ internal record IssueFormCheckBoxesText
     private static List<IssueFormCheckboxOption> CreateCheckboxOptions(string options)
     {
         return options
-            .Split(new string[] { NewLines.UnixNewline, NewLines.WindowsNewline }, StringSplitOptions.RemoveEmptyEntries)
+            .Split(new string[] { NewLines.CR, NewLines.LF }, StringSplitOptions.RemoveEmptyEntries)
             .Select(optionText =>
             {
                 string label;
