@@ -35,3 +35,8 @@ jobs:
         env:
           STEP_OUTPUT: ${{ toJSON(steps.parser.outputs) }}
         run: $env:STEP_OUTPUT
+      - name: Output parsed issue
+        run: |
+          $issueAsJson = '${{ steps.parser.outputs.parsed-issue }}'
+          $issue = ConvertFrom-Json $issueAsJson
+          Convert-ToJson $issue
