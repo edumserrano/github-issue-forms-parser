@@ -21,22 +21,23 @@ public class ParseIssueFormCommandTests
         issueFormJson.NuGetVersion.ShouldBe("1.0.13-alpha");
         issueFormJson.AutoGenerateReleaseNotes.ShouldBe("Yes");
         issueFormJson.AutoGenerateReleaseNotesOptional.ShouldBeEmpty();
-        issueFormJson.CustomReleaseNotes.ShouldBe("## Custom release notes \r\n\r\nTest 123\r\n\r\nAnother line:\r\n- point 1\r\n- point 2\r\n- point 3");
-        issueFormJson.OperatingSystems?.MacOS.ShouldNotBeNull();
-        issueFormJson.OperatingSystems?.MacOS?.ShouldBeTrue();
-        issueFormJson.OperatingSystems?.Windows.ShouldNotBeNull();
-        issueFormJson.OperatingSystems?.Windows?.ShouldBeTrue();
-        issueFormJson.OperatingSystems?.Linux.ShouldNotBeNull();
-        issueFormJson.OperatingSystems?.Linux?.ShouldBeFalse();
-        issueFormJson.OperatingSystems?.Unknown.ShouldNotBeNull();
-        issueFormJson.OperatingSystems?.Unknown?.ShouldBeFalse();
+        issueFormJson.CustomReleaseNotes.ShouldBe($"## Custom release notes {CRLF}{CRLF}Test 123{CRLF}{CRLF}Another line:{CRLF}- point 1{CRLF}- point 2{CRLF}- point 3");
+        issueFormJson.OperatingSystems.ShouldNotBeNull();
+        issueFormJson.OperatingSystems.MacOS.ShouldNotBeNull();
+        issueFormJson.OperatingSystems.MacOS.ShouldBe(true);
+        issueFormJson.OperatingSystems.Windows.ShouldNotBeNull();
+        issueFormJson.OperatingSystems.Windows.ShouldBe(true);
+        issueFormJson.OperatingSystems.Linux.ShouldNotBeNull();
+        issueFormJson.OperatingSystems.Linux.ShouldBe(false);
+        issueFormJson.OperatingSystems.Unknown.ShouldNotBeNull();
+        issueFormJson.OperatingSystems.Unknown.ShouldBe(false);
     }
 
 
     [Fact]
     public async Task ParseIssueFormCommandTest2()
     {
-        var issueFormBody = "### What NuGet package do you want to release?\n\ndotnet-sdk-extensions\n\n### What is the new version for the NuGet package?\n\n1.0.13-alpha\n\n### Auto-generate release notes?\n\nYes\n\n### Auto-generate release notes optional?\n\n_No response_\n\n### Custom release notes?\n\n## Custom release notes \n\nTest 123\n\nAnother line:\n- point 1\n- point 2\n- point 3\n\n### Which operating systems have you used?\n\n- [X] macOS\n- [X] Windows\n- [ ] Linux\n- [ ] I don't know\n";
+        var issueFormBody = $"### What NuGet package do you want to release?{LF}{LF}dotnet-sdk-extensions{LF}{LF}### What is the new version for the NuGet package?{LF}{LF}1.0.13-alpha{LF}{LF}### Auto-generate release notes?{LF}{LF}Yes{LF}{LF}### Auto-generate release notes optional?{LF}{LF}_No response_{LF}{LF}### Custom release notes?{LF}{LF}## Custom release notes {LF}{LF}Test 123{LF}{LF}Another line:{LF}- point 1{LF}- point 2{LF}- point 3{LF}{LF}### Which operating systems have you used?{LF}{LF}- [X] macOS{LF}- [X] Windows{LF}- [ ] Linux{LF}- [ ] I don't know{LF}";
         using var console = new FakeInMemoryConsole();
         var command = new ParseIssueFormCommand
         {
@@ -52,14 +53,15 @@ public class ParseIssueFormCommandTests
         issueFormJson.NuGetVersion.ShouldBe("1.0.13-alpha");
         issueFormJson.AutoGenerateReleaseNotes.ShouldBe("Yes");
         issueFormJson.AutoGenerateReleaseNotesOptional.ShouldBeEmpty();
-        issueFormJson.CustomReleaseNotes.ShouldBe("## Custom release notes \n\nTest 123\n\nAnother line:\n- point 1\n- point 2\n- point 3");
-        issueFormJson.OperatingSystems?.MacOS.ShouldNotBeNull();
-        issueFormJson.OperatingSystems?.MacOS?.ShouldBeTrue();
-        issueFormJson.OperatingSystems?.Windows.ShouldNotBeNull();
-        issueFormJson.OperatingSystems?.Windows?.ShouldBeTrue();
-        issueFormJson.OperatingSystems?.Linux.ShouldNotBeNull();
-        issueFormJson.OperatingSystems?.Linux?.ShouldBeFalse();
-        issueFormJson.OperatingSystems?.Unknown.ShouldNotBeNull();
-        issueFormJson.OperatingSystems?.Unknown?.ShouldBeFalse();
+        issueFormJson.CustomReleaseNotes.ShouldBe($"## Custom release notes {LF}{LF}Test 123{LF}{LF}Another line:{LF}- point 1{LF}- point 2{LF}- point 3");
+        issueFormJson.OperatingSystems.ShouldNotBeNull();
+        issueFormJson.OperatingSystems.MacOS.ShouldNotBeNull();
+        issueFormJson.OperatingSystems.MacOS.ShouldBe(true);
+        issueFormJson.OperatingSystems.Windows.ShouldNotBeNull();
+        issueFormJson.OperatingSystems.Windows.ShouldBe(true);
+        issueFormJson.OperatingSystems.Linux.ShouldNotBeNull();
+        issueFormJson.OperatingSystems.Linux.ShouldBe(false);
+        issueFormJson.OperatingSystems.Unknown.ShouldNotBeNull();
+        issueFormJson.OperatingSystems.Unknown.ShouldBe(false);
     }
 }

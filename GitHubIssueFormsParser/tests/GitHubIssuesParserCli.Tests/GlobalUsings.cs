@@ -6,3 +6,4 @@ global using GitHubIssuesParserCli.IssueFormBody.Parsing;
 global using GitHubIssuesParserCli.Tests.Auxiliary;
 global using Shouldly;
 global using Xunit;
+global using static GitHubIssuesParserCli.Tests.Auxiliary.NewLines;
