@@ -33,7 +33,6 @@ public class ParseIssueFormCommandTests
         issueFormJson.OperatingSystems.Unknown.ShouldBe(false);
     }
 
-
     [Fact]
     public async Task ParseIssueFormCommandTest2()
     {
