@@ -24,7 +24,7 @@ public class ParseIssueFormCommandTests
         issueFormJson.NuGetVersion.ShouldBe("1.0.13-alpha");
         issueFormJson.AutoGenerateReleaseNotes.ShouldBe("Yes");
         issueFormJson.AutoGenerateReleaseNotesOptional.ShouldBeEmpty();
-        issueFormJson.CustomReleaseNotes.ShouldBe($"## Custom release notes {CRLF}{CRLF}Test 123{CRLF}{CRLF}Another line:{CRLF}- point 1{CRLF}- point 2{CRLF}- point 3");
+        issueFormJson.CustomReleaseNotes.ShouldBe($"## Custom release notes {Environment.NewLine}{Environment.NewLine}Test 123{Environment.NewLine}{Environment.NewLine}Another line:{Environment.NewLine}- point 1{Environment.NewLine}- point 2{Environment.NewLine}- point 3");
         issueFormJson.OperatingSystems.ShouldNotBeNull();
         issueFormJson.OperatingSystems.MacOS.ShouldNotBeNull();
         issueFormJson.OperatingSystems.MacOS.ShouldBe(true);
@@ -38,12 +38,14 @@ public class ParseIssueFormCommandTests
 
     /// <summary>
     /// Tests that the <see cref="ParseIssueFormCommand"/> produces the expected JSON output
-    /// when the line endings are only LF.
+    /// when the line endings are only newLine.
     /// </summary>
-    [Fact]
-    public async Task ParseIssueFormCommandTest2()
+    [Theory]
+    [InlineData(CR)]
+    [InlineData(LF)]
+    public async Task ParseIssueFormCommandTest2(string newLine)
     {
-        var issueFormBody = $"### What NuGet package do you want to release?{LF}{LF}dotnet-sdk-extensions{LF}{LF}### What is the new version for the NuGet package?{LF}{LF}1.0.13-alpha{LF}{LF}### Auto-generate release notes?{LF}{LF}Yes{LF}{LF}### Auto-generate release notes optional?{LF}{LF}_No response_{LF}{LF}### Custom release notes?{LF}{LF}## Custom release notes {LF}{LF}Test 123{LF}{LF}Another line:{LF}- point 1{LF}- point 2{LF}- point 3{LF}{LF}### Which operating systems have you used?{LF}{LF}- [X] macOS{LF}- [X] Windows{LF}- [ ] Linux{LF}- [ ] I don't know{LF}";
+        var issueFormBody = $"### What NuGet package do you want to release?{newLine}{newLine}dotnet-sdk-extensions{newLine}{newLine}### What is the new version for the NuGet package?{newLine}{newLine}1.0.13-alpha{newLine}{newLine}### Auto-generate release notes?{newLine}{newLine}Yes{newLine}{newLine}### Auto-generate release notes optional?{newLine}{newLine}_No response_{newLine}{newLine}### Custom release notes?{newLine}{newLine}## Custom release notes {newLine}{newLine}Test 123{newLine}{newLine}Another line:{newLine}- point 1{newLine}- point 2{newLine}- point 3{newLine}{newLine}### Which operating systems have you used?{newLine}{newLine}- [X] macOS{newLine}- [X] Windows{newLine}- [ ] Linux{newLine}- [ ] I don't know{newLine}";
         using var console = new FakeInMemoryConsole();
         var command = new ParseIssueFormCommand
         {
@@ -59,7 +61,7 @@ public class ParseIssueFormCommandTests
         issueFormJson.NuGetVersion.ShouldBe("1.0.13-alpha");
         issueFormJson.AutoGenerateReleaseNotes.ShouldBe("Yes");
         issueFormJson.AutoGenerateReleaseNotesOptional.ShouldBeEmpty();
-        issueFormJson.CustomReleaseNotes.ShouldBe($"## Custom release notes {LF}{LF}Test 123{LF}{LF}Another line:{LF}- point 1{LF}- point 2{LF}- point 3");
+        issueFormJson.CustomReleaseNotes.ShouldBe($"## Custom release notes {newLine}{newLine}Test 123{newLine}{newLine}Another line:{newLine}- point 1{newLine}- point 2{newLine}- point 3");
         issueFormJson.OperatingSystems.ShouldNotBeNull();
         issueFormJson.OperatingSystems.MacOS.ShouldNotBeNull();
         issueFormJson.OperatingSystems.MacOS.ShouldBe(true);
