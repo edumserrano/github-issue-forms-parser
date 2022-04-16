@@ -22,7 +22,6 @@ public class CliIntegrationTests
         output.ShouldEndWith(expectedOutput);
     }
 
-
     /// <summary>
     /// Tests the correct value for the options that can be used with the 'parse-issue-form' command.
     /// </summary>
