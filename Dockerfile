@@ -31,7 +31,7 @@ COPY ["GitHubIssueFormsParser/src/GitHubIssuesParserCli/GitHubIssuesParserCli.cs
 RUN dotnet restore "GitHubIssueFormsParser/src/GitHubIssuesParserCli/GitHubIssuesParserCli.csproj"
 COPY . .
 WORKDIR "/github-issue-forms-parser/GitHubIssueFormsParser/src/GitHubIssuesParserCli"
-RUN dotnet build "GitHubIssuesParserCli.csproj" -c Release -o /app/build
+RUN dotnet build "GitHubIssuesParserCli.csproj" -c Release -o /app/build --no-restore
 
 FROM build AS publish
 # use ''--no-build' and ''p:OutDir' to pickup the output from dotnet build and avoid building again
