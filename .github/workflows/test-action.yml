@@ -1,7 +1,17 @@
-name: Test action
+name: Test GitHub action
 
 on:
   workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths-ignore:
+    - "**.md"
+  pull_request:
+    branches: [ main ]
+    paths-ignore:
+    - "**.md"
+  schedule:
+    - cron: '0 0 * * 0' # Once a week: "At 00:00 on Sunday."
 
 defaults:
   run:
@@ -9,8 +19,11 @@ defaults:
 
 jobs:
   main:
+    name: Test GitHub action
+    environment: no-secrets-workflow
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
-    name: Test
     steps:
       - uses: actions/checkout@v3
       - name: Get test input args

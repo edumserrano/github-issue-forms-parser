@@ -1,0 +1,116 @@
+name: Build, test and package
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths-ignore:
+    - "**.md"
+  pull_request:
+    branches: [ main ]
+    paths-ignore:
+    - "**.md"
+  schedule:
+    - cron: '0 0 * * 0' # Once a week: "At 00:00 on Sunday."
+
+defaults:
+  run:
+    shell: pwsh
+
+jobs:
+  main:
+    name: Build and test
+    environment: no-secrets-workflow
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    env:
+      SLN_FILEPATH: GitHubIssueFormsParser/GitHubIssueFormsParser.sln
+      TEST_RESULTS_DIR: tests/test-results
+      TEST_COVERAGE_DIR: tests/coverage-results
+      TEST_COVERAGE_MERGE_FILE: tests/coverage-results/coverage.json
+      TEST_COVERAGE_FILE: tests/coverage-results/coverage.opencover.xml
+      TEST_COVERAGE_REPORT_DIR: tests/coverage-results/report
+      TEST_RESULTS_ARTIFACT_NAME: test-results
+      CODE_COVERAGE_ARTIFACT_NAME: code-coverage-report
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+    - name: Cache/Restore NuGets
+      uses: actions/cache@v3
+      with:
+        path:
+          ~/.nuget/packages
+        key: ${{ runner.os }}-nuget
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+    - name: Install reportgenerator dotnet tool
+      run:  dotnet tool install --global dotnet-reportgenerator-globaltool
+    - name: Restore dependencies
+      run: dotnet restore ${{ env.SLN_FILEPATH }}
+    - name: Build
+      run: dotnet build ${{ env.SLN_FILEPATH }} -c Release -warnaserror --no-restore --no-incremental
+    - name: Test and code coverage
+      id: dotnet-test
+      run: |
+        $os = $PSVersionTable.OS
+        $testResultsDir = $(Join-Path -Path (Get-Location) -ChildPath "${{ env.TEST_RESULTS_DIR }}")
+        Write-Output "::set-output name=test-results-dir::$testResultsDir"
+        dotnet test ${{ env.SLN_FILEPATH }} `
+          -c Release `
+          --no-build `
+          --logger "trx;LogFilePrefix=framework" `
+          --logger GitHubActions `
+          --logger "liquid.custom;Template=${{github.workspace}}/GitHubIssueFormsParser/tests/liquid-test-logger-template.md;runnerOs=${{ runner.os }};os=$os;LogFilePrefix=framework" `
+          --results-directory "$testResultsDir" `
+          /p:CollectCoverage=true `
+          /p:CoverletOutput="$(Join-Path -Path (Get-Location) -ChildPath "${{ env.TEST_COVERAGE_DIR }}/")" `
+          /p:MergeWith="$(Join-Path -Path (Get-Location) -ChildPath "${{ env.TEST_COVERAGE_MERGE_FILE }}")" `
+          /p:CoverletOutputFormat="json%2copencover" `
+          -m:1
+
+        $downloadArtifactMessage = "You can inspect the test results by downloading the workflow artifact named: ${{ env.TEST_RESULTS_ARTIFACT_NAME }}."
+        if($LASTEXITCODE -eq 0) {
+          Write-Output "::notice title=Tests (${{ runner.os }})::Tests passed on ${{ runner.os }}. $downloadArtifactMessage"
+        }
+        else {
+          Write-Output "::error title=Tests (${{ runner.os }})::Tests failed on ${{ runner.os }}. $downloadArtifactMessage"
+        }
+    # Some of the steps below provide feedback on the test run and I want to run them even if some of the previous steps failed. For that
+    # I need:
+    # - the 'always()' condition: without it the step only runs if the job is successful, it's like the 'if' condition on any step always has a hidden '&& success()' clause.
+    # - the '(steps.<step-id>.conclusion == 'success' || steps.<step-id>.conclusion == 'failure')' condition: to run the steps only if the <step-id> step has ran, regardless
+    # if it failed or not. It won't run if the <step-id> step has been skipped or cancelled.
+    - name: Upload test coverage to Codecov
+      uses: codecov/codecov-action@v2.1.0
+      with:
+        files: ${{ env.TEST_COVERAGE_FILE }}
+        fail_ci_if_error: true
+    - name: Generate code coverage report
+      if: (steps.dotnet-test.conclusion == 'success' || steps.dotnet-test.conclusion == 'failure') && always()
+      run: |
+        reportgenerator `
+          "-reports:${{ env.TEST_COVERAGE_FILE }}" `
+          "-targetdir:${{ env.TEST_COVERAGE_REPORT_DIR }}" `
+          -reportTypes:htmlInline
+    - name: Upload code coverage report to artifacts
+      if: (steps.dotnet-test.conclusion == 'success' || steps.dotnet-test.conclusion == 'failure') && always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ env.CODE_COVERAGE_ARTIFACT_NAME }}
+        path: ${{ env.TEST_COVERAGE_REPORT_DIR }}
+    - name: Log Codecov info
+      if: (steps.dotnet-test.conclusion == 'success' || steps.dotnet-test.conclusion == 'failure') && always()
+      run: |
+        $codeCoveUrl = "https://app.codecov.io/gh/${{ github.repository }}/"
+        Write-Output "::notice title=Code coverage (${{ runner.os }})::Code coverage has been uploaded to Codecov at $codeCoveUrl. You can download the code coverage report from the workflow artifact named: ${{ env.CODE_COVERAGE_ARTIFACT_NAME }}."
+    - name: Upload test results to artifacts
+      if: (steps.dotnet-test.conclusion == 'success' || steps.dotnet-test.conclusion == 'failure') && always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ env.TEST_RESULTS_ARTIFACT_NAME }}
+        path: ${{ steps.dotnet-test.outputs.test-results-dir }}
