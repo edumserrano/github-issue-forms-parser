@@ -3,6 +3,9 @@ namespace GitHubIssuesParserCli.Tests.CliCommands;
 [Trait("Category", XUnitCategories.Commands)]
 public class ParseIssueFormCommandTests
 {
+    /// <summary>
+    /// Tests that the <see cref="ParseIssueFormCommand"/> produces the expected JSON output.
+    /// </summary>
     [Fact]
     public async Task ParseIssueFormCommandTest1()
     {
@@ -33,6 +36,10 @@ public class ParseIssueFormCommandTests
         issueFormJson.OperatingSystems.Unknown.ShouldBe(false);
     }
 
+    /// <summary>
+    /// Tests that the <see cref="ParseIssueFormCommand"/> produces the expected JSON output
+    /// when the line endings are only LF.
+    /// </summary>
     [Fact]
     public async Task ParseIssueFormCommandTest2()
     {

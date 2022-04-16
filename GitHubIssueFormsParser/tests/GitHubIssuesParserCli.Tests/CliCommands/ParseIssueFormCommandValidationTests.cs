@@ -3,6 +3,9 @@ namespace GitHubIssuesParserCli.Tests.CliCommands;
 [Trait("Category", XUnitCategories.Validation)]
 public class ParseIssueFormCommandValidationTests
 {
+    /// <summary>
+    /// Validation test for the <see cref="ParseIssueFormCommand.IssueFormBody"/> command parameter.
+    /// </summary>
     [Theory]
     [InlineData(null)]
     [InlineData("")]
@@ -21,6 +24,9 @@ public class ParseIssueFormCommandValidationTests
         exception.InnerException.Message.ShouldBe("IssueFormBody cannot be null or whitespace.");
     }
 
+    /// <summary>
+    /// Validation test for the <see cref="ParseIssueFormCommand.TemplateFilepath"/> command parameter.
+    /// </summary>
     [Theory]
     [InlineData(null)]
     [InlineData("")]
@@ -39,6 +45,10 @@ public class ParseIssueFormCommandValidationTests
         exception.InnerException.Message.ShouldBe("TemplateFilepath cannot be null or whitespace.");
     }
 
+    /// <summary>
+    /// Test for when the <see cref="ParseIssueFormCommand.TemplateFilepath"/> command parameter points
+    /// to a file that doesn't exist.
+    /// </summary>
     [Fact]
     public async Task TemplateFilepathNotFound()
     {
@@ -55,6 +65,10 @@ public class ParseIssueFormCommandValidationTests
         exception.InnerException.Message.ShouldStartWith("Could not find a part of the path");
     }
 
+    /// <summary>
+    /// Test for when the <see cref="ParseIssueFormCommand.IssueFormBody"/> command parameter is
+    /// not a JSON string.
+    /// </summary>
     [Fact]
     public async Task InvalidIssueFormBody()
     {
@@ -71,6 +85,10 @@ public class ParseIssueFormCommandValidationTests
         exception.InnerException.Message.ShouldStartWith("H3 header value '### What NuGet package do you want to release?' not found in issue form body.");
     }
 
+    /// <summary>
+    /// Test for when the <see cref="ParseIssueFormCommand.IssueFormBody"/> command parameter is
+    /// valid but the H3 headers order doesn't match the template.
+    /// </summary>
     [Fact]
     public async Task InvalidIssueFormBody2()
     {
@@ -87,6 +105,10 @@ public class ParseIssueFormCommandValidationTests
         exception.InnerException.Message.ShouldStartWith("Failed to obtain the value for H3 header: '### What NuGet package do you want to release?'. Couldn't find any text between that H3 header and the next H3 header: '### What is the new version for the NuGet package?'.");
     }
 
+    /// <summary>
+    /// Test for when the <see cref="ParseIssueFormCommand.IssueFormBody"/> command parameter is
+    /// valid but the H3 headers order doesn't match the template.
+    /// </summary>
     [Fact]
     public async Task InvalidIssueFormBody3()
     {

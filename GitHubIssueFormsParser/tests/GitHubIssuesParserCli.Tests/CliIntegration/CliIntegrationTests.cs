@@ -1,8 +1,15 @@
 namespace GitHubIssuesParserCli.Tests.CliIntegration;
 
+/// <summary>
+/// These tests make sure that the CLI interface is as expected.
+/// IE: if the command name changes or the options change then these tests would pick that up.
+/// </summary>
 [Trait("Category", XUnitCategories.Integration)]
 public class CliIntegrationTests
 {
+    /// <summary>
+    /// Tests that if no arguments are passed the CLI returns the help text.
+    /// </summary>
     [Fact]
     public async Task IntegrationTest1()
     {
@@ -15,6 +22,10 @@ public class CliIntegrationTests
         output.ShouldEndWith(expectedOutput);
     }
 
+
+    /// <summary>
+    /// Tests the correct value for the options that can be used with the 'parse-issue-form' command.
+    /// </summary>
     [Theory]
     [InlineData("-i", "-t")]
     [InlineData("--issue-body", "--template-filepath")]
@@ -32,19 +43,5 @@ public class CliIntegrationTests
 
         var issueFormJson = JsonSerializer.Deserialize<IssueFormTestModel>(output);
         issueFormJson.ShouldNotBeNull();
-        issueFormJson.NuGetId.ShouldBe("dotnet-sdk-extensions");
-        issueFormJson.NuGetVersion.ShouldBe("1.0.13-alpha");
-        issueFormJson.AutoGenerateReleaseNotes.ShouldBe("Yes");
-        issueFormJson.AutoGenerateReleaseNotesOptional.ShouldBeEmpty();
-        issueFormJson.CustomReleaseNotes.ShouldBe($"## Custom release notes {CRLF}{CRLF}Test 123{CRLF}{CRLF}Another line:{CRLF}- point 1{CRLF}- point 2{CRLF}- point 3");
-        issueFormJson.OperatingSystems.ShouldNotBeNull();
-        issueFormJson.OperatingSystems.MacOS.ShouldNotBeNull();
-        issueFormJson.OperatingSystems.MacOS.ShouldBe(true);
-        issueFormJson.OperatingSystems.Windows.ShouldNotBeNull();
-        issueFormJson.OperatingSystems.Windows.ShouldBe(true);
-        issueFormJson.OperatingSystems.Linux.ShouldNotBeNull();
-        issueFormJson.OperatingSystems.Linux.ShouldBe(false);
-        issueFormJson.OperatingSystems.Unknown.ShouldNotBeNull();
-        issueFormJson.OperatingSystems.Unknown.ShouldBe(false);
     }
 }
