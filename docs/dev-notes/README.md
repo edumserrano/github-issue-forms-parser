@@ -1,6 +1,6 @@
 # Dev notes
 
-## Building
+## Building the GitHubIssueFormsParser solution
 
 ### Building with Visual Studio
 
@@ -12,7 +12,7 @@
 1) Clone the repo and browse to the solution's directory at `/GitHubIssueFormsParser` using your favorite shell.
 2) Run **`dotnet build GitHubIssueFormsParser.sln`** to build the source of the CLI app.
 
-## Running tests
+## Running GitHubIssueFormsParser solution tests
 
 ### Run tests with Visual Studio
 
@@ -25,6 +25,23 @@
 
 1) Clone the repo and browse to the solution's directory at `/GitHubIssueFormsParser` using your favorite shell.
 2) Run **`dotnet test GitHubIssueFormsParser.sln`** to run tests.
+
+## Building and running the Docker container action using Powershell against a set of test data
+
+The steps below show how to run the Docker container action against a set of test data provided by the repo. However you can follow the same steps and provide any data you wish to test.
+
+1) Clone the repo and browse to the repo's directory.
+2) Run `docker build -t github-issue-parser .`
+3) Read the test issue form body into the variable `$issueBody` by doing: `$issueBody = Get-Content GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md -Raw`
+4) Run the docker container by executing `docker run --rm -v ${pwd}:/workspace --workdir /workspace github-issue-parser GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/Template.yml $issueBody`.
+
+**Notes:**
+
+- The docker container entrypoint expects two arguments:
+    1) First, the filepath to the issue form template.
+    2) Second, the issue form body.
+- When running the docker container the current directory is mounted to the docker container so that we can read the issue form template.
+- When reading the issue form body into the `$issueBody` variable we have to use the `-Raw` parameter to avoid problems with line endings.
 
 ## Projects wide configuration
 
