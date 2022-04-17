@@ -28,7 +28,7 @@
 
 ## Projects wide configuration
 
-The [Directory.Build.props](/Directory.Build.props) at the root of the repo enables for all projects several settings as well as adds some common NuGet packages.
+The [Directory.Build.props](/GitHubIssueFormsParser/Directory.Build.props) enables several settings as well as adds some common NuGet packages for all projects.
 
 There is a set of NuGet packages that are only applied in test projects by using the condition `"'$(IsTestProject)' == 'true'"`. To make this work the `csproj` for the test projects must have the `<IsTestProject>true</IsTestProject>` property defined. Adding this property manually shouldn't be needed because it should be added by the `Microsoft.NET.Test.Sdk` package however there seems to be an issue with this when running tests outside of Visual Studio. See [this GitHub issue](https://github.com/dotnet/sdk/issues/3790#issuecomment-1100773198) for more info.
 
