@@ -25,12 +25,11 @@ A Docker container [GitHub action](https://docs.github.com/en/actions/learn-gith
 - name: Output parsed issue
   shell: pwsh
   run: |
-    $issueAsJson = '${{ steps.issue-parser.outputs.parsed-issue }}'
-    Write-Output $issueAsJsonIndented # outputs the parsed issue as a JSON string
-    $issueForm = '${{ steps.issue-parser.outputs.parsed-issue }}' | ConvertFrom-Json
-    # To access kebab case properties in powershell use single quotes around the property names
-    $title = $issueForm.'my-title'
-    $version = $issueForm.version
+    $issue = '${{ steps.issue-parser.outputs.parsed-issue }}' | ConvertFrom-Json
+    $issueAsJsonIndented = ConvertTo-Json $issue
+    Write-Output $issueAsJsonIndented # outputs the parsed issue as an indented JSON string
+    $title = $issue.title
+    $version = $issue.version
     Write-Output "The title is $title"
     Write-Output "The version is $version"
 ```

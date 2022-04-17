@@ -27,7 +27,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Get test input args
-        id: input
+        id: args
         run: |
           $templateFilepath = './GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/Template.yml'
           # using -Raw is needed or else the newlines are not preserved and the action will fail to parse the body
@@ -37,21 +37,21 @@ jobs:
           Write-Output "::set-output name=template-filepath::$templateFilepath"
       - name: Dump outputs from previous step
         env:
-          STEP_OUTPUT: ${{ toJSON(steps.input.outputs) }}
+          STEP_OUTPUT: ${{ toJSON(steps.args.outputs) }}
         run: $env:STEP_OUTPUT
       - name: Run GitHub issue forms parser
-        id: parser
+        id: issue-parser
         uses: edumserrano/github-issue-forms-parser@v1
         with:
-          template-filepath: '${{ steps.input.outputs.template-filepath }}'
-          issue-form-body: '${{ steps.input.outputs.issue-body }}'
+          template-filepath: '${{ steps.args.outputs.template-filepath }}'
+          issue-form-body: '${{ steps.args.outputs.issue-body }}'
       - name: Dump outputs from previous step
         env:
-          STEP_OUTPUT: ${{ toJSON(steps.parser.outputs) }}
+          STEP_OUTPUT: ${{ toJSON(steps.issue-parser.outputs) }}
         run: $env:STEP_OUTPUT
       - name: Output and assert parsed issue
         run: |
-          $issue = '${{ steps.parser.outputs.parsed-issue }}' | ConvertFrom-Json
+          $issue = '${{ steps.issue-parser.outputs.parsed-issue }}' | ConvertFrom-Json
           $issueAsJsonIndented = ConvertTo-Json $issue
           $expectedIssueAsJson = '{
             "nuget-id": "dotnet-sdk-extensions",
