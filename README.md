@@ -187,4 +187,4 @@ In the log for the action, expand the groups for `dotnet GitHub issue form parse
 
 ## Dev notes
 
-For notes aimed at developers working on this repo or just trying to understand it go [here](/docs/dev-notes/dev-notes-main.md). It will show you how to build and run the solution among other things.
+For notes aimed at developers working on this repo or just trying to understand it go [here](/docs/dev-notes/README.md). It will show you how to build and run the solution among other things.
