@@ -179,7 +179,11 @@ The output would be:
 
 ## I can't figure out the structure of the JSON object produced by the parser
 
-You can add the following step 
+You can check the structure of the action's output on the log produced by the action. 
+
+In the log for the action, expand the groups for `dotnet GitHub issue form parser output` and `dotnet GitHub issue form parser output indented` as shown in the image below.
+
+![debug-output](docs/readme-images/debug-output.png "Debug output")
 
 
 ## Dev notes

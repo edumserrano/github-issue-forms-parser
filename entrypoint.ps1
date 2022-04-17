@@ -19,7 +19,7 @@ Write-Output "::group::dotnet GitHub issue form parser output"
 Write-Output $output
 Write-Output "::endgroup::"
 
-Write-Output "::group::dotnet GitHub issue form parser output as json"
+Write-Output "::group::dotnet GitHub issue form parser output indented"
 $outputAsJson = ConvertFrom-Json $output
 COnvertTo-Json $outputAsJson
 Write-Output "::endgroup::"
