@@ -57,7 +57,7 @@ jobs:
             "nuget-id": "dotnet-sdk-extensions",
             "nuget-version": "1.0.13-alpha",
             "auto-generate-release-notes": "Yes",
-            "auto-generate-release-notes-optional": "",
+            "push-nuget": "",
             "custom-release-notes": "## Custom release notes \n\nTest 123\n\nAnother line:\n- point 1\n- point 2\n- point 3",
             "operating-systems": {
               "macos": true,
