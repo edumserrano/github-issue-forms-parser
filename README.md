@@ -1,8 +1,9 @@
-# GitHub issues form parser
+# GitHub issue forms parser
 
 [![Build and test](https://github.com/edumserrano/github-issue-forms-parser/workflows/Build%20and%20test/badge.svg)](https://github.com/edumserrano/github-issue-forms-parser/actions/workflows/build-test.yml)
 [![Test GitHub action](https://github.com/edumserrano/github-issue-forms-parser/workflows/Test%20GitHub%20action/badge.svg)](https://github.com/edumserrano/github-issue-forms-parser/actions/workflows/test-action.yml)
 [![codecov](https://codecov.io/gh/edumserrano/github-issue-forms-parser/branch/main/graph/badge.svg?token=B9nrGE2Ine)](https://codecov.io/gh/edumserrano/github-issue-forms-parser)
+[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-GitHub%20issue%20forms%20parser-blue.svg?colorA=24292e&colorB=0366d6&style=flat&longCache=true&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAM6wAADOsB5dZE0gAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAERSURBVCiRhZG/SsMxFEZPfsVJ61jbxaF0cRQRcRJ9hlYn30IHN/+9iquDCOIsblIrOjqKgy5aKoJQj4O3EEtbPwhJbr6Te28CmdSKeqzeqr0YbfVIrTBKakvtOl5dtTkK+v4HfA9PEyBFCY9AGVgCBLaBp1jPAyfAJ/AAdIEG0dNAiyP7+K1qIfMdonZic6+WJoBJvQlvuwDqcXadUuqPA1NKAlexbRTAIMvMOCjTbMwl1LtI/6KWJ5Q6rT6Ht1MA58AX8Apcqqt5r2qhrgAXQC3CZ6i1+KMd9TRu3MvA3aH/fFPnBodb6oe6HM8+lYHrGdRXW8M9bMZtPXUji69lmf5Cmamq7quNLFZXD9Rq7v0Bpc1o/tp0fisAAAAASUVORK5CYII=)]()
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 [![GitHub Sponsors](https://img.shields.io/github/sponsors/edumserrano)](https://github.com/sponsors/edumserrano)
@@ -13,7 +14,7 @@ A Docker container [GitHub action](https://docs.github.com/en/actions/learn-gith
 ## Usage
 
 ```yml
-- name: Run GitHub issue form parser
+- name: Run GitHub issue forms parser
   id: issue-parser
   uses: edumserrano/github-issue-forms-parser@v1
   with:
@@ -38,25 +39,25 @@ A Docker container [GitHub action](https://docs.github.com/en/actions/learn-gith
 
 | Name | Description
 | --- | --- |
-| `template-filepath` | The filepath to the [issue form template](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository#creating-issue-forms). |
+| `template-filepath` | The filepath to the [issue forms template](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository#creating-issue-forms). |
 | `issue-form-body` | The body of the issue to parse. |
 
 ### Action outputs
 
 | Name | Description
 | --- | --- |
-| `parsed-issue` | The issue form parsed as a JSON string. |
+| `parsed-issue` | The issue forms parsed as a JSON string. |
 
 **Notes about the JSON output:**
 
 - The keys on the JSON object are id field of the template form element.
 - Checkboxes form elements are outputed as an object whose keys are the [slugified]((https://blog.tersmitten.nl/slugify/)) value of the label of the option.
-- When the form element is optional and no input is provided for the form element then the issue form body will contain a `_No response_` but the parsed output for that key in the JSON string will just be an empty value.
+- When the form element is optional and no input is provided for the form element then the issue forms body will contain a `_No response_` but the parsed output for that key in the JSON string will just be an empty value.
 - **For a better understanding of the output rules see example below.**
 
-## Example output for a given issue form template and body
+## Example output for a given issue forms template and body
 
-Given the following issue form template:
+Given the following issue forms template:
 
 ```yml
 name: Release NuGet package
@@ -120,7 +121,7 @@ body:
         - label: Linux
 ```
 
-And given the following issue form body:
+And given the following issue forms body:
 
 ```md
 ### What NuGet package do you want to release?
@@ -180,7 +181,7 @@ The output would be:
 
 You can check the structure of the action's output on the log produced by the action. 
 
-In the log for the action, expand the groups for `dotnet GitHub issue form parser output` and `dotnet GitHub issue form parser output indented` as shown in the image below.
+In the log for the action, expand the groups for `dotnet GitHub issue forms parser output` and `dotnet GitHub issue forms parser output indented` as shown in the image below.
 
 ![debug-output](docs/readme-images/debug-output.png "Debug output")
 

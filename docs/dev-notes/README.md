@@ -32,16 +32,16 @@ The steps below show how to run the Docker container action against a set of tes
 
 1) Clone the repo and browse to the repo's directory.
 2) Run `docker build -t github-issue-parser .`
-3) Read the test issue form body into the variable `$issueBody` by doing: `$issueBody = Get-Content GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md -Raw`
+3) Read the test issue forms body into the variable `$issueBody` by doing: `$issueBody = Get-Content GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md -Raw`
 4) Run the docker container by executing `docker run --rm -v ${pwd}:/workspace --workdir /workspace github-issue-parser GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/Template.yml $issueBody`.
 
 **Notes:**
 
 - The docker container entrypoint expects two arguments:
-    1) First, the filepath to the issue form template.
-    2) Second, the issue form body.
-- When running the docker container the current directory is mounted to the docker container so that we can read the issue form template.
-- When reading the issue form body into the `$issueBody` variable we have to use the `-Raw` parameter to avoid problems with line endings.
+    1) First, the filepath to the issue forms template.
+    2) Second, the issue forms body.
+- When running the docker container the current directory is mounted to the docker container so that we can read the issue forms template.
+- When reading the issue forms body into the `$issueBody` variable we have to use the `-Raw` parameter to avoid problems with line endings.
 
 ## Projects wide configuration
 
@@ -126,19 +126,19 @@ This allows the GitHub action to access the files checked out by the workflow an
 
 **Example:**
 
-- Repository `hello-world` has an issue form template file at `.github\ISSUE_TEMPLATE\my-template.yml`.
+- Repository `hello-world` has an issue forms template file at `.github\ISSUE_TEMPLATE\my-template.yml`.
 - We create a workflow in the `hello-world` repository that checks out the `hello-world` repo and makes use of the `GitHub issue forms parser` action.
 - We set the `template-filepath` input parameter of the `GitHub issue forms parser` action to `.github\ISSUE_TEMPLATE\my-template.yml`.
 - When the workflow is executing the Docker container is able to get to `.github\ISSUE_TEMPLATE\my-template.yml` because the contents of the checked out `hello-world` repo are mounted into the Docker container at `/github/workspace`. Furthermore the `template-filepath` input parameter doesn't need to start with `/github/workspace` because the `workdir` parameter is set to `/github/workspace` when executing the Docker container.
 
 ## Other notes
 
-When creatng the [Test GitHub action workflow](/.github/workflows/test-action.yml) I had difficulty figuring out how to properly read the issue form body from a file and pass it into the GitHub action as an input parameter.
+When creatng the [Test GitHub action workflow](/.github/workflows/test-action.yml) I had difficulty figuring out how to properly read the issue forms body from a file and pass it into the GitHub action as an input parameter.
 
-What was happening initially was that the newlines were not being preserved and the action would fail to parse the issue form body. To help me debug this issue and see exactly what text, including newline characters, were being passed into the action I added the following debug step:
+What was happening initially was that the newlines were not being preserved and the action would fail to parse the issue forms body. To help me debug this issue and see exactly what text, including newline characters, were being passed into the action I added the following debug step:
 
 ```yml
-- name: Debug reading issue form body file using -Raw
+- name: Debug reading issue forms body file using -Raw
   run: |
     $issueBody = Get-Content ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md -Raw
     $issue = @{

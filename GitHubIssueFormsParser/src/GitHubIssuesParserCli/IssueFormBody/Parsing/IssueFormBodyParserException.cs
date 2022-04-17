@@ -9,7 +9,7 @@ public sealed class IssueFormBodyParserException : Exception
 
     internal static IssueFormBodyParserException H3HeaderNotFound(string h3Header)
     {
-        var message = $"H3 header value '{h3Header}' not found in issue form body.";
+        var message = $"H3 header value '{h3Header}' not found in issue forms body.";
         return new IssueFormBodyParserException(message);
     }
 

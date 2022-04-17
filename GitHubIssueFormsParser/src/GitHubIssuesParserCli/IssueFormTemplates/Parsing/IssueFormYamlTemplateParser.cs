@@ -14,9 +14,9 @@ internal static class IssueFormYamlTemplateParser
             throw IssueFormYamlTemplateParserException.InvalidYmlTemplate();
         }
 
-        // markdown template item types do NOT show in the issue form body, they are only used
+        // markdown template item types do NOT show in the issue forms body, they are only used
         // to show some markdown text when creating the issue. Excluding them here so that we
-        // only get the issue form template items that will be rendered on the issue form
+        // only get the issue forms template items that will be rendered on the issue forms body
         var items = templateDto.Body
             .Where(x => x.Type is not IssueFormYamlTemplateItemDtoTypes.Markdown)
             .Select(x =>

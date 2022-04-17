@@ -39,7 +39,7 @@ jobs:
         env:
           STEP_OUTPUT: ${{ toJSON(steps.input.outputs) }}
         run: $env:STEP_OUTPUT
-      - name: Run GitHub issue form parser
+      - name: Run GitHub issue forms parser
         id: parser
         uses: edumserrano/github-issue-forms-parser@v1
         with:

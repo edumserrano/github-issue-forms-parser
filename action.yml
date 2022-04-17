@@ -1,18 +1,18 @@
-name: 'GitHub issues form parser'
-description: 'Parses a GitHub issue form body and outputs a JSON representation.'
+name: 'GitHub issue forms parser'
+description: 'Parses a GitHub issue forms body and outputs a JSON representation.'
 branding:
   icon: align-justify
   color: blue
 inputs:
   template-filepath:
-    description: 'The filepath for the GitHub issue form template.'
+    description: 'The filepath for the GitHub issue forms template.'
     required: true
   issue-form-body:
-    description: 'The issue form body.'
+    description: 'The issue forms body.'
     required: true
 outputs:
   parsed-issue:
-    description: 'The parsed issue form as a JSON string.'
+    description: 'The parsed issue forms as a JSON string.'
 runs:
   using: 'docker'
   image: 'Dockerfile'
