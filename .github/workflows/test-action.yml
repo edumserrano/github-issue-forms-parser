@@ -26,6 +26,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Debug reading issue form body file
+        run: |
+          $issueBody = Get-Content ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md -Raw
+          $issueBody | ConvertTo-Json
+      - name: Debug reading issue form body file
+        run: |
+          $issueBody = Get-Content ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md
+          $issueBody | ConvertTo-Json
       - name: Get test input args
         id: input
         run: |
