@@ -11,3 +11,15 @@ There are two workflows setup on this repo:
 
 - [build-and-test](/docs/dev-notes/workflows/build-and-test-workflow.md)
 - [test-actions](/docs/dev-notes/workflows/test-actions-workflow.md)
+
+## Note about status badges
+
+I couldn't create a status badge by executing the steps documented in [Adding a workflow status badge](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge). Following thedocumentation was giving me a status badge which would always say `no status` isntead of the pass/fail status.
+
+There are some articles online explaining that this happens when the workflow has a `name` defined. Although these articles are old and the current GitHub documentation does not mention this workaround, formatting the `svg` link for the status badge as follows successfully produced the status badge:
+
+- https://github.com/{repo}/workflows/{workflow-name-URI-encoded}/badge.svg
+
+So for this repo and for the [build-and-test](/.github/workflows/build-test.yml) workflow the `svg` link is:
+
+- https://github.com/edumserrano/github-issue-forms-parser/workflows/Build%20and%20test/badge.svg
