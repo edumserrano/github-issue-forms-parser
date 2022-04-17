@@ -48,4 +48,4 @@ From all the GitHub repository settings the configurations worth mentioning are:
 
 ## GitHub Workflows
 
-For more information about the GitHub workflows configured for this repo go [here](/docs/dev-notes/workflows/github-workflows.md).
+For more information about the GitHub workflows configured for this repo go [here](/docs/dev-notes/workflows/README.md).
