@@ -48,8 +48,30 @@ jobs:
         env:
           STEP_OUTPUT: ${{ toJSON(steps.parser.outputs) }}
         run: $env:STEP_OUTPUT
-      - name: Output parsed issue
+      - name: Output and assert parsed issue
         run: |
           $issueAsJson = '${{ steps.parser.outputs.parsed-issue }}'
           $issue = ConvertFrom-Json $issueAsJson
-          ConvertTo-Json $issue
+          $issueAsJsonIndented = ConvertTo-Json $issue
+          $expectedIssueAsJson = '{
+            "nuget-id": "dotnet-sdk-extensions",
+            "nuget-version": "1.0.13-alpha",
+            "auto-generate-release-notes": "Yes",
+            "auto-generate-release-notes-optional": "",
+            "custom-release-notes": "## Custom release notes \n\nTest 123\n\nAnother line:\n- point 1\n- point 2\n- point 3",
+            "operating-systems": {
+              "macos": true,
+              "windows": true,
+              "linux": false,
+              "i-dont-know": false
+            }
+          }'
+          
+          Write-Output $issueAsJsonIndented
+          if($expectedIssueAsJson -eq $issueAsJsonIndented) {
+            Write-Output "::notice::Action produced the expected output. See the output from the step 'Output and assert parsed issue'."
+          }
+          else {
+            Write-Output "::error::Action didn't produce expected output. See the output from the step 'Output and assert parsed issue'."
+          }
+
