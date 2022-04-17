@@ -73,5 +73,6 @@ jobs:
           }
           else {
             Write-Output "::error::Action didn't produce expected output. See the output from the step 'Output and assert parsed issue'."
+            Exit -1
           }
 
