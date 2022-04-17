@@ -67,6 +67,10 @@ From all the GitHub repository settings the configurations worth mentioning are:
 
 For more information about the GitHub workflows configured for this repo go [here](/docs/dev-notes/workflows/README.md).
 
+## GitHub marketplace
+
+This action is published to the [GitHub marketplace](https://github.com/marketplace/actions/github-issue-forms-parser). See here for more information on [how to publish or remove an action from the marketplace](https://docs.github.com/en/actions/creating-actions/publishing-actions-in-github-marketplace).
+
 ## Note about the Docker container action
 
 This repo provides a [Docker container action](https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action). See here for more information about the [syntax for a Docker container action](https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#runs-for-docker-container-actions). To understand better how the action builds and executes the Docker container look at the log for the steps that build and run the action.
@@ -142,7 +146,7 @@ What was happening initially was that the newlines were not being preserved and 
   run: |
     $issueBody = Get-Content ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md -Raw
     $issue = @{
-    body = $issueBody
+      body = $issueBody
     }
     $issue | ConvertTo-Json
 ```
