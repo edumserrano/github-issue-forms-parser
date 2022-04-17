@@ -12,8 +12,8 @@ internal class IssueFormTestModel
     [JsonPropertyName("auto-generate-release-notes")]
     public string? AutoGenerateReleaseNotes { get; set; }
 
-    [JsonPropertyName("auto-generate-release-notes-optional")]
-    public string? AutoGenerateReleaseNotesOptional { get; set; }
+    [JsonPropertyName("push-nuget")]
+    public string? PushNuget { get; set; }
 
     [JsonPropertyName("custom-release-notes")]
     public string? CustomReleaseNotes { get; set; }

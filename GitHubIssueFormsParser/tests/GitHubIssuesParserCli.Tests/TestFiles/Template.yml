@@ -35,10 +35,10 @@ body:
     validations:
       required: true
   - type: dropdown
-    id: auto-generate-release-notes-optional
+    id: push-nuget
     attributes:
-      label: Auto-generate release notes optional?
-      description: Automatically add the markdown for all the merged pull requests from this diff and contributors of this release.
+      label: Push to NuGet.org?
+      description: This is optional.
       options:
         - 'Yes'
         - 'No'

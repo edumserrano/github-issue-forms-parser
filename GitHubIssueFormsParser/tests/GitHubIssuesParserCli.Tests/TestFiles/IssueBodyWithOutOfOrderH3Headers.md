@@ -10,13 +10,13 @@ Yes
 
 dotnet-sdk-extensions
 
-### Auto-generate release notes optional?
+### Push to NuGet.org?
 
 _No response_
 
 ### Custom release notes?
 
-## Custom release notes 
+## Custom release notes
 
 Test 123
 

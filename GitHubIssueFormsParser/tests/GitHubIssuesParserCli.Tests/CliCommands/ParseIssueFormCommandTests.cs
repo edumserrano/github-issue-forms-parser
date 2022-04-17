@@ -23,8 +23,8 @@ public class ParseIssueFormCommandTests
         issueFormJson.NuGetId.ShouldBe("dotnet-sdk-extensions");
         issueFormJson.NuGetVersion.ShouldBe("1.0.13-alpha");
         issueFormJson.AutoGenerateReleaseNotes.ShouldBe("Yes");
-        issueFormJson.AutoGenerateReleaseNotesOptional.ShouldBeEmpty();
-        issueFormJson.CustomReleaseNotes.ShouldBe($"## Custom release notes {Environment.NewLine}{Environment.NewLine}Test 123{Environment.NewLine}{Environment.NewLine}Another line:{Environment.NewLine}- point 1{Environment.NewLine}- point 2{Environment.NewLine}- point 3");
+        issueFormJson.PushNuget.ShouldBeEmpty();
+        issueFormJson.CustomReleaseNotes.ShouldBe($"## Custom release notes{Environment.NewLine}{Environment.NewLine}Test 123{Environment.NewLine}{Environment.NewLine}Another line:{Environment.NewLine}- point 1{Environment.NewLine}- point 2{Environment.NewLine}- point 3");
         issueFormJson.OperatingSystems.ShouldNotBeNull();
         issueFormJson.OperatingSystems.MacOS.ShouldNotBeNull();
         issueFormJson.OperatingSystems.MacOS.ShouldBe(true);
@@ -45,7 +45,7 @@ public class ParseIssueFormCommandTests
     [InlineData(LF)]
     public async Task ParseIssueFormCommandTest2(string newLine)
     {
-        var issueFormBody = $"### What NuGet package do you want to release?{newLine}{newLine}dotnet-sdk-extensions{newLine}{newLine}### What is the new version for the NuGet package?{newLine}{newLine}1.0.13-alpha{newLine}{newLine}### Auto-generate release notes?{newLine}{newLine}Yes{newLine}{newLine}### Auto-generate release notes optional?{newLine}{newLine}_No response_{newLine}{newLine}### Custom release notes?{newLine}{newLine}## Custom release notes {newLine}{newLine}Test 123{newLine}{newLine}Another line:{newLine}- point 1{newLine}- point 2{newLine}- point 3{newLine}{newLine}### Which operating systems have you used?{newLine}{newLine}- [X] macOS{newLine}- [X] Windows{newLine}- [ ] Linux{newLine}- [ ] I don't know{newLine}";
+        var issueFormBody = $"### What NuGet package do you want to release?{newLine}{newLine}dotnet-sdk-extensions{newLine}{newLine}### What is the new version for the NuGet package?{newLine}{newLine}1.0.13-alpha{newLine}{newLine}### Auto-generate release notes?{newLine}{newLine}Yes{newLine}{newLine}### Push to NuGet.org?{newLine}{newLine}_No response_{newLine}{newLine}### Custom release notes?{newLine}{newLine}## Custom release notes {newLine}{newLine}Test 123{newLine}{newLine}Another line:{newLine}- point 1{newLine}- point 2{newLine}- point 3{newLine}{newLine}### Which operating systems have you used?{newLine}{newLine}- [X] macOS{newLine}- [X] Windows{newLine}- [ ] Linux{newLine}- [ ] I don't know{newLine}";
         using var console = new FakeInMemoryConsole();
         var command = new ParseIssueFormCommand
         {
@@ -60,7 +60,7 @@ public class ParseIssueFormCommandTests
         issueFormJson.NuGetId.ShouldBe("dotnet-sdk-extensions");
         issueFormJson.NuGetVersion.ShouldBe("1.0.13-alpha");
         issueFormJson.AutoGenerateReleaseNotes.ShouldBe("Yes");
-        issueFormJson.AutoGenerateReleaseNotesOptional.ShouldBeEmpty();
+        issueFormJson.PushNuget.ShouldBeEmpty();
         issueFormJson.CustomReleaseNotes.ShouldBe($"## Custom release notes {newLine}{newLine}Test 123{newLine}{newLine}Another line:{newLine}- point 1{newLine}- point 2{newLine}- point 3");
         issueFormJson.OperatingSystems.ShouldNotBeNull();
         issueFormJson.OperatingSystems.MacOS.ShouldNotBeNull();
