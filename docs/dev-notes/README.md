@@ -133,7 +133,7 @@ This allows the GitHub action to access the files checked out by the workflow an
 
 ## Other notes
 
-When creatng the [Test GitHub action workflow](/.github/workflows/test-action.yml) I sometimes had difficulty figuring out how to properly read the issue form body from a file and pass it into the GitHub action as an input parameter.
+When creatng the [Test GitHub action workflow](/.github/workflows/test-action.yml) I had difficulty figuring out how to properly read the issue form body from a file and pass it into the GitHub action as an input parameter.
 
 What was happening initially was that the newlines were not being preserved and the action would fail to parse the issue form body. To help me debug this issue and see exactly what text, including newline characters, were being passed into the action I added the following debug step:
 
