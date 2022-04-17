@@ -5,7 +5,7 @@ internal static class NormalizedLineEndingsFileReader
     /// <summary>
     /// Opens a text file, reads all text and then closes the file.
     /// </summary>
-    /// <param name="path"></param>
+    /// <param name="path">The file to open for reading.</param>
     /// <returns>A string containing all the text of the file with line endings matching the OS.</returns>
     public static string ReadAllText(string path)
     {
