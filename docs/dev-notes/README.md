@@ -133,15 +133,18 @@ This allows the GitHub action to access the files checked out by the workflow an
 
 ## Other notes
 
-When creatng the [Test GitHub action workflow](/.github/workflows/test-action.yml) I sometimes had difficulty figuring out how to properly read the issue form body from a file and pass it into the GitHub action as an input parameter. 
+When creatng the [Test GitHub action workflow](/.github/workflows/test-action.yml) I sometimes had difficulty figuring out how to properly read the issue form body from a file and pass it into the GitHub action as an input parameter.
 
-Initially the newlines were getting mangled and the action would fail to parse the issue form body. To help me debug this issue and see exactly what text, including newline characters, were being passed into the action I added the following debug step:
+What was happening initially was that the newlines were not being preserved and the action would fail to parse the issue form body. To help me debug this issue and see exactly what text, including newline characters, were being passed into the action I added the following debug step:
 
 ```yml
-- name: Debug
+- name: Debug reading issue form body file using -Raw
   run: |
     $issueBody = Get-Content ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md -Raw
-    $issueBody | ConvertTo-Json
+    $issue = @{
+    body = $issueBody
+    }
+    $issue | ConvertTo-Json
 ```
 
-The above will output a JSON string that contains the newline characters. With this I was able to identify that I was losing the newline characters. The fix was to use the `-Raw` parameter with the `Get-Content` command.
+The above will output a JSON string in which the value of the property body will also contain the newline characters if available. With this I was able to identify that without the `-Raw` parameter I was losing the newline characters. See here for more info on [`-Raw`](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-content).
