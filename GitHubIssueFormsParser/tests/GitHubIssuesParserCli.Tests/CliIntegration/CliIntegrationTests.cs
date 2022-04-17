@@ -18,7 +18,7 @@ public class CliIntegrationTests
         app.CliApplicationBuilder.UseConsole(console);
         await app.RunAsync();
         var output = console.ReadOutputString();
-        var expectedOutput = File.ReadAllText("./TestFiles/CliOutputNoArgs.txt");
+        var expectedOutput = NormalizedLineEndingsFileReader.ReadAllText("./TestFiles/CliOutputNoArgs.txt");
         output.ShouldEndWith(expectedOutput);
     }
 
@@ -34,7 +34,7 @@ public class CliIntegrationTests
         var app = new IssuesParserCli();
         app.CliApplicationBuilder.UseConsole(console);
 
-        var issueFormBody = File.ReadAllText("./TestFiles/IssueBody.md");
+        var issueFormBody = NormalizedLineEndingsFileReader.ReadAllText("./TestFiles/IssueBody.md");
         const string templateFilepath = "./TestFiles/Template.yml";
         var args = new[] { "parse-issue-form", issueFormParamName, issueFormBody, templateFilepathParamName, templateFilepath };
         await app.RunAsync(args);

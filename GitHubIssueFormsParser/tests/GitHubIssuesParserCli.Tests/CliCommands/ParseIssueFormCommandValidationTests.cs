@@ -115,7 +115,7 @@ public class ParseIssueFormCommandValidationTests
         using var console = new FakeInMemoryConsole();
         var command = new ParseIssueFormCommand
         {
-            IssueFormBody = File.ReadAllText("./TestFiles/IssueBodyWithOutOfOrderH3Headers.md"),
+            IssueFormBody = NormalizedLineEndingsFileReader.ReadAllText("./TestFiles/IssueBodyWithOutOfOrderH3Headers.md"),
             TemplateFilepath = "./TestFiles/Template.yml",
         };
         var exception = await Should.ThrowAsync<ParseGitHubIssueFormCommandException>(() => command.ExecuteAsync(console).AsTask());
@@ -135,7 +135,7 @@ public class ParseIssueFormCommandValidationTests
         using var console = new FakeInMemoryConsole();
         var command = new ParseIssueFormCommand
         {
-            IssueFormBody = File.ReadAllText("./TestFiles/IssueBodyWithMangledCheckbox.md"),
+            IssueFormBody = NormalizedLineEndingsFileReader.ReadAllText("./TestFiles/IssueBodyWithMangledCheckbox.md"),
             TemplateFilepath = "./TestFiles/Template.yml",
         };
         var exception = await Should.ThrowAsync<ParseGitHubIssueFormCommandException>(() => command.ExecuteAsync(console).AsTask());

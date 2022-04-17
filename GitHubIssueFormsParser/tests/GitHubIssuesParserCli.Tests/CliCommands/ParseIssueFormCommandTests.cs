@@ -12,7 +12,7 @@ public class ParseIssueFormCommandTests
         using var console = new FakeInMemoryConsole();
         var command = new ParseIssueFormCommand
         {
-            IssueFormBody = File.ReadAllText("./TestFiles/IssueBody.md"),
+            IssueFormBody = NormalizedLineEndingsFileReader.ReadAllText("./TestFiles/IssueBody.md"),
             TemplateFilepath = "./TestFiles/Template.yml",
         };
         await command.ExecuteAsync(console);
