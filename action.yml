@@ -1,5 +1,8 @@
 name: 'GitHub issues form parser'
 description: 'Parses a GitHub issue form body and outputs a JSON representation.'
+branding:
+  icon: align-justify
+  color: blue
 inputs:
   template-filepath:
     description: 'The filepath for the GitHub issue form template.'
