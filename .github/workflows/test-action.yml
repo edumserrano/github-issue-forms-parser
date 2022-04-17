@@ -50,8 +50,7 @@ jobs:
         run: $env:STEP_OUTPUT
       - name: Output and assert parsed issue
         run: |
-          $issueAsJson = '${{ steps.parser.outputs.parsed-issue }}'
-          $issue = ConvertFrom-Json $issueAsJson
+          $issue = '${{ steps.parser.outputs.parsed-issue }}' | ConvertFrom-Json
           $issueAsJsonIndented = ConvertTo-Json $issue
           $expectedIssueAsJson = '{
             "nuget-id": "dotnet-sdk-extensions",
