@@ -66,6 +66,26 @@ public class ParseIssueFormCommandValidationTests
     }
 
     /// <summary>
+    /// Test for when the <see cref="ParseIssueFormCommand.TemplateFilepath"/> command parameter is not a valid
+    /// YAML templte.
+    /// </summary>
+    [Fact]
+    public async Task InvalidTemplate()
+    {
+        using var console = new FakeInMemoryConsole();
+        var command = new ParseIssueFormCommand
+        {
+            IssueFormBody = "some issue form body",
+            TemplateFilepath = "./TestFiles/InvalidTemplate.yml",
+        };
+        var exception = await Should.ThrowAsync<ParseGitHubIssueFormCommandException>(() => command.ExecuteAsync(console).AsTask());
+        exception.Message.ShouldBe("An error occurred trying to execute the command to parse a GitHub issue form. See inner exception for more details.");
+        exception.InnerException.ShouldNotBeNull();
+        exception.InnerException.ShouldBeAssignableTo<IssueFormYamlTemplateParserException>();
+        exception.InnerException.Message.ShouldStartWith("Failed to deserialize the issue form template. The template must contain at least an YAML member named 'body' at the first indentation level.");
+    }
+
+    /// <summary>
     /// Test for when the <see cref="ParseIssueFormCommand.IssueFormBody"/> command parameter is
     /// not a JSON string.
     /// </summary>
