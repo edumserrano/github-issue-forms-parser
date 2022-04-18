@@ -90,5 +90,5 @@ jobs:
             Exit 1
           }
           else {
-            Write-Output "::notice title=Action check::Action would have failed the workflow given invalid input."
+            Write-Output "::notice title=Action check::Action would have failed the workflow given invalid input. You should see an error message on the action's Annotations."
           }
