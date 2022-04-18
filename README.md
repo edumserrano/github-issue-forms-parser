@@ -182,7 +182,7 @@ You can check the structure of the action's output on the log produced by the ac
 
 In the log for the action, expand the groups for `dotnet GitHub issue form parser output` and `dotnet GitHub issue form parser output indented` as shown in the image below.
 
-![debug-output](docs/readme-images/debug-output.png "Debug output")
+![debug-output](docs/main-readme-assets/debug-output.png "Debug output")
 
 ## Dev notes
 
