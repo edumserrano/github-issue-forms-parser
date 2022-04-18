@@ -3,10 +3,10 @@ namespace GitHubIssuesParserCli.CliCommands;
 [Command("parse-issue-form")]
 public class ParseIssueFormCommand : ICommand
 {
-    [CommandOption("issue-body", 'i', Description = "The body of the GitHub issue forms.")]
+    [CommandOption("issue-body", 'i', Description = "The body of the GitHub issue form.")]
     public string? IssueFormBody { get; init; }
 
-    [CommandOption("template-filepath", 't', Description = "The filepath for the GitHub issue forms YAML template.")]
+    [CommandOption("template-filepath", 't', Description = "The filepath for the GitHub issue form YAML template.")]
     public string? TemplateFilepath { get; init; }
 
     public async ValueTask ExecuteAsync(IConsole console)

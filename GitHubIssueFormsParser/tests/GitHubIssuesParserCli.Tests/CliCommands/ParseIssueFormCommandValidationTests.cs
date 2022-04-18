@@ -18,7 +18,7 @@ public class ParseIssueFormCommandValidationTests
             TemplateFilepath = "./some/file/path.txt",
         };
         var exception = await Should.ThrowAsync<ParseGitHubIssueFormCommandException>(() => command.ExecuteAsync(console).AsTask());
-        exception.Message.ShouldBe("An error occurred trying to execute the command to parse a GitHub issue forms. See inner exception for more details.");
+        exception.Message.ShouldBe("An error occurred trying to execute the command to parse a GitHub issue form. See inner exception for more details.");
         exception.InnerException.ShouldNotBeNull();
         exception.InnerException.ShouldBeAssignableTo<ArgumentException>();
         exception.InnerException.Message.ShouldBe("IssueFormBody cannot be null or whitespace.");
@@ -35,11 +35,11 @@ public class ParseIssueFormCommandValidationTests
         using var console = new FakeInMemoryConsole();
         var command = new ParseIssueFormCommand
         {
-            IssueFormBody = "some issue forms body",
+            IssueFormBody = "some issue form body",
             TemplateFilepath = templateFilepath,
         };
         var exception = await Should.ThrowAsync<ParseGitHubIssueFormCommandException>(() => command.ExecuteAsync(console).AsTask());
-        exception.Message.ShouldBe("An error occurred trying to execute the command to parse a GitHub issue forms. See inner exception for more details.");
+        exception.Message.ShouldBe("An error occurred trying to execute the command to parse a GitHub issue form. See inner exception for more details.");
         exception.InnerException.ShouldNotBeNull();
         exception.InnerException.ShouldBeAssignableTo<ArgumentException>();
         exception.InnerException.Message.ShouldBe("TemplateFilepath cannot be null or whitespace.");
@@ -55,11 +55,11 @@ public class ParseIssueFormCommandValidationTests
         using var console = new FakeInMemoryConsole();
         var command = new ParseIssueFormCommand
         {
-            IssueFormBody = "some issue forms body",
+            IssueFormBody = "some issue form body",
             TemplateFilepath = "./this/path/does/not/exist.yml",
         };
         var exception = await Should.ThrowAsync<ParseGitHubIssueFormCommandException>(() => command.ExecuteAsync(console).AsTask());
-        exception.Message.ShouldBe("An error occurred trying to execute the command to parse a GitHub issue forms. See inner exception for more details.");
+        exception.Message.ShouldBe("An error occurred trying to execute the command to parse a GitHub issue form. See inner exception for more details.");
         exception.InnerException.ShouldNotBeNull();
         exception.InnerException.ShouldBeAssignableTo<DirectoryNotFoundException>();
         exception.InnerException.Message.ShouldStartWith("Could not find a part of the path");
@@ -75,14 +75,14 @@ public class ParseIssueFormCommandValidationTests
         using var console = new FakeInMemoryConsole();
         var command = new ParseIssueFormCommand
         {
-            IssueFormBody = "some issue forms body",
+            IssueFormBody = "some issue form body",
             TemplateFilepath = "./TestFiles/InvalidTemplate.yml",
         };
         var exception = await Should.ThrowAsync<ParseGitHubIssueFormCommandException>(() => command.ExecuteAsync(console).AsTask());
-        exception.Message.ShouldBe("An error occurred trying to execute the command to parse a GitHub issue forms. See inner exception for more details.");
+        exception.Message.ShouldBe("An error occurred trying to execute the command to parse a GitHub issue form. See inner exception for more details.");
         exception.InnerException.ShouldNotBeNull();
         exception.InnerException.ShouldBeAssignableTo<IssueFormYamlTemplateParserException>();
-        exception.InnerException.Message.ShouldStartWith("Failed to deserialize the issue forms template. The template must contain at least an YAML member named 'body' at the first indentation level.");
+        exception.InnerException.Message.ShouldStartWith("Failed to deserialize the issue form template. The template must contain at least an YAML member named 'body' at the first indentation level.");
     }
 
     /// <summary>
@@ -99,10 +99,10 @@ public class ParseIssueFormCommandValidationTests
             TemplateFilepath = "./TestFiles/Template.yml",
         };
         var exception = await Should.ThrowAsync<ParseGitHubIssueFormCommandException>(() => command.ExecuteAsync(console).AsTask());
-        exception.Message.ShouldBe("An error occurred trying to execute the command to parse a GitHub issue forms. See inner exception for more details.");
+        exception.Message.ShouldBe("An error occurred trying to execute the command to parse a GitHub issue form. See inner exception for more details.");
         exception.InnerException.ShouldNotBeNull();
         exception.InnerException.ShouldBeAssignableTo<IssueFormBodyParserException>();
-        exception.InnerException.Message.ShouldStartWith("H3 header value '### What NuGet package do you want to release?' not found in issue forms body.");
+        exception.InnerException.Message.ShouldStartWith("H3 header value '### What NuGet package do you want to release?' not found in issue form body.");
     }
 
     /// <summary>
@@ -119,7 +119,7 @@ public class ParseIssueFormCommandValidationTests
             TemplateFilepath = "./TestFiles/Template.yml",
         };
         var exception = await Should.ThrowAsync<ParseGitHubIssueFormCommandException>(() => command.ExecuteAsync(console).AsTask());
-        exception.Message.ShouldBe("An error occurred trying to execute the command to parse a GitHub issue forms. See inner exception for more details.");
+        exception.Message.ShouldBe("An error occurred trying to execute the command to parse a GitHub issue form. See inner exception for more details.");
         exception.InnerException.ShouldNotBeNull();
         exception.InnerException.ShouldBeAssignableTo<IssueFormBodyParserException>();
         exception.InnerException.Message.ShouldStartWith("Failed to obtain the value for H3 header: '### What NuGet package do you want to release?'. Couldn't find any text between that H3 header and the next H3 header: '### What is the new version for the NuGet package?'.");
@@ -139,7 +139,7 @@ public class ParseIssueFormCommandValidationTests
             TemplateFilepath = "./TestFiles/Template.yml",
         };
         var exception = await Should.ThrowAsync<ParseGitHubIssueFormCommandException>(() => command.ExecuteAsync(console).AsTask());
-        exception.Message.ShouldBe("An error occurred trying to execute the command to parse a GitHub issue forms. See inner exception for more details.");
+        exception.Message.ShouldBe("An error occurred trying to execute the command to parse a GitHub issue form. See inner exception for more details.");
         exception.InnerException.ShouldNotBeNull();
         exception.InnerException.ShouldBeAssignableTo<IssueFormBodyParserException>();
         exception.InnerException.Message.ShouldStartWith("Invalid checkbox option text: '- macOS'.");
