@@ -84,9 +84,9 @@ jobs:
           issue-form-body: '{}'
       - name: The action should fail if it fails to parse
         run: |
-          $parseStepWithBadInputOutcome = '${{ steps.issue-parser-bad-input.outcome }}''
+          $parseStepWithBadInputOutcome = '${{ steps.issue-parser-bad-input.outcome }}'
           if($parseStepWithBadInputOutcome -eq 'success') {
-            Write-Output "::error title=Action check:Action should have failed the workflow because of invalid input but it didn't'."
+            Write-Output "::error title=Action check:Action should have failed the workflow because of invalid input but it didn't."
             Exit 1
           }
           else {
