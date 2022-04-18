@@ -69,10 +69,26 @@ jobs:
           
           Write-Output $issueAsJsonIndented
           if($expectedIssueAsJson -eq $issueAsJsonIndented) {
-            Write-Output "::notice::Action produced the expected output. See the output from the step 'Output and assert parsed issue'."
+            Write-Output "::notice title=Action check::Action produced the expected output. See the output from the step 'Output and assert parsed issue'."
           }
           else {
-            Write-Output "::error::Action didn't produce expected output. See the output from the step 'Output and assert parsed issue'."
+            Write-Output "::error title=Action check::Action didn't produce expected output. See the output from the step 'Output and assert parsed issue'."
             Exit -1
           }
-
+      - name: Run GitHub issue forms parser with bad input
+        id: issue-parser-bad-input
+        uses: edumserrano/github-issue-forms-parser@v1
+        continue-on-error: true
+        with:
+          template-filepath: '${{ steps.args.outputs.template-filepath }}'
+          issue-form-body: '{}'
+      - name: The action should fail if it fails to parse
+        run: |
+          $parseStepWithBadInputOutcome = '${{ steps.issue-parser-bad-input.outcome }}''
+          if($parseStepWithBadInputOutcome -eq 'success') {
+            Write-Output "::error title=Action check:Action should have failed the workflow because of invalid input but it didn't'."
+            Exit 1
+          }
+          else {
+            Write-Output "::notice title=Action check::Action would have failed the workflow given invalid input."
+          }
