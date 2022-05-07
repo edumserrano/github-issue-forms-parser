@@ -172,13 +172,14 @@ The output would be:
 }
 ```
 
-## Example GitHub workflow
+## Example usages of this action in GitHub workflows
 
-[This workflow](https://github.com/edumserrano/github-issue-forms-parser/blob/main/.github/workflows/test-action.yml) is used to test that the action works as expected.
+- [This workflow](https://github.com/edumserrano/github-issue-forms-parser/blob/main/.github/workflows/test-action.yml) is used to test that the action works as expected.
+- [This workflow](https://github.com/edumserrano/dot-net-sdk-extensions/blob/33303189c564989fd40fcb1fa5086ca443f7bd92/.github/workflows/nuget-release.yml#L69-L73) shows the usage of the action as part of the release flow of a NuGet package.
 
 ## I can't figure out the structure of the JSON object produced by the parser
 
-You can check the structure of the action's output on the log produced by the action. 
+You can check the structure of the action's output on the log produced by the action.
 
 In the log for the action, expand the groups for `dotnet GitHub issue form parser output` and `dotnet GitHub issue form parser output indented` as shown in the image below.
 
