@@ -1,6 +1,6 @@
 USAGE
-  dotnet testhost.dll [options]
-  dotnet testhost.dll [command] [...]
+  testhost [options]
+  testhost [command] [...]
 
 OPTIONS
   -h|--help         Shows help text. 
@@ -9,4 +9,4 @@ OPTIONS
 COMMANDS
   parse-issue-form  
 
-You can run `dotnet testhost.dll [command] --help` to show help on a specific command.
+You can run `testhost [command] --help` to show help on a specific command.

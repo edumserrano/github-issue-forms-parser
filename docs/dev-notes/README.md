@@ -71,6 +71,8 @@ For more information about the GitHub workflows configured for this repo go [her
 
 This action is published to the [GitHub marketplace](https://github.com/marketplace/actions/github-issue-forms-parser). See here for more information on [how to publish or remove an action from the marketplace](https://docs.github.com/en/actions/creating-actions/publishing-actions-in-github-marketplace).
 
+**Currently there is no workflow setup to publish this action to the marketplace. The publishing act is a manual process following the instructions above.**
+
 ## Note about the Docker container action
 
 This repo provides a [Docker container action](https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action). If parsing the GitHub issue form fails then the action [will fail](https://docs.github.com/en/enterprise-cloud@latest/actions/creating-actions/setting-exit-codes-for-actions#setting-a-failure-exit-code-in-a-docker-container-action). See here for more information about the [syntax for a Docker container action](https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#runs-for-docker-container-actions).

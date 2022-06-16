@@ -36,10 +36,10 @@ A Docker container [GitHub action](https://docs.github.com/en/actions/learn-gith
 
 ### Action inputs
 
-| Name | Description
-| --- | --- |
-| `template-filepath` | The filepath to the [issue form template](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository#creating-issue-forms). |
-| `issue-form-body` | The body of the issue to parse. |
+| Name | Description | Required
+| --- | --- | --- |
+| `template-filepath` | The filepath to the [issue form template](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository#creating-issue-forms). | yes |
+| `issue-form-body` | The body of the issue to parse. | yes |
 
 ### Action outputs
 
