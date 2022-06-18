@@ -8,7 +8,7 @@ namespace GitHubIssuesParserCli.Tests.CliIntegration;
 public class CliIntegrationTests
 {
     [Fact]
-    public async Task Temp()
+    public void Temp()
     {
         "1".ShouldBe("2");
     }
