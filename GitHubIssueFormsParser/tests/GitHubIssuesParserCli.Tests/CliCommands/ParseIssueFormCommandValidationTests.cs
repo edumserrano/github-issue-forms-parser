@@ -9,7 +9,8 @@ public class ParseIssueFormCommandValidationTests
     [Theory]
     [InlineData(null)]
     [InlineData("")]
-    public async Task ValidateIssueFormBodyParam(string? issueFormBody)
+    [InlineData("   ")]
+    public async Task ValidateIssueFormBodyParam(string issueFormBody)
     {
         using var console = new FakeInMemoryConsole();
         var command = new ParseIssueFormCommand
@@ -30,7 +31,8 @@ public class ParseIssueFormCommandValidationTests
     [Theory]
     [InlineData(null)]
     [InlineData("")]
-    public async Task ValidateTemplateFilepathParam(string? templateFilepath)
+    [InlineData("   ")]
+    public async Task ValidateTemplateFilepathParam(string templateFilepath)
     {
         using var console = new FakeInMemoryConsole();
         var command = new ParseIssueFormCommand

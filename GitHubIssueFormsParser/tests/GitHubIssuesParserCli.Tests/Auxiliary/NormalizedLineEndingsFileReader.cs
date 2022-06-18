@@ -15,6 +15,7 @@ internal static class NormalizedLineEndingsFileReader
             // if it's a Windows OS and contains Windows line endings then do nothing
             return original;
         }
+
         if (Environment.OSVersion.Platform == PlatformID.Win32NT && original.Contains(LF, StringComparison.Ordinal))
         {
             // if it's a Windows OS and doesn't contain Windows line endings then replace

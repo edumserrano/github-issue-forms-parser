@@ -11,7 +11,7 @@ public class CliIntegrationTests
     /// Tests that if no arguments are passed the CLI returns the help text.
     /// </summary>
     [Fact]
-    public async Task IntegrationTest1()
+    public async Task NoArguments()
     {
         using var console = new FakeInMemoryConsole();
         var app = new IssuesParserCli();
@@ -23,12 +23,46 @@ public class CliIntegrationTests
     }
 
     /// <summary>
+    /// Tests that the --issue-body parameter is required for the 'parse-issue-form' command.
+    /// </summary>
+    [Fact]
+    public async Task IssueBodyParamIsRequired()
+    {
+        using var console = new FakeInMemoryConsole();
+        var app = new IssuesParserCli();
+        app.CliApplicationBuilder.UseConsole(console);
+
+        var args = new[] { "parse-issue-form", "--template-filepath", "some filepath" };
+        await app.RunAsync(args);
+        var output = console.ReadOutputString();
+        var expectedOutput = NormalizedLineEndingsFileReader.ReadAllText("./TestFiles/CliOutputRequiredParam.txt");
+        output.ShouldEndWith(expectedOutput);
+    }
+
+    /// <summary>
+    /// Tests that the --template-filepath parameter is required for the 'parse-issue-form' command.
+    /// </summary>
+    [Fact]
+    public async Task TemplateFilepathParamIsRequired()
+    {
+        using var console = new FakeInMemoryConsole();
+        var app = new IssuesParserCli();
+        app.CliApplicationBuilder.UseConsole(console);
+
+        var args = new[] { "parse-issue-form", "--issue-body", "some issue body" };
+        await app.RunAsync(args);
+        var output = console.ReadOutputString();
+        var expectedOutput = NormalizedLineEndingsFileReader.ReadAllText("./TestFiles/CliOutputRequiredParam.txt");
+        output.ShouldEndWith(expectedOutput);
+    }
+
+    /// <summary>
     /// Tests the correct value for the options that can be used with the 'parse-issue-form' command.
     /// </summary>
     [Theory]
     [InlineData("-i", "-t")]
     [InlineData("--issue-body", "--template-filepath")]
-    public async Task IntegrationTest2(string issueFormParamName, string templateFilepathParamName)
+    public async Task ExpectedUsage(string issueFormParamName, string templateFilepathParamName)
     {
         using var console = new FakeInMemoryConsole();
         var app = new IssuesParserCli();
