@@ -18,7 +18,7 @@ public class CliIntegrationTests
         app.CliApplicationBuilder.UseConsole(console);
         await app.RunAsync();
         var output = console.ReadOutputString();
-        var expectedOutput = NormalizedLineEndingsFileReader.ReadAllText("./TestFiles/CliOutputNoArgs.txt");
+        var expectedOutput = OsDependantOutput.ReadAllText("./TestFiles/CliOutputNoArgs");
         output.ShouldEndWith(expectedOutput);
     }
 
@@ -35,7 +35,7 @@ public class CliIntegrationTests
         var args = new[] { "parse-issue-form", "--template-filepath", "some filepath" };
         await app.RunAsync(args);
         var output = console.ReadOutputString();
-        var expectedOutput = NormalizedLineEndingsFileReader.ReadAllText("./TestFiles/CliOutputUsage.txt");
+        var expectedOutput = OsDependantOutput.ReadAllText("./TestFiles/CliOutputUsage");
         output.ShouldEndWith(expectedOutput);
     }
 
@@ -52,7 +52,7 @@ public class CliIntegrationTests
         var args = new[] { "parse-issue-form", "--issue-body", "some issue body" };
         await app.RunAsync(args);
         var output = console.ReadOutputString();
-        var expectedOutput = NormalizedLineEndingsFileReader.ReadAllText("./TestFiles/CliOutputUsage.txt");
+        var expectedOutput = OsDependantOutput.ReadAllText("./TestFiles/CliOutputUsage");
         output.ShouldEndWith(expectedOutput);
     }
 
@@ -71,7 +71,7 @@ public class CliIntegrationTests
         var args = new[] { "parse-issue-form", "--issue-body", issueBody, "--template-filepath", "some filepath" };
         await app.RunAsync(args);
         var error = console.ReadErrorString();
-        var expectedError = File.ReadAllText("./TestFiles/CliErrorIssueBodyValidation.txt");
+        var expectedError = NormalizedLineEndingsFileReader.ReadAllText("./TestFiles/CliErrorIssueBodyValidation.txt");
         expectedError.ShouldBe(error);
     }
 
@@ -91,7 +91,7 @@ public class CliIntegrationTests
         var args = new[] { "parse-issue-form", "--issue-body", "some body", "--template-filepath", templateFilepath };
         await app.RunAsync(args);
         var error = console.ReadErrorString();
-        var expectedError = File.ReadAllText("./TestFiles/CliErrorTemplateFilepathValidation.txt");
+        var expectedError = NormalizedLineEndingsFileReader.ReadAllText("./TestFiles/CliErrorTemplateFilepathValidation.txt");
         expectedError.ShouldBe(error);
     }
 
@@ -109,7 +109,7 @@ public class CliIntegrationTests
         var args = new[] { "parse-issue-form", "--issue-body", "some body", "--template-filepath", "non-existent-file.txt" };
         await app.RunAsync(args);
         var error = console.ReadErrorString();
-        var expectedError = File.ReadAllText("./TestFiles/CliErrorTemplateFilepathValidation2.txt");
+        var expectedError = NormalizedLineEndingsFileReader.ReadAllText("./TestFiles/CliErrorTemplateFilepathValidation2.txt");
         expectedError.ShouldBe(error);
     }
 

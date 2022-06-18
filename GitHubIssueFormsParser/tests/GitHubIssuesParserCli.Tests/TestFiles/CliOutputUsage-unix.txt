@@ -1,0 +1,7 @@
+USAGE
+  dotnet testhost.dll parse-issue-form --issue-body <value> --template-filepath <value> [options]
+
+OPTIONS
+* -i|--issue-body   The body of the GitHub issue form. 
+* -t|--template-filepath  The filepath for the GitHub issue form YAML template. 
+  -h|--help         Shows help text. 
