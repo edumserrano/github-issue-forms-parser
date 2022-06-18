@@ -1,4 +1,4 @@
-namespace GitHubIssuesParserCli.CliCommands.ParseIssueForm.OptionValidators;
+namespace GitHubIssuesParserCli.CliCommands;
 
 #pragma warning disable CA1812 // Avoid uninstantiated internal classes. Referenced via typeof(IssueFormBodyOptionValidator) usage
 internal class IssueFormBodyOptionValidator : BindingValidator<string>

@@ -1,4 +1,4 @@
-namespace GitHubIssuesParserCli.CliCommands.ParseIssueForm;
+namespace GitHubIssuesParserCli.CliCommands;
 
 [Command("parse-issue-form")]
 public class ParseIssueFormCommand : ICommand
