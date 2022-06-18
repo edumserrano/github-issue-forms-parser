@@ -7,12 +7,6 @@ namespace GitHubIssuesParserCli.Tests.CliIntegration;
 [Trait("Category", XUnitCategories.Integration)]
 public class CliIntegrationTests
 {
-    [Fact]
-    public void Temp()
-    {
-        "1".ShouldBe("2");
-    }
-
     /// <summary>
     /// Tests that if no arguments are passed the CLI returns the help text.
     /// </summary>
