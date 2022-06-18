@@ -26,6 +26,26 @@
 1) Clone the repo and browse to the solution's directory at `/GitHubIssueFormsParser` using your favorite shell.
 2) Run **`dotnet test GitHubIssueFormsParser.sln`** to run tests.
 
+## Debugging the `GitHubIssuesParserCli` project using Visual Studio
+
+If you just try to debug the `GitHubIssuesParserCli` project after cloning the repo you will get the help message on how to use the app.
+
+To pass arguments to the app when debugging you can use the `commandLineArgs` in the `launchSettings.json`:
+
+1) Make sure the `GitHubIssuesParserCli` project is set as the Startup project. Right click it and use th option "Set as Startup".
+2) Update the `launchSettings.json` to add app arguments as shown below:
+
+```json
+{
+  "profiles": {
+    "GitHubIssuesParserCli": {
+      "commandName": "Project",
+      "commandLineArgs": "parse-issue-form --issue-body <value> --template-filepath <value>"
+    }
+  }
+}
+```
+
 ## Building and running the Docker container action using Powershell against a set of test data
 
 The steps below show how to run the Docker container action against a set of test data provided by the repo. However you can follow the same steps and provide any data you wish to test.
