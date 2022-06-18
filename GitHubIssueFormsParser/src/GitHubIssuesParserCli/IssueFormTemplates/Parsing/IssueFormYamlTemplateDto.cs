@@ -1,13 +1,13 @@
 namespace GitHubIssuesParserCli.IssueFormTemplates.Parsing;
 
 #pragma warning disable CA1812 // Avoid uninstantiated internal classes. Used via generics on YML deserialization
-internal record IssueFormYamlTemplateDto
+internal class IssueFormYamlTemplateDto
 {
     [YamlMember(Alias = "body")]
     public List<IssueFormYamlTemplateItemDto>? Body { get; init; }
 }
 
-internal record IssueFormYamlTemplateItemDto
+internal class IssueFormYamlTemplateItemDto
 {
     [YamlMember(Alias = "id")]
     public string? Id { get; init; }
@@ -19,7 +19,7 @@ internal record IssueFormYamlTemplateItemDto
     public IssueFormYamlTemplateItemAttributesDto? Attributes { get; init; }
 }
 
-internal record IssueFormYamlTemplateItemAttributesDto
+internal class IssueFormYamlTemplateItemAttributesDto
 {
     [YamlMember(Alias = "label")]
     public string? Label { get; init; }

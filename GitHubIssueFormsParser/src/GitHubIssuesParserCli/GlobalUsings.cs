@@ -8,7 +8,6 @@ global using CliFx.Exceptions;
 global using CliFx.Extensibility;
 global using CliFx.Infrastructure;
 global using GitHubIssuesParserCli.ArgumentValidations;
-global using GitHubIssuesParserCli.CliCommands.ParseIssueForm.OptionValidators;
 global using GitHubIssuesParserCli.IssueFormBody;
 global using GitHubIssuesParserCli.IssueFormBody.IssueFormItems;
 global using GitHubIssuesParserCli.IssueFormBody.IssueFormItems.Checkboxes;
