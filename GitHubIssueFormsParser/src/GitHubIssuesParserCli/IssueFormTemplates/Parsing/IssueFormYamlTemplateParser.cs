@@ -5,10 +5,7 @@ internal static class IssueFormYamlTemplateParser
     public static IssueFormYamlTemplate Parse(IssueFormYamlTemplateText yamlTemplate)
     {
         yamlTemplate.NotNull();
-        var deserializer = new DeserializerBuilder()
-            .IgnoreUnmatchedProperties()
-            .Build();
-        var templateDto = deserializer.Deserialize<IssueFormYamlTemplateDto>(yamlTemplate);
+        var templateDto = DeserializeYaml(yamlTemplate);
         if (templateDto?.Body is null)
         {
             throw IssueFormYamlTemplateParserException.InvalidYmlTemplate();
@@ -36,5 +33,20 @@ internal static class IssueFormYamlTemplateParser
             })
             .ToList();
         return new IssueFormYamlTemplate(items);
+    }
+
+    public static IssueFormYamlTemplateDto? DeserializeYaml(this string yamlTemplate)
+    {
+        try
+        {
+            var deserializer = new DeserializerBuilder()
+                .IgnoreUnmatchedProperties()
+                .Build();
+            return deserializer.Deserialize<IssueFormYamlTemplateDto>(yamlTemplate);
+        }
+        catch (YamlException)
+        {
+            return null;
+        }
     }
 }

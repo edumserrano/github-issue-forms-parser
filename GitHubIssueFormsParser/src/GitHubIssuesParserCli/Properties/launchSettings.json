@@ -1,7 +1,8 @@
 {
   "profiles": {
     "GitHubIssuesParserCli": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "commandLineArgs": "parse-issue-form --issue-body some --template-filepath D:/Dev/edumserrano/github-issue-forms-parser/GitHubIssueFormsParser/src/GitHubIssuesParserCli/bin/Debug/net6.0/test.txt"
     }
   }
 }

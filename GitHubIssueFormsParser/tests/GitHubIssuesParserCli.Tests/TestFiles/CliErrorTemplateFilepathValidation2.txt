@@ -1,0 +1,3 @@
+Option -t|--template-filepath has been provided with an invalid value.
+Error(s):
+- File does not exist.

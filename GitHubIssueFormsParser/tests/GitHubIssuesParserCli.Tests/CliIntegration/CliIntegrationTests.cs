@@ -23,10 +23,10 @@ public class CliIntegrationTests
     }
 
     /// <summary>
-    /// Tests that the --issue-body parameter is required for the 'parse-issue-form' command.
+    /// Tests that the --issue-body option is required for the 'parse-issue-form' command.
     /// </summary>
     [Fact]
-    public async Task IssueBodyParamIsRequired()
+    public async Task IssueBodyOptionIsRequired()
     {
         using var console = new FakeInMemoryConsole();
         var app = new IssuesParserCli();
@@ -35,15 +35,15 @@ public class CliIntegrationTests
         var args = new[] { "parse-issue-form", "--template-filepath", "some filepath" };
         await app.RunAsync(args);
         var output = console.ReadOutputString();
-        var expectedOutput = NormalizedLineEndingsFileReader.ReadAllText("./TestFiles/CliOutputRequiredParam.txt");
+        var expectedOutput = NormalizedLineEndingsFileReader.ReadAllText("./TestFiles/CliOutputUsage.txt");
         output.ShouldEndWith(expectedOutput);
     }
 
     /// <summary>
-    /// Tests that the --template-filepath parameter is required for the 'parse-issue-form' command.
+    /// Tests that the --template-filepath option is required for the 'parse-issue-form' command.
     /// </summary>
     [Fact]
-    public async Task TemplateFilepathParamIsRequired()
+    public async Task TemplateFilepathOptionIsRequired()
     {
         using var console = new FakeInMemoryConsole();
         var app = new IssuesParserCli();
@@ -52,8 +52,65 @@ public class CliIntegrationTests
         var args = new[] { "parse-issue-form", "--issue-body", "some issue body" };
         await app.RunAsync(args);
         var output = console.ReadOutputString();
-        var expectedOutput = NormalizedLineEndingsFileReader.ReadAllText("./TestFiles/CliOutputRequiredParam.txt");
+        var expectedOutput = NormalizedLineEndingsFileReader.ReadAllText("./TestFiles/CliOutputUsage.txt");
         output.ShouldEndWith(expectedOutput);
+    }
+
+    /// <summary>
+    /// Tests the validation of the --issue-body option for the 'parse-issue-form' command.
+    /// </summary>
+    [Theory]
+    [InlineData("")]
+    [InlineData("   ")]
+    public async Task IssueBodyOptionValidation(string issueBody)
+    {
+        using var console = new FakeInMemoryConsole();
+        var app = new IssuesParserCli();
+        app.CliApplicationBuilder.UseConsole(console);
+
+        var args = new[] { "parse-issue-form", "--issue-body", issueBody, "--template-filepath", "some filepath" };
+        await app.RunAsync(args);
+        var error = console.ReadErrorString();
+        var expectedError = File.ReadAllText("./TestFiles/CliErrorIssueBodyValidation.txt");
+        expectedError.ShouldBe(error);
+    }
+
+    /// <summary>
+    /// Tests the validation of the --template-filepath option for the 'parse-issue-form' command.
+    /// Tests for empty string or whitespace.
+    /// </summary>
+    [Theory]
+    [InlineData("")]
+    [InlineData("   ")]
+    public async Task TemplateFilepathOptionValidation(string templateFilepath)
+    {
+        using var console = new FakeInMemoryConsole();
+        var app = new IssuesParserCli();
+        app.CliApplicationBuilder.UseConsole(console);
+
+        var args = new[] { "parse-issue-form", "--issue-body", "some body", "--template-filepath", templateFilepath };
+        await app.RunAsync(args);
+        var error = console.ReadErrorString();
+        var expectedError = File.ReadAllText("./TestFiles/CliErrorTemplateFilepathValidation.txt");
+        expectedError.ShouldBe(error);
+    }
+
+    /// <summary>
+    /// Tests the validation of the --template-filepath option for the 'parse-issue-form' command.
+    /// Tests for file existance.
+    /// </summary>
+    [Fact]
+    public async Task TemplateFilepathOptionValidation2()
+    {
+        using var console = new FakeInMemoryConsole();
+        var app = new IssuesParserCli();
+        app.CliApplicationBuilder.UseConsole(console);
+
+        var args = new[] { "parse-issue-form", "--issue-body", "some body", "--template-filepath", "non-existent-file.txt" };
+        await app.RunAsync(args);
+        var error = console.ReadErrorString();
+        var expectedError = File.ReadAllText("./TestFiles/CliErrorTemplateFilepathValidation2.txt");
+        expectedError.ShouldBe(error);
     }
 
     /// <summary>
@@ -62,7 +119,7 @@ public class CliIntegrationTests
     [Theory]
     [InlineData("-i", "-t")]
     [InlineData("--issue-body", "--template-filepath")]
-    public async Task ExpectedUsage(string issueFormParamName, string templateFilepathParamName)
+    public async Task ExpectedUsage(string issueFormOptionName, string templateFilepathOptionName)
     {
         using var console = new FakeInMemoryConsole();
         var app = new IssuesParserCli();
@@ -70,7 +127,7 @@ public class CliIntegrationTests
 
         var issueFormBody = NormalizedLineEndingsFileReader.ReadAllText("./TestFiles/IssueBody.md");
         const string templateFilepath = "./TestFiles/Template.yml";
-        var args = new[] { "parse-issue-form", issueFormParamName, issueFormBody, templateFilepathParamName, templateFilepath };
+        var args = new[] { "parse-issue-form", issueFormOptionName, issueFormBody, templateFilepathOptionName, templateFilepath };
         await app.RunAsync(args);
         var output = console.ReadOutputString();
 

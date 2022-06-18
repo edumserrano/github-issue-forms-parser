@@ -24,10 +24,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="TestFiles\CliOutputRequiredParam.txt">
+    <None Update="TestFiles\CliErrorTemplateFilepathValidation2.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFiles\CliErrorTemplateFilepathValidation.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFiles\CliErrorIssueBodyValidation.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFiles\CliOutputUsage.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="TestFiles\CliOutputNoArgs.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFiles\InvalidTemplate2.yml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="TestFiles\IssueBodyWithMangledCheckbox.md">

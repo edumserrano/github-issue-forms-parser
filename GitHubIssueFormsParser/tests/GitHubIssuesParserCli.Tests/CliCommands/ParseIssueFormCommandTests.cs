@@ -38,11 +38,12 @@ public class ParseIssueFormCommandTests
 
     /// <summary>
     /// Tests that the <see cref="ParseIssueFormCommand"/> produces the expected JSON output
-    /// when the line endings are only newLine.
+    /// regardless of the line endings on the issue form body.
     /// </summary>
     [Theory]
     [InlineData(CR)]
     [InlineData(LF)]
+    [InlineData(CR + LF)]
     public async Task ParseIssueFormCommandTest2(string newLine)
     {
         var issueFormBody = $"### What NuGet package do you want to release?{newLine}{newLine}dotnet-sdk-extensions{newLine}{newLine}### What is the new version for the NuGet package?{newLine}{newLine}1.0.13-alpha{newLine}{newLine}### Auto-generate release notes?{newLine}{newLine}Yes{newLine}{newLine}### Push to NuGet.org?{newLine}{newLine}_No response_{newLine}{newLine}### Custom release notes?{newLine}{newLine}## Custom release notes {newLine}{newLine}Test 123{newLine}{newLine}Another line:{newLine}- point 1{newLine}- point 2{newLine}- point 3{newLine}{newLine}### Which operating systems have you used?{newLine}{newLine}- [X] macOS{newLine}- [X] Windows{newLine}- [ ] Linux{newLine}- [ ] I don't know{newLine}";

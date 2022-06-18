@@ -1,0 +1,3 @@
+Option -i|--issue-body has been provided with an invalid value.
+Error(s):
+- Cannot be null or whitespace.
