@@ -13,4 +13,6 @@ internal class IssueFormYamlTemplateText
     {
         return issueFormTemplateText._value;
     }
+
+    public override string ToString() => (string)this;
 }

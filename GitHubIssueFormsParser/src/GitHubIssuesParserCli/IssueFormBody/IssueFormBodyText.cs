@@ -13,4 +13,6 @@ internal class IssueFormBodyText
     {
         return issueFormBodyText._value;
     }
+
+    public override string ToString() => (string)this;
 }
