@@ -4,8 +4,8 @@ internal static class TrimExtensions
 {
     public static string TrimIssueText(this string value)
     {
-        return value.Trim(NewLines.UnixNewlineChars)
-            .Trim(NewLines.WindowsNewlineChars)
+        return value.Trim(NewLines.WindowsNewlineChars)
+            .Trim(NewLines.UnixNewlineChars)
             .Trim();
     }
 }
