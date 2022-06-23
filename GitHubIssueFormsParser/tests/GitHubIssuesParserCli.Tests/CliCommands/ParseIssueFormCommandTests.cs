@@ -1,5 +1,3 @@
-using GitHubIssuesParserCli.CliCommands;
-
 namespace GitHubIssuesParserCli.Tests.CliCommands;
 
 [Trait("Category", XUnitCategories.Commands)]
