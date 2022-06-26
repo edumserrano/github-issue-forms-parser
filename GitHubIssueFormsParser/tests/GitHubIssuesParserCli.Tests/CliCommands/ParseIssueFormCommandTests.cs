@@ -1,5 +1,8 @@
 namespace GitHubIssuesParserCli.Tests.CliCommands;
 
+/// <summary>
+/// These tests make sure that the <see cref="ParseIssueFormCommand"/> outputs the expected JSON value to the console.
+/// </summary>
 [Trait("Category", XUnitCategories.Commands)]
 public class ParseIssueFormCommandTests
 {

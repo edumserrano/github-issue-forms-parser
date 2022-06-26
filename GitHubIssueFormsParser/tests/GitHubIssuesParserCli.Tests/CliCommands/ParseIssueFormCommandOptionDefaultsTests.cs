@@ -1,5 +1,8 @@
 namespace GitHubIssuesParserCli.Tests.CliCommands;
 
+/// <summary>
+/// These tests check the default values for the the <see cref="ParseIssueFormCommand"/>.
+/// </summary>
 [Trait("Category", XUnitCategories.Validation)]
 public class ParseIssueFormCommandOptionDefaultsTests
 {
