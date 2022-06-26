@@ -72,7 +72,7 @@ public class CliIntegrationTests
         await app.RunAsync(args);
         var error = console.ReadErrorString();
         var expectedError = NormalizedLineEndingsFileReader.ReadAllText("./TestFiles/CliErrorIssueBodyValidation.txt");
-        expectedError.ShouldBe(error);
+        error.ShouldBe(expectedError);
     }
 
     /// <summary>
@@ -92,7 +92,7 @@ public class CliIntegrationTests
         await app.RunAsync(args);
         var error = console.ReadErrorString();
         var expectedError = NormalizedLineEndingsFileReader.ReadAllText("./TestFiles/CliErrorTemplateFilepathValidation.txt");
-        expectedError.ShouldBe(error);
+        error.ShouldBe(expectedError);
     }
 
     /// <summary>
@@ -110,7 +110,7 @@ public class CliIntegrationTests
         await app.RunAsync(args);
         var error = console.ReadErrorString();
         var expectedError = NormalizedLineEndingsFileReader.ReadAllText("./TestFiles/CliErrorTemplateFilepathValidation2.txt");
-        expectedError.ShouldBe(error);
+        error.ShouldBe(expectedError);
     }
 
     /// <summary>
