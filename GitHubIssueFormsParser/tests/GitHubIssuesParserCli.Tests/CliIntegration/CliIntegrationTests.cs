@@ -3,6 +3,7 @@ namespace GitHubIssuesParserCli.Tests.CliIntegration;
 /// <summary>
 /// These tests make sure that the CLI interface is as expected.
 /// IE: if the command name changes or the options change then these tests would pick that up.
+/// These tests also test the <see cref="IBindingValidator"/> validators of the command options.
 /// </summary>
 [Trait("Category", XUnitCategories.Integration)]
 public class CliIntegrationTests
