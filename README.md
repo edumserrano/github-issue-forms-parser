@@ -28,6 +28,7 @@ A Docker container [GitHub action](https://docs.github.com/en/actions/learn-gith
     $issue = '${{ steps.issue-parser.outputs.parsed-issue }}' | ConvertFrom-Json
     $issueAsJsonIndented = ConvertTo-Json $issue
     Write-Output $issueAsJsonIndented # outputs the parsed issue as an indented JSON string
+    ...
 ```
 
 ### Action inputs
