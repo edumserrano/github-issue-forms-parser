@@ -20,7 +20,6 @@ defaults:
 jobs:
   main:
     name: Build and test
-    environment: no-secrets-workflow
     permissions:
       contents: read
     runs-on: ubuntu-latest
