@@ -108,14 +108,14 @@ To understand better how the action builds and executes the Docker container loo
 "/home/runner/work/_actions/edumserrano/github-issue-forms-parser/v1"
 ```
 
-Note that the `docker build` command points to the Dockerfile on `/home/runner/work/_actions/edumserrano/github-issue-forms-parser/v1/Dockerfile`. What is happening here is that GitHub clones the action's repository into the GitHub runner's working directory of the repo making use of this action. The clone of action's repo will be under the `_actions` folder.
+Note that the `docker build` command points to the Dockerfile at `/home/runner/work/_actions/edumserrano/github-issue-forms-parser/v1/Dockerfile`. What is happening here is that GitHub clones the action's repository into the GitHub runner's working directory of the repo making use of this action. The clone of action's repo will be under the `_actions` folder.
 
 This way it can successfully build the Dockerfile for this action which would otherwise fail since the Dockerfile references files in the action's repository which would not be present in the repository making use of this action.
 
 **Example:**
 
 - Repository `hello-world` creates a workflow that uses the `GitHub issue forms parser` action.
-- When the workflow is executing, it contains a setup step that runs befor any of the workflow defined steps. This step will clone the `GitHub issue forms parser` action repo into the runner's workding directory under the `_actions` folder and build the Docker container.
+- When the workflow is executing, it contains a setup step that runs before any of the workflow defined steps. This step will clone the `GitHub issue forms parser` action's repo into the runner's working directory under the `_actions` folder and build the Docker container.
 - This allows the Dockerfile to reference files in the `GitHub issue forms parser` repo even though the workflow has not explicitly checked it out.
 
 ### As of writing this, the log for running the docker action looks as follows

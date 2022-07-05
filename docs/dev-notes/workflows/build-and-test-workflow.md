@@ -7,13 +7,13 @@
 - Builds the code and runs tests.
 - Generates code coverage and uploads as a workflow artifact.
 - Uploads code coverage to Codecov.
-- Uploades test results as a workflow artifact.
+- Uploads test results as a workflow artifact.
 
 ## Codecov
 
 Codecov integration does not require any secret, it was done via the [Codecov GitHub app](https://github.com/apps/codecov).
 
-Besides the information available on the [Codecov web app](https://app.codecov.io/gh/edumserrano/dot-net-sdk-extensions), this integration enables Codecov to:
+Besides the information available on the [Codecov web app](https://app.codecov.io/gh/edumserrano/github-issue-forms-parser), this integration enables Codecov to:
 
 - [add status checks on pull requests](https://docs.codecov.com/docs/commit-status)
 - [display coverage on pull requests via comments](https://docs.codecov.com/docs/pull-request-comments)
