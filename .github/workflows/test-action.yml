@@ -76,7 +76,7 @@ jobs:
           }
       - name: Run GitHub issue forms parser with bad input
         id: issue-parser-bad-input
-        uses: edumserrano/github-issue-forms-parser@v1
+        uses: ./
         continue-on-error: true
         with:
           template-filepath: '${{ steps.args.outputs.template-filepath }}'
