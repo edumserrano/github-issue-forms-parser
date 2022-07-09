@@ -38,7 +38,7 @@ Write-Output "::group::Run dotnet GitHub issue form parser"
 
 for ($i = 0; $i -lt $args.Count; $i++)
 {
-  $args[$i] = Escape-SingleQuotes $arg
+  $args[$i] = Escape-SingleQuotes $args[$i]
 }
 
 $command = $($args -join " ")
