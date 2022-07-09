@@ -15,6 +15,9 @@ Write-Output $templateFilepath
 Write-Output $issueFormBodyOption
 Write-Output $issueFormBody
 Write-Output "==========================="
+Write-Output $args.Count
+Write-Output $args
+Write-Output "==========================="
 
 
 $templateFilepath = "'$templateFilepath'"
