@@ -201,3 +201,5 @@ What was happening initially was that the newlines were not being preserved and 
 ```
 
 The above will output a JSON string in which the value of the property body will also contain the newline characters if available. With this I was able to identify that without the `-Raw` parameter I was losing the newline characters. See here for more info on [`-Raw`](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-content).
+
+
