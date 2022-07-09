@@ -1,14 +1,17 @@
+param ($templateFilepath, $issueFormBody)
+
+Write-Output "::group::GitHub issue form template"
+Write-Output "Template filepath: '$templateFilepath'"
+$template = Get-Content $templateFilepath
+Write-Output $template
+Write-Output "::endgroup::"
+
+Write-Output "::group::GitHub issue form body"
+Write-Output $issueFormBody
+Write-Output "::endgroup::"
+
 Write-Output "::group::Run dotnet GitHub issue form parser"
-# $inputArgs = @"
-# $($args -join " ")"
-# "@
-# $command = @"
-# dotnet '/app/GitHubIssuesParserCli.dll' $($args[0])
-# "@
-$command = "dotnet '/app/GitHubIssuesParserCli.dll'"
-$command = -join($command, " ", $args[0]);
-Write-Output $command
-$output = Invoke-Expression $command
+$output = dotnet '/app/GitHubIssuesParserCli.dll' parse-issue-form -t $templateFilepath -i $issueFormBody
 if($LASTEXITCODE -ne 0 ) {
     Write-Output "::error::GitHub issue form parser didn't complete successfully. See the step's log for more details."
     exit $LASTEXITCODE
