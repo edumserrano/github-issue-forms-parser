@@ -1,7 +1,9 @@
 Write-Output "::group::Run dotnet GitHub issue form parser"
-$inputArgs = "$($args -join " ")"
+# $inputArgs = @"
+# $($args -join " ")"
+# "@
 $command = @"
-dotnet '/app/GitHubIssuesParserCli.dll' $inputArgs
+dotnet '/app/GitHubIssuesParserCli.dll' $args[0]
 "@
 $output = Invoke-Expression $command
 if($LASTEXITCODE -ne 0 ) {
