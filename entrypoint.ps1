@@ -1,9 +1,16 @@
+param (
+  $commandName,
+  $templateFilepathOption,
+  $templateFilepath,
+  $issueFormBodyOption,
+  $issueFormBody)
+
 Write-Output "::group::Run dotnet GitHub issue form parser"
-$inputArgs = "$($args -join " ")"
-Write-Output "--------$inputArgs--------"
+$templateFilepath = "'$templateFilepath'"
+$issueFormBody =  $issueFormBody -replace '''', '`'''
+$issueFormBody = "'$issueFormBody'"
+$inputArgs =-join($commandName, " ", $templateFilepathOption, " ", $templateFilepath, " ", $issueFormBodyOption, " ", $issueFormBody)
 $command = "dotnet '/app/GitHubIssuesParserCli.dll' $inputArgs"
-Write-Output $command
-$command = $command -replace '''', '''''' 
 Write-Output $command
 $output = Invoke-Expression $command
 if($LASTEXITCODE -ne 0 ) {

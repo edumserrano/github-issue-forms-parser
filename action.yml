@@ -17,4 +17,8 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - parse-issue-form --template-filepath '${{ inputs.template-filepath }}' --issue-body '${{ inputs.issue-form-body }}'
+    - parse-issue-form
+    - --template-filepath 
+    - ${{ inputs.template-filepath }}
+    - --issue-body
+    - ${{ inputs.issue-form-body }}
