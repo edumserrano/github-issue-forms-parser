@@ -12,10 +12,10 @@ class CliArgs
     for ($i = 0; $i -lt $inputArgs.Count; $i++)
     {
       $arg = $inputArgs[$i]
-      $arg = $this.EscapeSingleQuotes($arg)
+      $arg = $this.EscapeSingleQuotes($arg) # if the input arg contains a single quote we need to escape them
       if (!$arg.StartsWith("'"))
       {
-        $arg = $this.AddSingleQuote($arg)
+        $arg = $this.AddSingleQuote($arg)   # make sure the input arg is surrounded by single quotes
       }
   
       $sanitizedArgs[$i] = $arg
