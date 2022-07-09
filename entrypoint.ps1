@@ -36,12 +36,13 @@ Write-Output "::group::Run dotnet GitHub issue form parser"
 # $command = "dotnet '/app/GitHubIssuesParserCli.dll' $inputArgs"
 
 
-$command = ""
-foreach ($arg in $args)
+
+for ($i = 0; $i -lt $args.Count; $i++)
 {
-  $command += Escape-SingleQuotes $arg
+  arg[i] = Escape-SingleQuotes $arg
 }
 
+$command = $($args -join " ")
 Write-Output $command
 $output = Invoke-Expression $command
 if ($LASTEXITCODE -ne 0 ) 
