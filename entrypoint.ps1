@@ -1,8 +1,20 @@
-function Main()
+function Main
 {
+  param ([string[]] $inputArgs)
+
+
+  Write-Output $inputArgs.Count
+
+  Write-Output "::group::Input arguments"
+  Write-Output $inputArgs
+  Write-Output "::endgroup::"
+
+  Write-Output "::group::Sanitized input arguments"
+  $command = Sanitize-InputArgs $inputArgs
+  Write-Output $command  
+  Write-Output "::endgroup::"
+
   Write-Output "::group::Run dotnet GitHub issue form parser"
-  $command = Sanitize-InputArgs $args 
-  Write-Output $command
   $output = Invoke-Expression $command
   if ($LASTEXITCODE -ne 0 ) 
   {
@@ -28,6 +40,7 @@ function Sanitize-InputArgs
   param ([string[]] $inputArgs)
 
   $sanitizedArgs = [string[]]::new($inputArgs.Count)
+  Write-Output $inputArgs.Count
   for ($i = 0; $i -lt $inputArgs.Count; $i++)
   {
     $arg = $inputArgs[$i]
@@ -61,4 +74,5 @@ function Add-SingleQuote
 }
 
 # invoke entrypoint function
-Main 
+Write-Output $args.Count
+Main $args
