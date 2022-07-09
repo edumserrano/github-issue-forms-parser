@@ -8,6 +8,6 @@
 - Runs the action against a valid test template and a valid test issue form body.
 - Checks that the output produced by the action is as expected.
 - Runs the action against a valid test template and an invalid test issue form body.
-- Checks that action should have failed the workflow.
+- Checks that action should fail the workflow if the action fails.
 
 Since this workflow executes the [Docker container action](https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action) it will build and execute the docker container so if there are any issues with the action's [Dockerfile](/Dockerfile) this workflow will detect it.
