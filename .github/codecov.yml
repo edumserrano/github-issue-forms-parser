@@ -18,3 +18,12 @@
 #
 codecov:
   allow_coverage_offsets: True
+
+coverage:
+  status:
+    project: # main
+      default:
+        threshold: 0.5% # allow code coverage to go down by 0.5%
+    patch: # pull-requests
+      default:
+        threshold: 0.5% # allow code coverage to go down by 0.5% in comparison with main branch.
