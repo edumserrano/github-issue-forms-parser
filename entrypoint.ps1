@@ -36,10 +36,9 @@ Write-Output "::group::Run dotnet GitHub issue form parser"
 # $command = "dotnet '/app/GitHubIssuesParserCli.dll' $inputArgs"
 
 
-
 for ($i = 0; $i -lt $args.Count; $i++)
 {
-  arg[i] = Escape-SingleQuotes $arg
+  $args[$i] = Escape-SingleQuotes $arg
 }
 
 $command = $($args -join " ")
