@@ -51,8 +51,12 @@ function Main()
   $cliArgs = [CliArgs]::new()
   
   Write-Output "::group::Sanitized input arguments"
-  $cliArgs =  $cliArgs.SanitizeInputArgs($inputArgs)
-  $command = "dotnet '/app/GitHubIssuesParserCli.dll' $cliArgs"
+  $gitHubIssuesParserArgs =  $cliArgs.SanitizeInputArgs($inputArgs)
+  Write-Output $gitHubIssuesParserArgs
+  Write-Output "::endgroup::"
+
+  Write-Output "::group::Final command to execute"
+  $command = "dotnet '/app/GitHubIssuesParserCli.dll' $gitHubIssuesParserArgs"
   Write-Output $command
   Write-Output "::endgroup::"
 
