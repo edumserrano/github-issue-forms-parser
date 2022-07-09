@@ -1,5 +1,10 @@
 class CliArgs
 {
+  # setting these functions in a class because I want to make sure the return type is what is specified and not an array of objects
+  # see:
+  # https://riptutorial.com/powershell/example/27037/how-to-work-with-functions-returns
+  # https://stackoverflow.com/questions/10286164/function-return-value-in-powershell
+
   [string]SanitizeInputArgs([string[]] $inputArgs) 
   {
     $sanitizedArgs = [string[]]::new($inputArgs.Count)
@@ -30,6 +35,8 @@ class CliArgs
   }
 }
 
+# Keeping this in a function instead of inside a class because of https://stackoverflow.com/questions/52757670/why-does-write-output-not-work-inside-a-powershell-class-method
+# And for now prefer to keep using Write-Output instead of Write-Host because of https://www.jsnover.com/blog/2013/12/07/write-host-considered-harmful/
 function Main()
 {
   [OutputType([Void])]
@@ -44,9 +51,9 @@ function Main()
   $cliArgs = [CliArgs]::new()
   
   Write-Output "::group::Sanitized input arguments"
-  $command = $cliArgs.SanitizeInputArgs($inputArgs)
-  Write-Output $command  
-  $command.GetType()
+  $cliArgs =  $cliArgs.SanitizeInputArgs($inputArgs)
+  $command = "dotnet '/app/GitHubIssuesParserCli.dll' $cliArgs"
+  Write-Output $command
   Write-Output "::endgroup::"
 
   Write-Output "::group::Run dotnet GitHub issue form parser"
