@@ -1,5 +1,23 @@
 # Dev notes
 
+- [Building the GitHubIssueFormsParser solution](#building-the-githubissueformsparser-solution)
+  - [Building with Visual Studio](#building-with-visual-studio)
+  - [Building with dotnet CLI](#building-with-dotnet-cli)
+- [Running GitHubIssueFormsParser solution tests](#running-githubissueformsparser-solution-tests)
+  - [Run tests with Visual Studio](#run-tests-with-visual-studio)
+  - [Run tests with dotnet CLI](#run-tests-with-dotnet-cli)
+- [Debugging the `GitHubIssuesParserCli` project using Visual Studio](#debugging-the-githubissuesparsercli-project-using-visual-studio)
+- [Building and running the Docker container action using Powershell against a set of test data](#building-and-running-the-docker-container-action-using-powershell-against-a-set-of-test-data)
+- [Projects wide configuration](#projects-wide-configuration)
+- [Deterministic Build configuration](#deterministic-build-configuration)
+- [Repository configuration](#repository-configuration)
+- [GitHub Workflows](#github-workflows)
+- [GitHub marketplace](#github-marketplace)
+- [Note about the Docker container action](#note-about-the-docker-container-action)
+  - [As of writing this, the log for building the docker action looks as follows](#as-of-writing-this-the-log-for-building-the-docker-action-looks-as-follows)
+  - [As of writing this, the log for running the docker action looks as follows](#as-of-writing-this-the-log-for-running-the-docker-action-looks-as-follows)
+- [Other notes](#other-notes)
+
 ## Building the GitHubIssueFormsParser solution
 
 ### Building with Visual Studio
@@ -53,7 +71,14 @@ The steps below show how to run the Docker container action against a set of tes
 1) Clone the repo and browse to the repo's directory.
 2) Run `docker build -t github-issue-parser .`
 3) Read the test issue form body into the variable `$issueBody` by doing: `$issueBody = Get-Content GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md -Raw`
-4) Run the docker container by executing `docker run --rm -v ${pwd}:/workspace --workdir /workspace github-issue-parser GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/Template.yml $issueBody`.
+4) Run the docker container by executing:
+
+```
+docker run --rm -v ${pwd}:/workspace --workdir /workspace github-issue-parser `
+parse-issue-form `
+--template-filepath GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/Template.yml `
+--issue-body $issueBody
+```
 
 **Notes:**
 

@@ -18,76 +18,95 @@ defaults:
     shell: pwsh
 
 jobs:
-  main:
-    name: Test GitHub action
+  test-success:
+    name: Test success
     permissions:
       contents: read
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Get test input args
-        id: args
-        run: |
-          $templateFilepath = './GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/Template.yml'
-          # using -Raw is needed or else the newlines are not preserved and the action will fail to parse the body
-          $issueBody = Get-Content ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md -Raw
-          $issueBody = $issueBody -replace "\n","%0A" # The content must be escaped to preserve newlines. See https://github.community/t/set-output-truncates-multiline-strings/16852/3
-          Write-Output "::set-output name=issue-body::$issueBody"
-          Write-Output "::set-output name=template-filepath::$templateFilepath"
-      - name: Dump outputs from previous step
-        env:
-          STEP_OUTPUT: ${{ toJSON(steps.args.outputs) }}
-        run: $env:STEP_OUTPUT
-      - name: Run GitHub issue forms parser
-        id: issue-parser
-        uses: ./
-        with:
-          template-filepath: '${{ steps.args.outputs.template-filepath }}'
-          issue-form-body: '${{ steps.args.outputs.issue-body }}'
-      - name: Dump outputs from previous step
-        env:
-          STEP_OUTPUT: ${{ toJSON(steps.issue-parser.outputs) }}
-        run: $env:STEP_OUTPUT
-      - name: Output and assert parsed issue
-        run: |
-          $issue = '${{ steps.issue-parser.outputs.parsed-issue }}' | ConvertFrom-Json
-          $issueAsJsonIndented = ConvertTo-Json $issue
-          $expectedIssueAsJson = '{
-            "nuget-id": "dotnet-sdk-extensions",
-            "nuget-version": "1.0.13-alpha",
-            "auto-generate-release-notes": "Yes",
-            "push-nuget": "",
-            "custom-release-notes": "## Custom release notes\n\nTest 123\n\nAnother line:\n- point 1\n- point 2\n- point 3",
-            "operating-systems": {
-              "macos": true,
-              "windows": true,
-              "linux": false,
-              "i-dont-know": false
-            }
-          }'
-          
-          Write-Output $issueAsJsonIndented
-          if($expectedIssueAsJson -eq $issueAsJsonIndented) {
-            Write-Output "::notice title=Action check::Action produced the expected output. See the output from the step 'Output and assert parsed issue'."
+    - name: Dump github context for debug purposes
+      env:
+        GITHUB_CONTEXT: ${{ toJSON(github) }}
+      run: $env:GITHUB_CONTEXT
+    - uses: actions/checkout@v3
+    - name: Get test input args
+      id: args
+      run: |
+        $templateFilepath = './GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/Template.yml'
+        # using -Raw is needed or else the newlines are not preserved and the action will fail to parse the body
+        $issueBody = Get-Content ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md -Raw
+        $issueBody = $issueBody -replace "\n","%0A" # The content must be escaped to preserve newlines. See https://github.community/t/set-output-truncates-multiline-strings/16852/3
+        Write-Output "::set-output name=issue-body::$issueBody"
+        Write-Output "::set-output name=template-filepath::$templateFilepath"
+    - name: Dump outputs from previous step
+      env:
+        STEP_OUTPUT: ${{ toJSON(steps.args.outputs) }}
+      run: $env:STEP_OUTPUT
+    - name: Run GitHub issue forms parser
+      id: issue-parser
+      uses: ./
+      with:
+        template-filepath: '${{ steps.args.outputs.template-filepath }}'
+        issue-form-body: '${{ steps.args.outputs.issue-body }}'
+    - name: Dump outputs from previous step
+      env:
+        STEP_OUTPUT: ${{ toJSON(steps.issue-parser.outputs) }}
+      run: $env:STEP_OUTPUT
+    - name: Output and assert parsed issue
+      run: |
+        $issue = '${{ steps.issue-parser.outputs.parsed-issue }}' | ConvertFrom-Json
+        $issueAsJsonIndented = ConvertTo-Json $issue
+        $expectedIssueAsJson = '{
+          "nuget-id": "dotnet-sdk-extensions",
+          "nuget-version": "1.0.13-alpha",
+          "auto-generate-release-notes": "Yes",
+          "push-nuget": "",
+          "custom-release-notes": "## Custom release notes\n\nTest 123\n\nAnother line:\n- point 1\n- point 2\n- point 3",
+          "operating-systems": {
+            "macos": true,
+            "windows": true,
+            "linux": false,
+            "i-dont-know": false
           }
-          else {
-            Write-Output "::error title=Action check::Action didn't produce expected output. See the output from the step 'Output and assert parsed issue'."
-            Exit -1
-          }
-      - name: Run GitHub issue forms parser with bad input
-        id: issue-parser-bad-input
-        uses: ./
-        continue-on-error: true
-        with:
-          template-filepath: '${{ steps.args.outputs.template-filepath }}'
-          issue-form-body: '{}'
-      - name: The action should fail if it fails to parse
-        run: |
-          $parseStepWithBadInputOutcome = '${{ steps.issue-parser-bad-input.outcome }}'
-          if($parseStepWithBadInputOutcome -eq 'success') {
-            Write-Output "::error title=Action check:Action should have failed the workflow because of invalid input but it didn't."
-            Exit 1
-          }
-          else {
-            Write-Output "::notice title=Action check::Action would have failed the workflow given invalid input. You should see an error message on the action's Annotations."
-          }
+        }'
+        
+        Write-Output $issueAsJsonIndented
+        if($expectedIssueAsJson -eq $issueAsJsonIndented)
+        {
+          Write-Output "::notice title=Action check::Action produced the expected output. See the output from the step 'Output and assert parsed issue'."
+        }
+        else
+        {
+          Write-Output "::error title=Action check::Action didn't produce expected output. See the output from the step 'Output and assert parsed issue'."
+          Exit -1
+        }
+  
+  test-failure:
+    name: Test failure
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+    - name: Dump github context for debug purposes
+      env:
+        GITHUB_CONTEXT: ${{ toJSON(github) }}
+    - uses: actions/checkout@v3
+    - name: Run GitHub issue forms parser with bad input
+      id: issue-parser-bad-input
+      uses: ./
+      continue-on-error: true
+      with:
+        template-filepath: '${{ steps.args.outputs.template-filepath }}'
+        issue-form-body: '{}'
+    - name: The action should fail if it fails to parse
+      run: |
+        $parseStepWithBadInputOutcome = '${{ steps.issue-parser-bad-input.outcome }}'
+        if($parseStepWithBadInputOutcome -eq 'success') 
+        {
+          Write-Output "::error title=Action check:Action should have failed the workflow because of invalid input but it didn't."
+          Exit 1
+        }
+        else 
+        {
+          Write-Output "::notice title=Action check::Action would have failed the workflow given invalid input. You should see an error message on the action's Annotations."
+        }

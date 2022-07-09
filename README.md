@@ -9,6 +9,17 @@
 [![GitHub Sponsors](https://img.shields.io/github/sponsors/edumserrano)](https://github.com/sponsors/edumserrano)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Eduardo%20Serrano-blue.svg)](https://www.linkedin.com/in/eduardomserrano/)
 
+- [Description](#description)
+- [Usage](#usage)
+- [Action inputs](#action-inputs)
+- [Action outputs](#action-outputs)
+- [Example output for a given issue form template and body](#example-output-for-a-given-issue-form-template-and-body)
+- [Example usages of this action in GitHub workflows](#example-usages-of-this-action-in-github-workflows)
+- [I can't figure out the structure of the JSON object produced by the parser](#i-cant-figure-out-the-structure-of-the-json-object-produced-by-the-parser)
+- [Dev notes](#dev-notes)
+
+## Description
+
 A Docker container [GitHub action](https://docs.github.com/en/actions/learn-github-actions/finding-and-customizing-actions) that can be used to parse [GitHub issue forms](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-githubs-form-schema).
 
 ## Usage
@@ -31,14 +42,14 @@ A Docker container [GitHub action](https://docs.github.com/en/actions/learn-gith
     ...
 ```
 
-### Action inputs
+## Action inputs
 
 | Name | Description | Required
 | --- | --- | --- |
 | `template-filepath` | The filepath to the [issue form template](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository#creating-issue-forms). | yes |
 | `issue-form-body` | The body of the issue to parse. | yes |
 
-### Action outputs
+## Action outputs
 
 | Name | Description
 | --- | --- |
