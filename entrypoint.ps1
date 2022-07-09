@@ -1,17 +1,52 @@
-function Main
+class CliArgs
 {
+  [string]SanitizeInputArgs([string[]] $inputArgs) 
+  {
+    $sanitizedArgs = [string[]]::new($inputArgs.Count)
+    Write-Output $inputArgs.Count
+    for ($i = 0; $i -lt $inputArgs.Count; $i++)
+    {
+      $arg = $inputArgs[$i]
+      $arg = $this.EscapeSingleQuotes($arg)
+      if (!$arg.StartsWith("'"))
+      {
+        $arg = $this.AddSingleQuote($arg)
+      }
+  
+      $sanitizedArgs[$i] = $arg
+    }
+  
+    return $($sanitizedArgs -join " ")
+  }
+
+  [string]EscapeSingleQuotes([string] $value) 
+  { 
+    return $value -replace '''', ''''''
+  }
+
+  [string]AddSingleQuote([string] $value) 
+  { 
+    return "'$value'"
+  }
+}
+
+function Main()
+{
+  [OutputType([Void])]
   param ([string[]] $inputArgs)
 
-
   Write-Output $inputArgs.Count
-
+  
   Write-Output "::group::Input arguments"
   Write-Output $inputArgs
   Write-Output "::endgroup::"
 
+  $cliArgs = [CliArgs]::new()
+  
   Write-Output "::group::Sanitized input arguments"
-  $command = Sanitize-InputArgs $inputArgs
+  $command = $cliArgs.SanitizeInputArgs($inputArgs)
   Write-Output $command  
+  $command.GetType()
   Write-Output "::endgroup::"
 
   Write-Output "::group::Run dotnet GitHub issue form parser"
@@ -34,45 +69,5 @@ function Main
   Write-Output "::endgroup::"
 }
 
-function Sanitize-InputArgs
-{
-  [OutputType([string])]
-  param ([string[]] $inputArgs)
-
-  $sanitizedArgs = [string[]]::new($inputArgs.Count)
-  Write-Output $inputArgs.Count
-  for ($i = 0; $i -lt $inputArgs.Count; $i++)
-  {
-    $arg = $inputArgs[$i]
-    $arg = Escape-SingleQuotes $arg
-    if (!$arg.StartsWith("'"))
-    {
-      $arg  = Add-SingleQuote $arg
-    }
-
-    $sanitizedArgs[$i] = $arg
-  }
-
-  return $($sanitizedArgs -join " ")
-}
-
-
-function Escape-SingleQuotes
-{
-  [OutputType([string])]
-  param ([string] $value)
-
-  return $value -replace '''', ''''''
-}
-
-function Add-SingleQuote
-{
-  [OutputType([string])]
-  param ([string] $value)
-
-  return "'$value'"
-}
-
 # invoke entrypoint function
-Write-Output $args.Count
 Main $args
