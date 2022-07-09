@@ -6,6 +6,17 @@ param (
   $issueFormBody)
 
 Write-Output "::group::Run dotnet GitHub issue form parser"
+
+
+Write-Output "==========================="
+Write-Output $commandName
+Write-Output $templateFilepathOption
+Write-Output $templateFilepath
+Write-Output $issueFormBodyOption
+Write-Output $issueFormBody
+Write-Output "==========================="
+
+
 $templateFilepath = "'$templateFilepath'"
 $issueFormBody =  $issueFormBody -replace '''', '`'''
 $issueFormBody = "'$issueFormBody'"
