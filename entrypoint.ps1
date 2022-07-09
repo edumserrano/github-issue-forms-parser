@@ -42,8 +42,6 @@ function Main()
   [OutputType([Void])]
   param ([string[]] $inputArgs)
 
-  Write-Output $inputArgs.Count
-  
   Write-Output "::group::Input arguments"
   Write-Output $inputArgs
   Write-Output "::endgroup::"
