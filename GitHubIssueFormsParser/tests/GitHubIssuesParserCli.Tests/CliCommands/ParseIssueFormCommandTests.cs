@@ -6,6 +6,71 @@ namespace GitHubIssuesParserCli.Tests.CliCommands;
 [Trait("Category", XUnitCategories.Commands)]
 public class ParseIssueFormCommandTests
 {
+    [Fact]
+    public async Task AAA()
+    {
+        var issueFormBody = @"
+'### What NuGet package do you want to release?
+
+  dotnet-sdk-extensions
+
+  ### What is the new version for the NuGet package?
+
+  1.0.13-alpha
+
+  ### Auto-generate release notes?
+
+  Yes
+
+  ### Push to NuGet.org?
+
+  _No response_
+
+  ### Custom release notes?
+
+  ## Custom release notes
+
+  Test 123
+
+  Another line:
+  - point 1
+  - point 2
+  - point 3
+
+  ### Which operating systems have you used?
+
+  - [X] macOS
+  - [X] Windows
+  - [ ] Linux
+  - [ ] I don''t know'
+";
+        using var console = new FakeInMemoryConsole();
+        var command = new ParseIssueFormCommand
+        {
+            IssueFormBody = issueFormBody,
+            TemplateFilepath = "./TestFiles/Template.yml",
+        };
+        await command.ExecuteAsync(console);
+        var output = console.ReadOutputString();
+
+        var issueFormJson = JsonSerializer.Deserialize<IssueFormTestModel>(output);
+        issueFormJson.ShouldNotBeNull();
+        issueFormJson.NuGetId.ShouldBe("dotnet-sdk-extensions");
+        issueFormJson.NuGetVersion.ShouldBe("1.0.13-alpha");
+        issueFormJson.AutoGenerateReleaseNotes.ShouldBe("Yes");
+        issueFormJson.PushNuget.ShouldBeEmpty();
+        issueFormJson.CustomReleaseNotes.ShouldBe($"## Custom release notes{Environment.NewLine}{Environment.NewLine}Test 123{Environment.NewLine}{Environment.NewLine}Another line:{Environment.NewLine}- point 1{Environment.NewLine}- point 2{Environment.NewLine}- point 3");
+        issueFormJson.OperatingSystems.ShouldNotBeNull();
+        issueFormJson.OperatingSystems.MacOS.ShouldNotBeNull();
+        issueFormJson.OperatingSystems.MacOS.ShouldBe(true);
+        issueFormJson.OperatingSystems.Windows.ShouldNotBeNull();
+        issueFormJson.OperatingSystems.Windows.ShouldBe(true);
+        issueFormJson.OperatingSystems.Linux.ShouldNotBeNull();
+        issueFormJson.OperatingSystems.Linux.ShouldBe(false);
+        issueFormJson.OperatingSystems.Unknown.ShouldNotBeNull();
+        issueFormJson.OperatingSystems.Unknown.ShouldBe(false);
+    }
+
     /// <summary>
     /// Tests that the <see cref="ParseIssueFormCommand"/> produces the expected JSON output.
     /// </summary>

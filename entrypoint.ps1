@@ -22,9 +22,10 @@ Write-Output "==========================="
 $templateFilepath = $args[2]
 $templateFilepath = "'$templateFilepath'"
 $issueFormBody =  $args[4]
-$issueFormBody =  $issueFormBody -replace '''', '`'''
+# $issueFormBody =  $issueFormBody -replace '''', '`'''
+$issueFormBody =  $issueFormBody -replace '''', ''''''
 $issueFormBody = "'$issueFormBody'"
-$inputArgs =-join($args[0], " ", $args[0], " ", $templateFilepath, " ", $args[3], " ", $issueFormBody)
+$inputArgs =-join($args[0], " ", $args[1], " ", $templateFilepath, " ", $args[3], " ", $issueFormBody)
 $command = "dotnet '/app/GitHubIssuesParserCli.dll' $inputArgs"
 Write-Output $command
 $output = Invoke-Expression $command
