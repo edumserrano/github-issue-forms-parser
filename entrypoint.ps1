@@ -1,5 +1,3 @@
-Main # invoke entrypoint function
-
 function Main()
 {
   Write-Output "::group::Run dotnet GitHub issue form parser"
@@ -61,3 +59,6 @@ function Add-SingleQuote
 
   return "'$value'"
 }
+
+# invoke entrypoint function
+Main 
