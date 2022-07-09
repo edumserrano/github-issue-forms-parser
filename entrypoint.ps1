@@ -3,7 +3,7 @@ Write-Output "::group::Run dotnet GitHub issue form parser"
 # $($args -join " ")"
 # "@
 $command = @"
-dotnet '/app/GitHubIssuesParserCli.dll' $args[0]
+dotnet '/app/GitHubIssuesParserCli.dll' $($args[0])
 "@
 Write-Output $command
 $output = Invoke-Expression $command
