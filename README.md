@@ -27,7 +27,7 @@ A Docker container [GitHub action](https://docs.github.com/en/actions/learn-gith
 ```yml
 - name: Run GitHub issue forms parser
   id: issue-parser
-  uses: edumserrano/github-issue-forms-parser@v1.2
+  uses: edumserrano/github-issue-forms-parser@v1.2.0
   with:
     template-filepath: '.github/ISSUE_TEMPLATE/my-issue-form-template.yml'
     issue-form-body: '${{ github.event.issue.body }}'
