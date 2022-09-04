@@ -1,7 +1,7 @@
 namespace GitHubIssuesParserCli.Tests.CliCommands;
 
 /// <summary>
-/// These tests check the validation on the options for the the <see cref="ParseIssueFormCommand"/>.
+/// These tests check the validation on the options for the <see cref="ParseIssueFormCommand"/>.
 /// </summary>
 [Trait("Category", XUnitCategories.Validation)]
 public class ParseIssueFormCommandValidationTests
