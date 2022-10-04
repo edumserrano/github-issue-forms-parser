@@ -2,6 +2,8 @@ namespace GitHubIssuesParserCli.Tests.CliCommands;
 
 /// <summary>
 /// These tests check the validation on the options for the <see cref="ParseIssueFormCommand"/>.
+/// These tests are not for the Validators applied to the command options. They are for logic constrains enforced
+/// before the command logic can be executed.
 /// </summary>
 [Trait("Category", XUnitCategories.Validation)]
 public class ParseIssueFormCommandValidationTests
