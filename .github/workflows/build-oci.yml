@@ -1,0 +1,36 @@
+name: Create OCI 
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  docker-build:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Build Docker Images
+        uses: philips-software/docker-ci-scripts@v5.0.0
+        with:
+          image-name: github-issue-forms-parser
+          tags: latest 0.1
+          push-branches: main
+          slsa-provenance: true
+          sign: true
+          sbom: true
+        env:
+          REGISTRY_USERNAME: ${{ github.actor }}
+          REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REGISTRY_URL: ghcr.io/edumserrano
+          GITHUB_ORGANIZATION: edumserrano
+          KEYLESS: true
