@@ -1,0 +1,30 @@
+name: Package retention policy
+
+on:
+  schedule:
+    - cron: '0 0 * * 0' # Once a week: "At 00:00 on Sunday."
+
+defaults:
+  run:
+    shell: pwsh
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Cleanup old github-issue-forms-parser Docker images
+        uses: snok/container-retention-policy@v1.5.1
+        with:
+          image-names: github-issue-forms-parser
+          cut-off: One month ago UTC
+          account-type: personal
+          keep-at-least: 5
+          skip-tags: main
+          token: ${{ secrets.CLEANUP_PACKAGES_GH_TOKEN }}
