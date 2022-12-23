@@ -19,3 +19,4 @@ global using GitHubIssuesParserCli.IssueFormTemplates.Parsing;
 global using SlugGenerator;
 global using YamlDotNet.Core;
 global using YamlDotNet.Serialization;
+
