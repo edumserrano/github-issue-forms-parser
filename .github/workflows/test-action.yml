@@ -42,7 +42,7 @@ jobs:
       run: $env:STEP_OUTPUT
     - name: Run GitHub issue forms parser
       id: issue-parser
-      uses: ./
+      uses: ./action-local.yml
       with:
         template-filepath: '${{ steps.args.outputs.template-filepath }}'
         issue-form-body: '${{ steps.args.outputs.issue-body }}'
@@ -92,7 +92,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Run GitHub issue forms parser with bad input
       id: issue-parser-bad-input
-      uses: ./
+      uses: ./action-local.yml
       continue-on-error: true
       with:
         template-filepath: '${{ steps.args.outputs.template-filepath }}'
