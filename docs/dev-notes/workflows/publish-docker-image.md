@@ -6,4 +6,4 @@
 
 - Builds and publishes to GitHub packages the Docker image that is used by this action.
 
-The action on this repo is [configured to use the Docker image](/action.yml)) that is published by this workflow.
+The action on this repo is [configured to use the Docker image](/action.yml) that is published by this workflow.
