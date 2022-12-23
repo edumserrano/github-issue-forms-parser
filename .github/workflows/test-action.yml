@@ -67,7 +67,7 @@ jobs:
             "i-dont-know": false
           }
         }'
-        
+
         Write-Output $issueAsJsonIndented
         if($expectedIssueAsJson -eq $issueAsJsonIndented)
         {
@@ -78,7 +78,7 @@ jobs:
           Write-Output "::error title=Action check::Action didn't produce expected output. See the output from the step 'Output and assert parsed issue'."
           Exit -1
         }
-  
+
   test-failure:
     name: Test failure
     permissions:
@@ -100,12 +100,12 @@ jobs:
     - name: The action should fail if it fails to parse
       run: |
         $parseStepWithBadInputOutcome = '${{ steps.issue-parser-bad-input.outcome }}'
-        if($parseStepWithBadInputOutcome -eq 'success') 
+        if($parseStepWithBadInputOutcome -eq 'success')
         {
           Write-Output "::error title=Action check:Action should have failed the workflow because of invalid input but it didn't."
           Exit 1
         }
-        else 
+        else
         {
           Write-Output "::notice title=Action check::Action would have failed the workflow given invalid input. You should see an error message on the action's Annotations."
         }
