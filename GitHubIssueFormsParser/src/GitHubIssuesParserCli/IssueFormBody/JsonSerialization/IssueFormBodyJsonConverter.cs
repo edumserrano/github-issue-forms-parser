@@ -1,6 +1,6 @@
 namespace GitHubIssuesParserCli.IssueFormBody.JsonSerialization;
 
-internal class IssueFormBodyJsonConverter : JsonConverter<IssueFormBody>
+internal sealed class IssueFormBodyJsonConverter : JsonConverter<IssueFormBody>
 {
     public override IssueFormBody Read(
         ref Utf8JsonReader reader,

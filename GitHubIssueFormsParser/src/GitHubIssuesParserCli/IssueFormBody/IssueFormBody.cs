@@ -1,6 +1,6 @@
 namespace GitHubIssuesParserCli.IssueFormBody;
 
-internal class IssueFormBody
+internal sealed class IssueFormBody
 {
     public IssueFormBody(List<IssueFormItem> items)
     {

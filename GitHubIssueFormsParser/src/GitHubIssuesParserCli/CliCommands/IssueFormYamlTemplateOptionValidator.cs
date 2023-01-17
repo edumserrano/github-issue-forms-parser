@@ -1,7 +1,7 @@
 namespace GitHubIssuesParserCli.CliCommands;
 
 #pragma warning disable CA1812 // Avoid uninstantiated internal classes. Referenced via typeof(TemplateFilepathOptionValidator) usage
-internal class TemplateFilepathOptionValidator : BindingValidator<string>
+internal sealed class TemplateFilepathOptionValidator : BindingValidator<string>
 {
     public override BindingValidationError? Validate(string? value)
     {

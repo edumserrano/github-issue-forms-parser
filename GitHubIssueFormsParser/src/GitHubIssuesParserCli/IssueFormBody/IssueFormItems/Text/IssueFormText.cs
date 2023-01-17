@@ -1,6 +1,6 @@
 namespace GitHubIssuesParserCli.IssueFormBody.IssueFormItems.Text;
 
-internal class IssueFormText
+internal sealed class IssueFormText
 {
     private readonly string _value;
 

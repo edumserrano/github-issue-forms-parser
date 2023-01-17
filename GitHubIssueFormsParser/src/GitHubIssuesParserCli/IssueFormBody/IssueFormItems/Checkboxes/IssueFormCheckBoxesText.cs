@@ -1,6 +1,6 @@
 namespace GitHubIssuesParserCli.IssueFormBody.IssueFormItems.Checkboxes;
 
-internal class IssueFormCheckBoxesText
+internal sealed class IssueFormCheckBoxesText
 {
     public IssueFormCheckBoxesText(string value)
     {
