@@ -1,7 +1,7 @@
 namespace GitHubIssuesParserCli.Tests.Auxiliary;
 
 #pragma warning disable CA1812 // Avoid uninstantiated internal classes. Used via generics on JSON deserialization
-internal class IssueFormTestModel
+internal sealed class IssueFormTestModel
 {
     [JsonPropertyName("nuget-id")]
     public string? NuGetId { get; set; }
@@ -22,7 +22,7 @@ internal class IssueFormTestModel
     public OperatingSystems? OperatingSystems { get; set; }
 }
 
-internal class OperatingSystems
+internal sealed class OperatingSystems
 {
     [JsonPropertyName("macos")]
     public bool? MacOS { get; set; }

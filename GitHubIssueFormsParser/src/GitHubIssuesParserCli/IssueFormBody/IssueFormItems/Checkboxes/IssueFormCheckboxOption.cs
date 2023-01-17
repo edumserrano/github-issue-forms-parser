@@ -1,6 +1,6 @@
 namespace GitHubIssuesParserCli.IssueFormBody.IssueFormItems.Checkboxes;
 
-internal class IssueFormCheckboxOption
+internal sealed class IssueFormCheckboxOption
 {
     public IssueFormCheckboxOption(string label, bool isChecked)
     {

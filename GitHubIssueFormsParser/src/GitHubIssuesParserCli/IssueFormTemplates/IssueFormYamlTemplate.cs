@@ -1,6 +1,6 @@
 namespace GitHubIssuesParserCli.IssueFormTemplates;
 
-internal class IssueFormYamlTemplate
+internal sealed class IssueFormYamlTemplate
 {
     public IssueFormYamlTemplate(List<IssueFormYmlTemplateItem> items)
     {
@@ -10,7 +10,7 @@ internal class IssueFormYamlTemplate
     public List<IssueFormYmlTemplateItem> Items { get; }
 }
 
-internal class IssueFormYmlTemplateItem
+internal sealed class IssueFormYmlTemplateItem
 {
     public IssueFormYmlTemplateItem(string id, IssueFormYamlTemplateItemTypes type, string label)
     {
@@ -26,7 +26,7 @@ internal class IssueFormYmlTemplateItem
     public IssueFormYmlTemplateItemLabel Label { get; }
 }
 
-internal class IssueFormYmlTemplateItemLabel
+internal sealed class IssueFormYmlTemplateItemLabel
 {
     public IssueFormYmlTemplateItemLabel(string label)
     {

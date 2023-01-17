@@ -1,6 +1,6 @@
 namespace GitHubIssuesParserCli.IssueFormTemplates;
 
-internal class IssueFormYamlTemplateText
+internal sealed class IssueFormYamlTemplateText
 {
     private readonly string _value;
 
