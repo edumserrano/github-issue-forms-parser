@@ -87,7 +87,7 @@ jobs:
     # - the '(steps.<step-id>.conclusion == 'success' || steps.<step-id>.conclusion == 'failure')' condition: to run the steps only if the <step-id> step has ran, regardless
     # if it failed or not. It won't run if the <step-id> step has been skipped or cancelled.
     - name: Upload test coverage to Codecov
-      uses: codecov/codecov-action@v2
+      uses: codecov/codecov-action@v3
       with:
         files: ${{ env.TEST_COVERAGE_FILE }}
         fail_ci_if_error: true
