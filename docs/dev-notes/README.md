@@ -37,7 +37,7 @@
 1) Clone the repo and open the **GitHubIssueFormsParser.sln** solution file at `/GitHubIssueFormsParser`.
 2) Go to the test explorer in Visual Studio and run tests.
 
-**Note:** [Remote testing](https://docs.microsoft.com/en-us/visualstudio/test/remote-testing?view=vs-2022) with WSL is configured on the solution which enables you to run the tests locally on Linux or on Windows. You can view the configuration file at [testenvironments.json](/GitHubIssueFormsParser/testenvironments.json). To run the tests on Linux you need to have at least `Visual Studio 2022` and the Linux distro `Ubuntu-20.04` installed on [WSL](https://docs.microsoft.com/en-us/windows/wsl/install).
+**Note:** [Remote testing](https://docs.microsoft.com/en-us/visualstudio/test/remote-testing?view=vs-2022) with WSL is configured on the solution which enables you to run the tests locally on Linux or on Windows. You can view the configuration file at [testenvironments.json](/GitHubIssueFormsParser/testenvironments.json). To run the tests on Linux you need to have at least `Visual Studio 2022` and the Linux distro `Ubuntu-22.04` installed on [WSL](https://docs.microsoft.com/en-us/windows/wsl/install).
 
 ### Run tests with dotnet CLI
 
@@ -127,9 +127,9 @@ To understand better how the action builds and executes the Docker container loo
 ### As of writing this, the log for building the docker action looks as follows
 
 ```
-/usr/bin/docker build 
--t 2bcf09:d996dfb6f4ec40c1a59c1e244bdd3374 
--f "/home/runner/work/_actions/edumserrano/github-issue-forms-parser/v1/Dockerfile" 
+/usr/bin/docker build
+-t 2bcf09:d996dfb6f4ec40c1a59c1e244bdd3374
+-f "/home/runner/work/_actions/edumserrano/github-issue-forms-parser/v1/Dockerfile"
 "/home/runner/work/_actions/edumserrano/github-issue-forms-parser/v1"
 ```
 
@@ -146,30 +146,30 @@ This way it can successfully build the Dockerfile for this action which would ot
 ### As of writing this, the log for running the docker action looks as follows
 
 ```
-/usr/bin/docker run 
---name bcf09d996dfb6f4ec40c1a59c1e244bdd3374_381201 
---label 2bcf09 
---workdir /github/workspace 
---rm 
--e INPUT_TEMPLATE-FILEPATH -e INPUT_ISSUE-FORM-BODY -e HOME 
--e GITHUB_JOB -e GITHUB_REF -e GITHUB_SHA 
--e GITHUB_REPOSITORY -e GITHUB_REPOSITORY_OWNER -e GITHUB_RUN_ID 
--e GITHUB_RUN_NUMBER -e GITHUB_RETENTION_DAYS -e GITHUB_RUN_ATTEMPT 
--e GITHUB_ACTOR -e GITHUB_WORKFLOW -e GITHUB_HEAD_REF 
--e GITHUB_BASE_REF -e GITHUB_EVENT_NAME -e GITHUB_SERVER_URL 
--e GITHUB_API_URL -e GITHUB_GRAPHQL_URL -e GITHUB_REF_NAME 
--e GITHUB_REF_PROTECTED -e GITHUB_REF_TYPE -e GITHUB_WORKSPACE 
--e GITHUB_ACTION -e GITHUB_EVENT_PATH -e GITHUB_ACTION_REPOSITORY 
--e GITHUB_ACTION_REF -e GITHUB_PATH -e GITHUB_ENV 
--e GITHUB_STEP_SUMMARY -e RUNNER_OS -e RUNNER_ARCH 
--e RUNNER_NAME -e RUNNER_TOOL_CACHE -e RUNNER_TEMP 
--e RUNNER_WORKSPACE -e ACTIONS_RUNTIME_URL -e ACTIONS_RUNTIME_TOKEN 
--e ACTIONS_CACHE_URL -e GITHUB_ACTIONS=true -e CI=true 
--v "/var/run/docker.sock":"/var/run/docker.sock" 
--v "/home/runner/work/_temp/_github_home":"/github/home" 
--v "/home/runner/work/_temp/_github_workflow":"/github/workflow" 
--v "/home/runner/work/_temp/_runner_file_commands":"/github/file_commands" 
--v "/home/runner/work/github-issue-forms-parser/github-issue-forms-parser":"/github/workspace" 
+/usr/bin/docker run
+--name bcf09d996dfb6f4ec40c1a59c1e244bdd3374_381201
+--label 2bcf09
+--workdir /github/workspace
+--rm
+-e INPUT_TEMPLATE-FILEPATH -e INPUT_ISSUE-FORM-BODY -e HOME
+-e GITHUB_JOB -e GITHUB_REF -e GITHUB_SHA
+-e GITHUB_REPOSITORY -e GITHUB_REPOSITORY_OWNER -e GITHUB_RUN_ID
+-e GITHUB_RUN_NUMBER -e GITHUB_RETENTION_DAYS -e GITHUB_RUN_ATTEMPT
+-e GITHUB_ACTOR -e GITHUB_WORKFLOW -e GITHUB_HEAD_REF
+-e GITHUB_BASE_REF -e GITHUB_EVENT_NAME -e GITHUB_SERVER_URL
+-e GITHUB_API_URL -e GITHUB_GRAPHQL_URL -e GITHUB_REF_NAME
+-e GITHUB_REF_PROTECTED -e GITHUB_REF_TYPE -e GITHUB_WORKSPACE
+-e GITHUB_ACTION -e GITHUB_EVENT_PATH -e GITHUB_ACTION_REPOSITORY
+-e GITHUB_ACTION_REF -e GITHUB_PATH -e GITHUB_ENV
+-e GITHUB_STEP_SUMMARY -e RUNNER_OS -e RUNNER_ARCH
+-e RUNNER_NAME -e RUNNER_TOOL_CACHE -e RUNNER_TEMP
+-e RUNNER_WORKSPACE -e ACTIONS_RUNTIME_URL -e ACTIONS_RUNTIME_TOKEN
+-e ACTIONS_CACHE_URL -e GITHUB_ACTIONS=true -e CI=true
+-v "/var/run/docker.sock":"/var/run/docker.sock"
+-v "/home/runner/work/_temp/_github_home":"/github/home"
+-v "/home/runner/work/_temp/_github_workflow":"/github/workflow"
+-v "/home/runner/work/_temp/_runner_file_commands":"/github/file_commands"
+-v "/home/runner/work/github-issue-forms-parser/github-issue-forms-parser":"/github/workspace"
 2bcf09:d996dfb6f4ec40c1a59c1e244bdd3374  <template-file-path> <issue-form-body>
 ```
 

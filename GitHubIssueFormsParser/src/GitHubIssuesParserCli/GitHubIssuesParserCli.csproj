@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CliFx" Version="2.2.6" />
+    <PackageReference Include="CliFx" Version="2.3.1" />
     <PackageReference Include="SlugGenerator" Version="2.0.2" />
     <PackageReference Include="YamlDotNet" Version="12.3.1" />
   </ItemGroup>

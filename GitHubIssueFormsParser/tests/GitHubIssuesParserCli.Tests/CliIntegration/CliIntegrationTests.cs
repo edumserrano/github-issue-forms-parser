@@ -72,8 +72,9 @@ public class CliIntegrationTests
         var args = new[] { "parse-issue-form", "--issue-body", issueBody, "--template-filepath", "some filepath" };
         await app.RunAsync(args);
         var error = console.ReadErrorString();
-        var expectedError = NormalizedLineEndingsFileReader.ReadAllText("./TestFiles/CliErrorIssueBodyValidation.txt");
-        error.ShouldBe(expectedError);
+
+        var expectedError = File.ReadAllText("./TestFiles/CliErrorIssueBodyValidation.txt");
+        error.ShouldBeWithNormalizedNewlines(expectedError);
     }
 
     /// <summary>
@@ -92,8 +93,8 @@ public class CliIntegrationTests
         var args = new[] { "parse-issue-form", "--issue-body", "some body", "--template-filepath", templateFilepath };
         await app.RunAsync(args);
         var error = console.ReadErrorString();
-        var expectedError = NormalizedLineEndingsFileReader.ReadAllText("./TestFiles/CliErrorTemplateFilepathValidation.txt");
-        error.ShouldBe(expectedError);
+        var expectedError = File.ReadAllText("./TestFiles/CliErrorTemplateFilepathValidation.txt");
+        error.ShouldBeWithNormalizedNewlines(expectedError);
     }
 
     /// <summary>
@@ -110,8 +111,8 @@ public class CliIntegrationTests
         var args = new[] { "parse-issue-form", "--issue-body", "some body", "--template-filepath", "non-existent-file.txt" };
         await app.RunAsync(args);
         var error = console.ReadErrorString();
-        var expectedError = NormalizedLineEndingsFileReader.ReadAllText("./TestFiles/CliErrorTemplateFilepathValidation2.txt");
-        error.ShouldBe(expectedError);
+        var expectedError = File.ReadAllText("./TestFiles/CliErrorTemplateFilepathValidation2.txt");
+        error.ShouldBeWithNormalizedNewlines(expectedError);
     }
 
     /// <summary>
@@ -126,7 +127,9 @@ public class CliIntegrationTests
         var app = new IssuesParserCli();
         app.CliApplicationBuilder.UseConsole(console);
 
-        var issueFormBody = NormalizedLineEndingsFileReader.ReadAllText("./TestFiles/IssueBody.md");
+        var issueFormBody = File
+            .ReadAllText("./TestFiles/IssueBody.md")
+            .NormalizeLineEndings();
         const string templateFilepath = "./TestFiles/Template.yml";
         var args = new[] { "parse-issue-form", issueFormOptionName, issueFormBody, templateFilepathOptionName, templateFilepath };
         await app.RunAsync(args);

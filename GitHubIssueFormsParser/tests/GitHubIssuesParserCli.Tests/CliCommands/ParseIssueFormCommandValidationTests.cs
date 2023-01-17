@@ -140,7 +140,7 @@ Error:
         using var console = new FakeInMemoryConsole();
         var command = new ParseIssueFormCommand
         {
-            IssueFormBody = NormalizedLineEndingsFileReader.ReadAllText("./TestFiles/IssueBodyWithOutOfOrderH3Headers.md"),
+            IssueFormBody = File.ReadAllText("./TestFiles/IssueBodyWithOutOfOrderH3Headers.md").NormalizeLineEndings(),
             TemplateFilepath = "./TestFiles/Template.yml",
         };
         var exception = await Should.ThrowAsync<CommandException>(() => command.ExecuteAsync(console).AsTask());
@@ -163,7 +163,7 @@ Error:
         using var console = new FakeInMemoryConsole();
         var command = new ParseIssueFormCommand
         {
-            IssueFormBody = NormalizedLineEndingsFileReader.ReadAllText("./TestFiles/IssueBodyWithMangledCheckbox.md"),
+            IssueFormBody = File.ReadAllText("./TestFiles/IssueBodyWithMangledCheckbox.md").NormalizeLineEndings(),
             TemplateFilepath = "./TestFiles/Template.yml",
         };
         var exception = await Should.ThrowAsync<CommandException>(() => command.ExecuteAsync(console).AsTask());
