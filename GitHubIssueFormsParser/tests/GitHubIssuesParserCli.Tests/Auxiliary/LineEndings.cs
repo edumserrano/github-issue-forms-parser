@@ -1,15 +1,14 @@
 namespace GitHubIssuesParserCli.Tests.Auxiliary;
 
-internal static class NormalizedLineEndingsFileReader
+internal static class LineEndings
 {
     /// <summary>
-    /// Opens a text file, reads all text and then closes the file.
+    /// Updates a string so that the line endings match the OS expected line endings.
     /// </summary>
-    /// <param name="path">The file to open for reading.</param>
-    /// <returns>A string containing all the text of the file with line endings matching the OS.</returns>
-    public static string ReadAllText(string path)
+    /// <param name="path">String to update.</param>
+    /// <returns>A string containing line endings matching the OS expected line endings.</returns>
+    public static string NormalizeLineEndings(this string original)
     {
-        var original = File.ReadAllText(path);
         if (Environment.OSVersion.Platform == PlatformID.Win32NT && original.Contains(CR + LF, StringComparison.Ordinal))
         {
             // if it's a Windows OS and contains Windows line endings then do nothing

@@ -15,7 +15,7 @@ public class ParseIssueFormCommandTests
         using var console = new FakeInMemoryConsole();
         var command = new ParseIssueFormCommand
         {
-            IssueFormBody = NormalizedLineEndingsFileReader.ReadAllText("./TestFiles/IssueBody.md"),
+            IssueFormBody = File.ReadAllText("./TestFiles/IssueBody.md").NormalizeLineEndings(),
             TemplateFilepath = "./TestFiles/Template.yml",
         };
         await command.ExecuteAsync(console);
