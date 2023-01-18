@@ -5,7 +5,7 @@ internal static class LineEndings
     /// <summary>
     /// Updates a string so that the line endings match the OS expected line endings.
     /// </summary>
-    /// <param name="path">String to update.</param>
+    /// <param name="original">String to update.</param>
     /// <returns>A string containing line endings matching the OS expected line endings.</returns>
     public static string NormalizeLineEndings(this string original)
     {
