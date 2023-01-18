@@ -33,10 +33,11 @@ jobs:
         $templateFilepath = './GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/Template.yml'
         # using -Raw is needed or else the newlines are not preserved and the action will fail to parse the body
         $issueBody = Get-Content ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md -Raw
-        $issueBody = $issueBody -replace "\n","%0A" # The content must be escaped to preserve newlines. See https://github.community/t/set-output-truncates-multiline-strings/16852/3
-        # Write-Output "::set-output name=issue-body::$issueBody"
-        # Write-Output "::set-output name=template-filepath::$templateFilepath"
-        Write-Output "issue-body=$issueBody" >> $env:GITHUB_OUTPUT
+        $random = Get-Random
+        $delimiter = "EOF_$random"
+        Write-Output "issue-body<<$delimiter" >> $env:GITHUB_OUTPUT
+        Write-Output $issueBody >> $env:GITHUB_OUTPUT
+        Write-Output $delimiter >> $env:GITHUB_OUTPUT
         Write-Output "template-filepath=$templateFilepath" >> $env:GITHUB_OUTPUT
     - name: Dump outputs from previous step
       env:
