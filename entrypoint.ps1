@@ -7,7 +7,6 @@ function Main()
   Write-Output $inputArgs
   Write-Output "::endgroup::"
 
-  Write-Output "::group::Run dotnet GitHub issue form parser"
   $output = dotnet '/app/GitHubIssuesParserCli.dll' $inputArgs
   if ($LASTEXITCODE -ne 0 )
   {
@@ -20,13 +19,12 @@ function Main()
   Write-Output "parsed-issue<<$delimiter" >> $env:GITHUB_OUTPUT
   Write-Output $output >> $env:GITHUB_OUTPUT
   Write-Output $delimiter >> $env:GITHUB_OUTPUT
-  Write-Output "::endgroup::"
 
-  Write-Output "::group::dotnet GitHub issue form parser output"
+  Write-Output "::group::GitHub issue form parser output"
   Write-Output $output
   Write-Output "::endgroup::"
 
-  Write-Output "::group::dotnet GitHub issue form parser output indented"
+  Write-Output "::group::GitHub issue form parser output indented"
   $outputAsJson = ConvertFrom-Json $output
   COnvertTo-Json $outputAsJson
   Write-Output "::endgroup::"

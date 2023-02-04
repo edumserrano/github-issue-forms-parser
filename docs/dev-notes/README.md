@@ -69,13 +69,17 @@ To pass arguments to the app when debugging you can use the `commandLineArgs` in
 The steps below show how to run the Docker container action against a set of test data provided by the repo. However you can follow the same steps and provide any data you wish to test.
 
 1) Clone the repo and browse to the repo's directory.
-2) Run `docker build -t github-issue-parser .`
-3) Read the test issue form body into the variable `$issueBody` by doing: `$issueBody = Get-Content GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md -Raw`
-4) Run the docker container by executing:
+2) Create an empty file named `github-step-output.txt` that will store the GitHub step output of the action. To create an empty file you can do something like `echo $null >> github-step-output.txt`.
+3) Run `docker build -t github-issue-parser .`
+4) Read the test issue form body into the variable `$issueBody` by doing: `$issueBody = Get-Content GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md -Raw`
+5) Run the docker container by executing:
 
 ```
-docker run --rm -v ${pwd}:/workspace --workdir /workspace github-issue-parser `
-parse-issue-form `
+docker run --env GITHUB_OUTPUT=/workspace/github-step-output.txt `
+-v ${pwd}:/workspace `
+-v ${pwd}/github-step-output.txt:/workspace/github-step-output.txt `
+--workdir /workspace `
+github-issue-parser parse-issue-form `
 --template-filepath GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/Template.yml `
 --issue-body $issueBody
 ```
@@ -126,6 +130,12 @@ To understand better how the action builds and executes the Docker container loo
 
 ### As of writing this, the log for building the docker action looks as follows
 
+> **Note**
+>
+> This is the log when building the docker image for the action, which only happens on the [test-action workflow](https://github.com/edumserrano/github-issue-forms-parser/actions/workflows/test-action.yml) because using the published action from GitHub Marketplace will download the package from the GitHub packages and so the log will look different.
+>
+> The information mentioned here is still valuable to understand more about how GitHub Docker actions work.
+
 ```
 /usr/bin/docker build
 -t 2bcf09:d996dfb6f4ec40c1a59c1e244bdd3374
@@ -144,6 +154,12 @@ This way it can successfully build the Dockerfile for this action which would ot
 - This allows the Dockerfile to reference files in the `GitHub issue forms parser` repo even though the workflow has not explicitly checked it out.
 
 ### As of writing this, the log for running the docker action looks as follows
+
+> **Note**
+>
+> This is the log when building the docker image for the action, which only happens on the [test-action workflow](https://github.com/edumserrano/github-issue-forms-parser/actions/workflows/test-action.yml) because using the published action from GitHub Marketplace will download the package from the GitHub packages and so the log will look different.
+>
+> The information mentioned here is still valuable to understand more about how GitHub Docker actions work.
 
 ```
 /usr/bin/docker run

@@ -1,0 +1,112 @@
+name: Test GitHub action from GH Marketplace
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths-ignore:
+    - "**.md"
+  schedule:
+    - cron: '0 0 * * 0' # Once a week: "At 00:00 on Sunday."
+
+defaults:
+  run:
+    shell: pwsh
+
+jobs:
+  test-success:
+    name: Test success
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+    - name: Dump github context for debug purposes
+      env:
+        GITHUB_CONTEXT: ${{ toJSON(github) }}
+      run: $env:GITHUB_CONTEXT
+    - uses: actions/checkout@v3
+    - name: Get test input args
+      id: args
+      run: |
+        $templateFilepath = './GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/Template.yml'
+        # using -Raw is needed or else the newlines are not preserved and the action will fail to parse the body
+        $issueBody = Get-Content ./GitHubIssueFormsParser/tests/GitHubIssuesParserCli.Tests/TestFiles/IssueBody.md -Raw
+        $random = Get-Random
+        $delimiter = "EOF_$random"
+        Write-Output "issue-body<<$delimiter" >> $env:GITHUB_OUTPUT
+        Write-Output $issueBody >> $env:GITHUB_OUTPUT
+        Write-Output $delimiter >> $env:GITHUB_OUTPUT
+        Write-Output "template-filepath=$templateFilepath" >> $env:GITHUB_OUTPUT
+    - name: Dump outputs from previous step
+      env:
+        STEP_OUTPUT: ${{ toJSON(steps.args.outputs) }}
+      run: $env:STEP_OUTPUT
+    - name: Run GitHub issue forms parser
+      id: issue-parser
+      uses: edumserrano/github-issue-forms-parser@v1
+      with:
+        template-filepath: '${{ steps.args.outputs.template-filepath }}'
+        issue-form-body: '${{ steps.args.outputs.issue-body }}'
+    - name: Dump outputs from previous step
+      env:
+        STEP_OUTPUT: ${{ toJSON(steps.issue-parser.outputs) }}
+      run: $env:STEP_OUTPUT
+    - name: Output and assert parsed issue
+      run: |
+        $issue = '${{ steps.issue-parser.outputs.parsed-issue }}' | ConvertFrom-Json
+        $issueAsJsonIndented = ConvertTo-Json $issue
+        $expectedIssueAsJson = '{
+          "nuget-id": "dotnet-sdk-extensions",
+          "nuget-version": "1.0.13-alpha",
+          "auto-generate-release-notes": "Yes",
+          "push-nuget": "",
+          "custom-release-notes": "## Custom release notes\n\nTest 123\n\nAnother line:\n- point 1\n- point 2\n- point 3",
+          "operating-systems": {
+            "macos": true,
+            "windows": true,
+            "linux": false,
+            "i-dont-know": false
+          }
+        }'
+
+        Write-Output $issueAsJsonIndented
+        if($expectedIssueAsJson -eq $issueAsJsonIndented)
+        {
+          Write-Output "::notice title=Action check::Action produced the expected output. See the output from the step 'Output and assert parsed issue'."
+        }
+        else
+        {
+          Write-Output "::error title=Action check::Action didn't produce expected output. See the output from the step 'Output and assert parsed issue'."
+          Exit -1
+        }
+
+  test-failure:
+    name: Test failure
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+    - name: Dump github context for debug purposes
+      env:
+        GITHUB_CONTEXT: ${{ toJSON(github) }}
+      run: $env:GITHUB_CONTEXT
+    - uses: actions/checkout@v3
+    - name: Run GitHub issue forms parser with bad input
+      id: issue-parser-bad-input
+      uses: edumserrano/github-issue-forms-parser@v1
+      continue-on-error: true
+      with:
+        template-filepath: '${{ steps.args.outputs.template-filepath }}'
+        issue-form-body: '{}'
+    - name: The action should fail if it fails to parse
+      run: |
+        $parseStepWithBadInputOutcome = '${{ steps.issue-parser-bad-input.outcome }}'
+        if($parseStepWithBadInputOutcome -eq 'success')
+        {
+          Write-Output "::error title=Action check:Action should have failed the workflow because of invalid input but it didn't."
+          Exit 1
+        }
+        else
+        {
+          Write-Output "::notice title=Action check::Action would have failed the workflow given invalid input. You should see an error message on the action's Annotations."
+        }

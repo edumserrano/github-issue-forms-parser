@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches: [ main ]
+    tags: [ 'v*' ]
     paths-ignore:
     - "**.md"
   schedule:
@@ -37,6 +38,7 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          flavor: latest=true
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
