@@ -8,4 +8,3 @@
 - The main difference from this workflow and the `test-action workflow` are:
   - Tests the GitHub action from the Marketplace instead of building it from this repo. It makes sure that the published version is working.
   - Does not run against PRs because it shouldn't add a status check to PRs.
-
