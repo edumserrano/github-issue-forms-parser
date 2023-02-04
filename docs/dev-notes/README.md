@@ -118,9 +118,18 @@ For more information about the GitHub workflows configured for this repo go [her
 
 ## GitHub marketplace
 
-This action is published to the [GitHub marketplace](https://github.com/marketplace/actions/github-issue-forms-parser). See here for more information on [how to publish or remove an action from the marketplace](https://docs.github.com/en/actions/creating-actions/publishing-actions-in-github-marketplace).
+This action is published to the [GitHub marketplace](https://github.com/marketplace/actions/github-issue-forms-parser).
 
-**Currently there is no workflow setup to publish this action to the marketplace. The publishing act is a manual process following the instructions above.**
+**Currently there is no workflow setup to publish this action to the marketplace. The publishing act is a manual process following the instructions below.**
+
+When publishing a new version:
+
+- the docker image tag for `docker://ghcr.io/edumserrano/github-issue-forms-parser` in the [action.yml](/action.yml) file needs to be updated to a new major version if a new major version has been published.
+- a tag with the new major version must be created as part of the release.
+
+Once a new tag is pushed the workflow to publish a docker image will execute and publish a docker image to GitHub packages that will contain a docker image tag that matches the new GitHub tag.
+
+From here on you can follow the instruction at [how to publish or remove an action from the marketplace](https://docs.github.com/en/actions/creating-actions/publishing-actions-in-github-marketplace).
 
 ## Note about the Docker container action
 
