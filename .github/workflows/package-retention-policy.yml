@@ -21,7 +21,7 @@ jobs:
       packages: write
     steps:
       - name: Cleanup old github-issue-forms-parser Docker images
-        uses: snok/container-retention-policy@v1
+        uses: snok/container-retention-policy@v2
         with:
           image-names: github-issue-forms-parser
           cut-off: One month ago UTC
