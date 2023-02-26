@@ -94,9 +94,13 @@ github-issue-parser parse-issue-form `
 
 ## Projects wide configuration
 
-The [Directory.Build.props](/GitHubIssueFormsParser/Directory.Build.props) enables several settings as well as adds some common NuGet packages for all projects.
+- The [Directory.Build.props](/GitHubIssueFormsParser/Directory.Build.props) enables several settings as well as adds some common NuGet packages for all projects.
 
-There is a set of NuGet packages that are only applied in test projects by using the condition `"'$(IsTestProject)' == 'true'"`. To make this work the `csproj` for the test projects must have the `<IsTestProject>true</IsTestProject>` property defined. Adding this property manually shouldn't be needed because it should be added by the `Microsoft.NET.Test.Sdk` package however there seems to be an issue with this when running tests outside of Visual Studio. See [this GitHub issue](https://github.com/dotnet/sdk/issues/3790#issuecomment-1100773198) for more info.
+- There is a set of NuGet packages that are only applied in test projects by using the condition `"'$(IsTestProject)' == 'true'"`. To make this work the `csproj` for the test projects must have the `<IsTestProject>true</IsTestProject>` property defined. Adding this property manually shouldn't be needed because it should be added by the `Microsoft.NET.Test.Sdk` package however there seems to be an issue with this when running tests outside of Visual Studio. See [this GitHub issue](https://github.com/dotnet/sdk/issues/3790#issuecomment-1100773198) for more info.
+
+- When running `dotnet` CLI commands make sure you are at the `/GitHubIssueFormsParser` folder so that the `global.json` is respected. If you don't you might get unexpected results when building the solution. As explained in [global.json overview](https://learn.microsoft.com/en-us/dotnet/core/tools/global-json):
+
+> The .NET SDK looks for a global.json file in the current working directory (which isn't necessarily the same as the project directory) or one of its parent directories.
 
 ## Deterministic Build configuration
 
