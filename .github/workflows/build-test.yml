@@ -107,6 +107,7 @@ jobs:
         $condition = '${{ (steps.dotnet-test.conclusion == 'success' || steps.dotnet-test.conclusion == 'failure') }}'
         Write-Output "condition=$condition" >> $env:GITHUB_OUTPUT
     - name: Generate code coverage report
+      id: code-coverage-report-generator
       if: (steps.dotnet-test.conclusion == 'success' || steps.dotnet-test.conclusion == 'failure') && always()
       run: |
         $testCoverageReportDir = $(Join-Path -Path ${{ steps.dotnet-test.outputs.test-coverage-dir }} -ChildPath "report")
