@@ -25,6 +25,16 @@ RUN ln -s /opt/microsoft/powershell/7/pwsh /usr/bin/pwsh
 # end of install powershell
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0-alpine AS build
+#############
+# temp fix due to sdk 7.0.201 using a preview version of msbuild
+# installing sdk 7.0.103 which doesn't have this problem
+#############
+RUN apk update && apk upgrade && apk add bash
+RUN wget https://dot.net/v1/dotnet-install.sh && chmod +x ./dotnet-install.sh
+ENV DOTNET_INSTALL_FOLDER=/usr/share/dotnet
+RUN ./dotnet-install.sh --version 7.0.103 --install-dir ${DOTNET_INSTALL_FOLDER}
+############# the above block can be deleted when the SDK issue has been resolved
+
 WORKDIR /github-issue-forms-parser
 COPY ["GitHubIssueFormsParser/NuGet.Config", "GitHubIssueFormsParser/"]
 COPY ["GitHubIssueFormsParser/src/GitHubIssuesParserCli/GitHubIssuesParserCli.csproj", "GitHubIssueFormsParser/src/GitHubIssuesParserCli/"]
