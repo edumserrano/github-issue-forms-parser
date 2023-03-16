@@ -27,5 +27,5 @@ jobs:
           cut-off: One month ago UTC
           account-type: personal
           keep-at-least: 5
-          skip-tags: main
+          skip-tags: latest, main, v*
           token: ${{ secrets.CLEANUP_PACKAGES_GH_TOKEN }}
