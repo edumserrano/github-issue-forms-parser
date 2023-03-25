@@ -34,3 +34,14 @@ When running tests we use 3 loggers:
 - `trx`: normal logger, produces test result files which can be downloaded and viewed on Visual Studio.
 - `GitHubActions`: used to produce annotations on the workflow to give more visibility when tests fail. For more info see [GitHub Actions Test Logger](https://github.com/Tyrrrz/GitHubActionsTestLogger). It also adds annotations on PRs.
 - `liquid.custom`: Uses a [template](/GitHubIssueFormsParser/tests/liquid-test-logger-template.md) to create a markdown reports for the test results. These markdown reports are uploaded as workflow artifacts and in case of Pull Requests they are added as comments. For more info see [Liquid Test Reports](https://github.com/kurtmkurtm/LiquidTestReports).
+
+## Secrets
+
+This workflow uses a custom secret `CODECOV_TOKEN`. This secret contains a [token from Codecov](https://app.codecov.io/gh/edumserrano/github-issue-forms-parser/settings) with permissions to upload [code coverage to Codecov](https://app.codecov.io/gh/edumserrano/github-issue-forms-parser). For public repos the Codecov action doesn't require a token but without one the action was having intermittent failures. For more details see:
+
+- [Upload Issues (`Unable to locate build via Github Actions API`)](https://community.codecov.com/t/upload-issues-unable-to-locate-build-via-github-actions-api/3954)
+- [Error: failed to properly upload](https://github.com/codecov/codecov-action/issues/598)
+
+> **Note**
+>
+> If the above issue is resolved then the use of the codecov action can be simplified by removing the secret.
