@@ -11,7 +11,7 @@
 
 ## Codecov
 
-Codecov integration does not require any secret, it was done via the [Codecov GitHub app](https://github.com/apps/codecov).
+Codecov integration is done via the [Codecov GitHub app](https://github.com/apps/codecov).
 
 Besides the information available on the [Codecov web app](https://app.codecov.io/gh/edumserrano/github-issue-forms-parser), this integration enables Codecov to:
 
