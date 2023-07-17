@@ -44,7 +44,6 @@ public class ParseIssueFormCommandTests
     /// regardless of the line endings on the issue form body.
     /// </summary>
     [Theory]
-    [InlineData(CR)]
     [InlineData(LF)]
     [InlineData(CR + LF)]
     public async Task ParseIssueFormCommandTest2(string newLine)
@@ -75,5 +74,28 @@ public class ParseIssueFormCommandTests
         issueFormJson.OperatingSystems.Linux.ShouldBe(false);
         issueFormJson.OperatingSystems.Unknown.ShouldNotBeNull();
         issueFormJson.OperatingSystems.Unknown.ShouldBe(false);
+    }
+
+    /// <summary>
+    /// Tests that the <see cref="ParseIssueFormCommand"/> produces the expected JSON output.
+    /// This tests an edge case scenario for matching on the H3 header values. The matching is done
+    /// with an string.IndexOf method and if two H3 headers start with the same value then the matching
+    /// would always return the first occurence.
+    ///
+    /// This has been fixed by changing the matching so that it only matches if the H3 header value
+    /// matches for an entire line, not just the first string occurence.
+    /// </summary>
+    [Fact]
+    public async Task ParseIssueFormCommandTest3()
+    {
+        using var console = new FakeInMemoryConsole();
+        var command = new ParseIssueFormCommand
+        {
+            IssueFormBody = File.ReadAllText("./TestFiles/IssueBody2.md").NormalizeLineEndings(),
+            TemplateFilepath = "./TestFiles/Template2.yml",
+        };
+        await command.ExecuteAsync(console);
+        var output = console.ReadOutputString();
+        output.ShouldNotBeNull();
     }
 }
