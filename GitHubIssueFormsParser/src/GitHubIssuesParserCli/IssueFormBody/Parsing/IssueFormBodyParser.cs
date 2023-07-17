@@ -13,7 +13,10 @@ internal static class IssueFormBodyParser
         {
             var currentTemplateItem = templateItems[i];
             var nextTemplateItem = templateItems.GetNextTemplateElement(i);
-            var (startIdx, valueLength) = GetLevel3HeaderValueIndexes(currentTemplateItem.Label, nextTemplateItem?.Label, issueFormBodyText);
+            var (startIdx, valueLength) = GetLevel3HeaderValueIndexes(
+                currentTemplateItem.Label,
+                nextTemplateItem?.Label,
+                issueFormBodyText);
             var bodyAsString = (string)issueFormBodyText;
             var value = bodyAsString.Substring(startIdx, valueLength);
             var issueFormItem = IssueFormItemFactory.CreateFormItem(currentTemplateItem.Id, currentTemplateItem.Type, value);
@@ -50,9 +53,26 @@ internal static class IssueFormBodyParser
     private static int GetStartIndex(this IssueFormBodyText issueFormBodyText, string h3HeaderValue)
     {
         var bodyAsString = (string)issueFormBodyText;
-        var startIdx = bodyAsString.IndexOf(h3HeaderValue, StringComparison.Ordinal);
-        return startIdx is -1
-            ? throw IssueFormBodyParserException.H3HeaderNotFound(h3HeaderValue)
-            : startIdx;
+        var h3HeaderValueWindowsLineEnding = h3HeaderValue + NewLines.CR + NewLines.LF;
+        var startIdx = bodyAsString.IndexOf(h3HeaderValueWindowsLineEnding, StringComparison.Ordinal);
+        if (startIdx is not -1)
+        {
+            return startIdx;
+        }
+
+        var h3HeaderValueUnixLineEnding = h3HeaderValue + NewLines.LF;
+        startIdx = bodyAsString.IndexOf(h3HeaderValueUnixLineEnding, StringComparison.Ordinal);
+        if (startIdx is not -1)
+        {
+            return startIdx;
+        }
+
+        throw IssueFormBodyParserException.H3HeaderNotFound(h3HeaderValue);
+    }
+
+    internal static class NewLines
+    {
+        public const string CR = "\r";
+        public const string LF = "\n";
     }
 }

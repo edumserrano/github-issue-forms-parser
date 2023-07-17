@@ -1,0 +1,22 @@
+name: Release NuGet package
+description: Release a NuGet package.
+title: Release NuGet package
+body:
+  - type: dropdown
+    id: nuget-id
+    attributes:
+      label: What NuGet package do you want to release?
+      options:
+        - dotnet-sdk-extensions
+        - dotnet-sdk-extensions-testing
+    validations:
+      required: true
+  - type: dropdown
+    id: nuget-id-2
+    attributes:
+      label: What
+      options:
+        - dotnet-sdk-extensions
+        - dotnet-sdk-extensions-testing
+    validations:
+      required: true
