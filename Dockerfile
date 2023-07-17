@@ -2,6 +2,7 @@
 
 FROM mcr.microsoft.com/dotnet/runtime:7.0-alpine AS base
 # install powershell as per https://docs.microsoft.com/en-us/powershell/scripting/install/install-alpine?view=powershell-7.2
+ARG PWSH_VERSION=7.3.6
 RUN apk add --no-cache \
     ca-certificates \
     less \
@@ -17,7 +18,7 @@ RUN apk add --no-cache \
     icu-libs \
     curl
 RUN apk -X https://dl-cdn.alpinelinux.org/alpine/edge/main add --no-cache lttng-ust
-RUN curl -L https://github.com/PowerShell/PowerShell/releases/download/v7.2.2/powershell-7.2.2-linux-alpine-x64.tar.gz -o /tmp/powershell.tar.gz
+RUN curl -L https://github.com/PowerShell/PowerShell/releases/download/v${PWSH_VERSION}/powershell-${PWSH_VERSION}-linux-alpine-x64.tar.gz -o /tmp/powershell.tar.gz
 RUN mkdir -p /opt/microsoft/powershell/7
 RUN tar zxf /tmp/powershell.tar.gz -C /opt/microsoft/powershell/7
 RUN chmod +x /opt/microsoft/powershell/7/pwsh
