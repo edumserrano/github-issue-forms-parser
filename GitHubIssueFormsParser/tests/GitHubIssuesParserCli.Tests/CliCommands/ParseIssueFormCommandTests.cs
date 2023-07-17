@@ -27,7 +27,7 @@ public class ParseIssueFormCommandTests
         issueFormJson.NuGetVersion.ShouldBe("1.0.13-alpha");
         issueFormJson.AutoGenerateReleaseNotes.ShouldBe("Yes");
         issueFormJson.PushNuget.ShouldBeEmpty();
-        issueFormJson.CustomReleaseNotes.ShouldBe($"## Custom release notes{Environment.NewLine}{Environment.NewLine}Test 123{Environment.NewLine}{Environment.NewLine}Another line:{Environment.NewLine}- point 1{Environment.NewLine}- point 2{Environment.NewLine}- point 3");
+        issueFormJson.CustomReleaseNotes.ShouldBe($"## Custom release notes{Environment.NewLine}{Environment.NewLine}Test 123{Environment.NewLine}\"line with double quotes\"{Environment.NewLine}{Environment.NewLine}Another line:{Environment.NewLine}- point 1{Environment.NewLine}- point 2{Environment.NewLine}- point 3");
         issueFormJson.OperatingSystems.ShouldNotBeNull();
         issueFormJson.OperatingSystems.MacOS.ShouldNotBeNull();
         issueFormJson.OperatingSystems.MacOS.ShouldBe(true);
