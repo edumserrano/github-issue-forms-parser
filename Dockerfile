@@ -1,7 +1,7 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
 FROM mcr.microsoft.com/dotnet/runtime:7.0-alpine AS base
-# install powershell as per https://docs.microsoft.com/en-us/powershell/scripting/install/install-alpine?view=powershell-7.2
+# install powershell as per https://docs.microsoft.com/en-us/powershell/scripting/install/install-alpine
 ARG PWSH_VERSION=7.3.6
 RUN apk add --no-cache \
     ca-certificates \
