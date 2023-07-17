@@ -19,6 +19,7 @@ _No response_
 ## Custom release notes
 
 Test 123
+"line with double quotes"
 
 Another line:
 - point 1
