@@ -1,4 +1,4 @@
-namespace GitHubIssuesParserCli.IssueFormBody.Parsing;
+namespace GitHubIssuesParserCli.IssueFormBodies.Parsing;
 
 internal static class IssueFormBodyParser
 {

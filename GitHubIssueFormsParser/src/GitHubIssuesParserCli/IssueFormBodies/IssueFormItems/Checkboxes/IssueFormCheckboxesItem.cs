@@ -1,4 +1,4 @@
-namespace GitHubIssuesParserCli.IssueFormBody.IssueFormItems.Checkboxes;
+namespace GitHubIssuesParserCli.IssueFormBodies.IssueFormItems.Checkboxes;
 
 internal sealed class IssueFormCheckboxesItem : IssueFormItem
 {

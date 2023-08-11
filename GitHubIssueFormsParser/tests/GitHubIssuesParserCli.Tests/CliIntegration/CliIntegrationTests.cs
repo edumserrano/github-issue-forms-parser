@@ -73,7 +73,7 @@ public class CliIntegrationTests
         await app.RunAsync(args);
         var error = console.ReadErrorString();
 
-        var expectedError = File.ReadAllText("./TestFiles/CliErrorIssueBodyValidation.txt");
+        var expectedError = await File.ReadAllTextAsync("./TestFiles/CliErrorIssueBodyValidation.txt");
         error.ShouldBeWithNormalizedNewlines(expectedError);
     }
 
@@ -93,7 +93,7 @@ public class CliIntegrationTests
         var args = new[] { "parse-issue-form", "--issue-body", "some body", "--template-filepath", templateFilepath };
         await app.RunAsync(args);
         var error = console.ReadErrorString();
-        var expectedError = File.ReadAllText("./TestFiles/CliErrorTemplateFilepathValidation.txt");
+        var expectedError = await File.ReadAllTextAsync("./TestFiles/CliErrorTemplateFilepathValidation.txt");
         error.ShouldBeWithNormalizedNewlines(expectedError);
     }
 
@@ -111,7 +111,7 @@ public class CliIntegrationTests
         var args = new[] { "parse-issue-form", "--issue-body", "some body", "--template-filepath", "non-existent-file.txt" };
         await app.RunAsync(args);
         var error = console.ReadErrorString();
-        var expectedError = File.ReadAllText("./TestFiles/CliErrorTemplateFilepathValidation2.txt");
+        var expectedError = await File.ReadAllTextAsync("./TestFiles/CliErrorTemplateFilepathValidation2.txt");
         error.ShouldBeWithNormalizedNewlines(expectedError);
     }
 
@@ -127,9 +127,8 @@ public class CliIntegrationTests
         var app = new IssuesParserCli();
         app.CliApplicationBuilder.UseConsole(console);
 
-        var issueFormBody = File
-            .ReadAllText("./TestFiles/IssueBody.md")
-            .NormalizeLineEndings();
+        var issueFormBody = await File.ReadAllTextAsync("./TestFiles/IssueBody.md");
+        issueFormBody = issueFormBody.NormalizeLineEndings();
         const string templateFilepath = "./TestFiles/Template.yml";
         var args = new[] { "parse-issue-form", issueFormOptionName, issueFormBody, templateFilepathOptionName, templateFilepath };
         await app.RunAsync(args);

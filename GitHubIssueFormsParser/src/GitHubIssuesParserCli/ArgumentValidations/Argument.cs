@@ -12,7 +12,7 @@ internal static class Argument
     {
         var message = $"{name} cannot be null or whitespace.";
         return string.IsNullOrWhiteSpace(value)
-            ? throw new ArgumentException(message)
+            ? throw new ArgumentException(message, name)
             : value;
     }
 }

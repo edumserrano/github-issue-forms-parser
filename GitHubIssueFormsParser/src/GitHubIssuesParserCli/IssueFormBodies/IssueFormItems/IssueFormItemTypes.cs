@@ -1,4 +1,4 @@
-namespace GitHubIssuesParserCli.IssueFormBody.IssueFormItems;
+namespace GitHubIssuesParserCli.IssueFormBodies.IssueFormItems;
 
 internal enum IssueFormItemTypes
 {

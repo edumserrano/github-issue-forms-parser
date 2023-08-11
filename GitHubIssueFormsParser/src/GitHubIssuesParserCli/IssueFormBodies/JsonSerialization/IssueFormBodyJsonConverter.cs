@@ -1,4 +1,4 @@
-namespace GitHubIssuesParserCli.IssueFormBody.JsonSerialization;
+namespace GitHubIssuesParserCli.IssueFormBodies.JsonSerialization;
 
 internal sealed class IssueFormBodyJsonConverter : JsonConverter<IssueFormBody>
 {
