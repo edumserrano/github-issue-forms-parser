@@ -11,6 +11,33 @@
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
     <!-- Force code analysis to run on build. If this starts to slow down the build or Visual Studio consider enabling it only in CI. https://docs.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props#enforcecodestyleinbuild -->
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <!--
+      GenerateDocumentationFile is not something needed for these projects but without it I won't get warnings about 'unused usings' (IDE0005)
+      when building with the dotnet CLI, I'll only get them when using Visual Studio or when running dotnet format.
+
+      For more info see:
+      - Compiler does not report unused imports when XML doc comments are disabled: https://github.com/dotnet/roslyn/issues/41640
+      - And this comment for the first workaround presented: https://github.com/dotnet/roslyn/issues/41640#issuecomment-985780130
+
+      NOTE:
+      1) Even if GenerateDocumentationFile is not required anymore to get IDE0005 to work via the dotnet CLI, I found that I might still
+      want to have GenerateDocumentationFile enabled wherever I used documentation tags, such as for my test projects. This is because I've
+      chosen to use to add a summary documentation tag to all my tests to explain what they do and by enabling GenerateDocumentationFile I "seem"
+      get some extra checks on what I write on those summary tags. For instance, on build I get warned if I have incorrect cref values.
+      When reviewing if I still need GenerateDocumentationFile for test projects I should test having an invalid cref and see if it I get
+      warnings on build.
+
+      2) Hopefully, when https://github.com/dotnet/roslyn/issues/41640 gets closed, I can tidy up this huge comment block
+
+      3) Some of the proposed fixes also add some exclusions to NoWarn like: <NoWarn>$(NoWarn);CS1573;CS1591;CS1712</NoWarn>
+      but I've found I only needed CS1591 for now.
+
+      CS1573: Parameter 'parameter' has no matching param tag in the XML comment for 'parameter' (but other parameters do)
+      CS1591: Missing XML comment for publicly visible type or member 'Type_or_Member'
+      CS1712: Type parameter 'type_parameter' has no matching typeparam tag in the XML comment on 'type_or_member' (but other type parameters do)
+    -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
