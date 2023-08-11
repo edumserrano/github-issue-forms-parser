@@ -21,7 +21,8 @@ internal static class LineEndings
             // new lines with Windows line endings
             return original.Replace(LF, Environment.NewLine, StringComparison.Ordinal);
         }
-        else if (Environment.OSVersion.Platform == PlatformID.Unix && original.Contains(CR + LF, StringComparison.Ordinal))
+
+        if (Environment.OSVersion.Platform == PlatformID.Unix && original.Contains(CR + LF, StringComparison.Ordinal))
         {
             // if it's a Linux OS and contains Windows line endings then replace
             // new lines with Linux line endings

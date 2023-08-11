@@ -13,9 +13,10 @@ public class ParseIssueFormCommandTests
     public async Task ParseIssueFormCommandTest1()
     {
         using var console = new FakeInMemoryConsole();
+        var issueFormBody = await File.ReadAllTextAsync("./TestFiles/IssueBody.md");
         var command = new ParseIssueFormCommand
         {
-            IssueFormBody = File.ReadAllText("./TestFiles/IssueBody.md").NormalizeLineEndings(),
+            IssueFormBody = issueFormBody.NormalizeLineEndings(),
             TemplateFilepath = "./TestFiles/Template.yml",
         };
         await command.ExecuteAsync(console);
@@ -30,13 +31,13 @@ public class ParseIssueFormCommandTests
         issueFormJson.CustomReleaseNotes.ShouldBe($"## Custom release notes{Environment.NewLine}{Environment.NewLine}Test 123{Environment.NewLine}\"line with double quotes\"{Environment.NewLine}{Environment.NewLine}Another line:{Environment.NewLine}- point 1{Environment.NewLine}- point 2{Environment.NewLine}- point 3");
         issueFormJson.OperatingSystems.ShouldNotBeNull();
         issueFormJson.OperatingSystems.MacOS.ShouldNotBeNull();
-        issueFormJson.OperatingSystems.MacOS.ShouldBe(true);
+        issueFormJson.OperatingSystems.MacOS.ShouldBe(expected: true);
         issueFormJson.OperatingSystems.Windows.ShouldNotBeNull();
-        issueFormJson.OperatingSystems.Windows.ShouldBe(true);
+        issueFormJson.OperatingSystems.Windows.ShouldBe(expected: true);
         issueFormJson.OperatingSystems.Linux.ShouldNotBeNull();
-        issueFormJson.OperatingSystems.Linux.ShouldBe(false);
+        issueFormJson.OperatingSystems.Linux.ShouldBe(expected: false);
         issueFormJson.OperatingSystems.Unknown.ShouldNotBeNull();
-        issueFormJson.OperatingSystems.Unknown.ShouldBe(false);
+        issueFormJson.OperatingSystems.Unknown.ShouldBe(expected: false);
     }
 
     /// <summary>
@@ -67,13 +68,13 @@ public class ParseIssueFormCommandTests
         issueFormJson.CustomReleaseNotes.ShouldBe($"## Custom release notes {newLine}{newLine}Test 123{newLine}{newLine}Another line:{newLine}- point 1{newLine}- point 2{newLine}- point 3");
         issueFormJson.OperatingSystems.ShouldNotBeNull();
         issueFormJson.OperatingSystems.MacOS.ShouldNotBeNull();
-        issueFormJson.OperatingSystems.MacOS.ShouldBe(true);
+        issueFormJson.OperatingSystems.MacOS.ShouldBe(expected: true);
         issueFormJson.OperatingSystems.Windows.ShouldNotBeNull();
-        issueFormJson.OperatingSystems.Windows.ShouldBe(true);
+        issueFormJson.OperatingSystems.Windows.ShouldBe(expected: true);
         issueFormJson.OperatingSystems.Linux.ShouldNotBeNull();
-        issueFormJson.OperatingSystems.Linux.ShouldBe(false);
+        issueFormJson.OperatingSystems.Linux.ShouldBe(expected: false);
         issueFormJson.OperatingSystems.Unknown.ShouldNotBeNull();
-        issueFormJson.OperatingSystems.Unknown.ShouldBe(false);
+        issueFormJson.OperatingSystems.Unknown.ShouldBe(expected: false);
     }
 
     /// <summary>
@@ -89,9 +90,10 @@ public class ParseIssueFormCommandTests
     public async Task ParseIssueFormCommandTest3()
     {
         using var console = new FakeInMemoryConsole();
+        var issueFormBody = await File.ReadAllTextAsync("./TestFiles/IssueBody2.md");
         var command = new ParseIssueFormCommand
         {
-            IssueFormBody = File.ReadAllText("./TestFiles/IssueBody2.md").NormalizeLineEndings(),
+            IssueFormBody = issueFormBody.NormalizeLineEndings(),
             TemplateFilepath = "./TestFiles/Template2.yml",
         };
         await command.ExecuteAsync(console);

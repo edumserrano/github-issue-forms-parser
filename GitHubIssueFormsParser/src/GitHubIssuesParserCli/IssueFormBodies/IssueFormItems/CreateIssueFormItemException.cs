@@ -1,4 +1,4 @@
-namespace GitHubIssuesParserCli.IssueFormBody.IssueFormItems;
+namespace GitHubIssuesParserCli.IssueFormBodies.IssueFormItems;
 
 public sealed class CreateIssueFormItemException : Exception
 {

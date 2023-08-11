@@ -1,4 +1,4 @@
-namespace GitHubIssuesParserCli.IssueFormBody;
+namespace GitHubIssuesParserCli.IssueFormBodies;
 
 internal sealed class IssueFormBody
 {

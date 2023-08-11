@@ -89,6 +89,8 @@ dotnet_analyzer_diagnostic.severity = warning
 dotnet_diagnostic.CA1014.severity = none        # CA1014: Mark assemblies with CLSCompliantAttribute
 dotnet_diagnostic.CA1030.severity = silent      # CA1030: Use events where appropriate
 dotnet_diagnostic.CA1032.severity = none        # CA1032: Implement standard exception constructors
+dotnet_diagnostic.CA1054.severity = none        # CA1054: URI parameters should not be strings
+dotnet_diagnostic.CA1056.severity = none        # CA1056: URI properties should not be strings
 # Globalization rules https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/globalization-warnings
 dotnet_diagnostic.CA1303.severity = none        # CA1303: Do not pass literals as localized parameters
 dotnet_diagnostic.CA1308.severity = none        # CA1308: Normalize strings to uppercase
@@ -115,7 +117,7 @@ dotnet_diagnostic.IDE0010.severity = silent     # Add missing cases to switch st
 dotnet_style_prefer_conditional_expression_over_assignment = true:silent
 dotnet_diagnostic.IDE0045.severity = suggestion # Use conditional expression for assignment (IDE0045)
 dotnet_style_prefer_conditional_expression_over_return = true:silent
-dotnet_diagnostic.IDE0046.severity = none     # Use conditional expression for return (IDE0046)
+dotnet_diagnostic.IDE0046.severity = none       # Use conditional expression for return (IDE0046)
 # Undocumented
 dotnet_style_operator_placement_when_wrapping = beginning_of_line
 
@@ -388,6 +390,14 @@ dotnet_naming_rule.parameters_rule.severity             = warning
 ##########################################
 
 ##########################################
+# Rules for Meziantou.Analyzer
+# See https://github.com/meziantou/Meziantou.Analyzer/tree/main/docs
+##########################################
+[*.cs]
+dotnet_diagnostic.MA0004.severity = none    # MA0004 Use Task.ConfigureAwait(false)
+dotnet_diagnostic.MA0048.severity = none    # MA0048 File name must match type name
+
+##########################################
 # Rules for Microsoft.VisualStudio.Threading.Analyzers
 # See https://github.com/microsoft/vs-threading/blob/main/doc/analyzers/index.md
 ##########################################
@@ -461,7 +471,7 @@ dotnet_diagnostic.RCS0034.severity = suggestion      # RCS0034: Add newline befo
 dotnet_diagnostic.RCS0039.severity = suggestion      # RCS0039: Remove newline before base list
 dotnet_diagnostic.RCS0041.severity = suggestion      # RCS0041: Remove newline between 'if' keyword and 'else' keyword
 dotnet_diagnostic.RCS0042.severity = suggestion      # RCS0042: Remove newlines from accessor list of auto-property
-dotnet_diagnostic.RCS0043.severity = none            # RCS0043: Remove newlines from accessor with single-line expression
+dotnet_diagnostic.RCS0043.severity = none            # RCS0043: Format accessor's braces on a single line when expression is on single line
 dotnet_diagnostic.RCS0050.severity = suggestion      # RCS0050: Add empty line before top declaration
 dotnet_diagnostic.RCS0051.severity = suggestion      # RCS0051: Add newline between closing brace and 'while' keyword (or vice versa)
 dotnet_diagnostic.RCS0054.severity = suggestion      # RCS0054: Fix formatting of a call chain
@@ -516,7 +526,8 @@ dotnet_diagnostic.SA1204.severity = none        # SA1204: Static members should 
 dotnet_diagnostic.SA1214.severity = none        # SA1214: Readonly fields should appear before non-readonly fields
 # Naming Rules (SA1300-)
 dotnet_diagnostic.SA1309.severity = none        # SA1309: Field should not begin with an underscore
-dotnet_diagnostic.SA1313.severity = none        # SA1313: Parameter '_' should begin with lower-case letter. Covered by IDE1006 and this one triggers false warnings when using discard symbol.
+dotnet_diagnostic.SA1312.severity = none        # SA1309: The name of a variable in C# does not begin with a lower-case letter. Covered by IDE1006 and this one triggers false warnings when using discard symbol for variables.
+dotnet_diagnostic.SA1313.severity = none        # SA1313: Parameter '_' should begin with lower-case letter. Covered by IDE1006 and this one triggers false warnings when using discard symbol for parameters.
 # Maintainability Rules (SA1400-)
 dotnet_diagnostic.SA1402.severity = none        # SA1402: File may only contain a single type
 # Layout Rules (SA1500-)
@@ -594,6 +605,15 @@ dotnet_diagnostic.SA1651.severity = suggestion      # SA1651: Do not use placeho
 # overrides the above configuration only for tests.
 ##########################################
 [tests/**/*.cs]
+
+##########################################
+# Rules for Meziantou.Analyzer
+# See https://github.com/meziantou/Meziantou.Analyzer/tree/main/docs
+##########################################
+[*.cs]
+dotnet_diagnostic.MA0051.severity = none    # MA0051 Method is too long
+dotnet_diagnostic.MA0076.severity = none    # MA0076 Do not use implicit culture-sensitive ToString in interpolated strings
+dotnet_diagnostic.MA0101.severity = none    # MA0101 String contains an implicit end of line character
 
 ##########################################
 # Rules for Microsoft.VisualStudio.Threading.Analyzers

@@ -1,3 +1,5 @@
+using GitHubIssuesParserCli.IssueFormBodies.Parsing;
+
 namespace GitHubIssuesParserCli.Tests.CliCommands;
 
 /// <summary>
@@ -26,12 +28,12 @@ public class ParseIssueFormCommandValidationTests
         var exception = await Should.ThrowAsync<CommandException>(() => command.ExecuteAsync(console).AsTask());
         const string expectedErrorMessage = @"An error occurred trying to execute the command to parse a GitHub issue form.
 Error:
-- IssueFormBody cannot be null or whitespace.";
+- IssueFormBody cannot be null or whitespace. (Parameter 'IssueFormBody')";
 
         exception.Message.ShouldBe(expectedErrorMessage);
         exception.InnerException.ShouldNotBeNull();
         exception.InnerException.ShouldBeAssignableTo<ArgumentException>();
-        exception.InnerException.Message.ShouldBe("IssueFormBody cannot be null or whitespace.");
+        exception.InnerException.Message.ShouldBe("IssueFormBody cannot be null or whitespace. (Parameter 'IssueFormBody')");
     }
 
     /// <summary>
@@ -52,11 +54,11 @@ Error:
         var exception = await Should.ThrowAsync<CommandException>(() => command.ExecuteAsync(console).AsTask());
         const string expectedErrorMessage = @"An error occurred trying to execute the command to parse a GitHub issue form.
 Error:
-- TemplateFilepath cannot be null or whitespace.";
+- TemplateFilepath cannot be null or whitespace. (Parameter 'TemplateFilepath')";
         exception.Message.ShouldBe(expectedErrorMessage);
         exception.InnerException.ShouldNotBeNull();
         exception.InnerException.ShouldBeAssignableTo<ArgumentException>();
-        exception.InnerException.Message.ShouldBe("TemplateFilepath cannot be null or whitespace.");
+        exception.InnerException.Message.ShouldBe("TemplateFilepath cannot be null or whitespace. (Parameter 'TemplateFilepath')");
     }
 
     /// <summary>
@@ -138,9 +140,10 @@ Error:
     public async Task InvalidIssueFormBody2()
     {
         using var console = new FakeInMemoryConsole();
+        var issueFormBody = await File.ReadAllTextAsync("./TestFiles/IssueBodyWithOutOfOrderH3Headers.md");
         var command = new ParseIssueFormCommand
         {
-            IssueFormBody = File.ReadAllText("./TestFiles/IssueBodyWithOutOfOrderH3Headers.md").NormalizeLineEndings(),
+            IssueFormBody = issueFormBody.NormalizeLineEndings(),
             TemplateFilepath = "./TestFiles/Template.yml",
         };
         var exception = await Should.ThrowAsync<CommandException>(() => command.ExecuteAsync(console).AsTask());
@@ -161,9 +164,10 @@ Error:
     public async Task InvalidIssueFormBody3()
     {
         using var console = new FakeInMemoryConsole();
+        var issueFormBody = await File.ReadAllTextAsync("./TestFiles/IssueBodyWithMangledCheckbox.md");
         var command = new ParseIssueFormCommand
         {
-            IssueFormBody = File.ReadAllText("./TestFiles/IssueBodyWithMangledCheckbox.md").NormalizeLineEndings(),
+            IssueFormBody = issueFormBody.NormalizeLineEndings(),
             TemplateFilepath = "./TestFiles/Template.yml",
         };
         var exception = await Should.ThrowAsync<CommandException>(() => command.ExecuteAsync(console).AsTask());
