@@ -529,7 +529,7 @@ dotnet_diagnostic.SA1204.severity = none        # SA1204: Static members should 
 dotnet_diagnostic.SA1214.severity = none        # SA1214: Readonly fields should appear before non-readonly fields
 # Naming Rules (SA1300-)
 dotnet_diagnostic.SA1309.severity = none        # SA1309: Field should not begin with an underscore
-dotnet_diagnostic.SA1312.severity = none        # SA1309: The name of a variable in C# does not begin with a lower-case letter. Covered by IDE1006 and this one triggers false warnings when using discard symbol for variables.
+dotnet_diagnostic.SA1312.severity = none        # SA1312: The name of a variable in C# does not begin with a lower-case letter. Covered by IDE1006 and this one triggers false warnings when using discard symbol for variables.
 dotnet_diagnostic.SA1313.severity = none        # SA1313: Parameter '_' should begin with lower-case letter. Covered by IDE1006 and this one triggers false warnings when using discard symbol for parameters.
 # Maintainability Rules (SA1400-)
 dotnet_diagnostic.SA1402.severity = none        # SA1402: File may only contain a single type
