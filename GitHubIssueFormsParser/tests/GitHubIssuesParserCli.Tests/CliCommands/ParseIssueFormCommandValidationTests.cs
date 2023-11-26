@@ -14,7 +14,6 @@ public class ParseIssueFormCommandValidationTests
     /// Validation test for the <see cref="ParseIssueFormCommand.IssueFormBody"/> command option.
     /// </summary>
     [Theory]
-    [InlineData(null)]
     [InlineData("")]
     [InlineData("   ")]
     public async Task ValidateIssueFormBodyOption(string issueFormBody)
@@ -40,7 +39,6 @@ Error:
     /// Validation test for the <see cref="ParseIssueFormCommand.TemplateFilepath"/> command option.
     /// </summary>
     [Theory]
-    [InlineData(null)]
     [InlineData("")]
     [InlineData("   ")]
     public async Task ValidateTemplateFilepathOption(string templateFilepath)
