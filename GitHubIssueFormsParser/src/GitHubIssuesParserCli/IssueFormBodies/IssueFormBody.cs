@@ -2,6 +2,12 @@ namespace GitHubIssuesParserCli.IssueFormBodies;
 
 internal sealed class IssueFormBody
 {
+    private static readonly JsonSerializerOptions _serializeOptions = new JsonSerializerOptions
+    {
+        WriteIndented = false,
+        Converters = { new IssueFormBodyJsonConverter() },
+    };
+
     public IssueFormBody(List<IssueFormItem> items)
     {
         Items = items.NotNull();
@@ -11,15 +17,7 @@ internal sealed class IssueFormBody
 
     public string ToJson()
     {
-        var serializeOptions = new JsonSerializerOptions
-        {
-            WriteIndented = false,
-            Converters =
-            {
-                new IssueFormBodyJsonConverter(),
-            },
-        };
-        return JsonSerializer.Serialize(this, serializeOptions);
+        return JsonSerializer.Serialize(this, _serializeOptions);
     }
 
     public void WriteAsJson(Utf8JsonWriter writer)
