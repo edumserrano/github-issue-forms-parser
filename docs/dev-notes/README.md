@@ -146,7 +146,7 @@ To understand better how the action builds and executes the Docker container loo
 
 ### As of writing this, the log for building the docker action looks as follows
 
-> **Note**
+> [!NOTE]
 >
 > This is the log when building the docker image for the action, which only happens on the [test-action workflow](https://github.com/edumserrano/github-issue-forms-parser/actions/workflows/test-action.yml) because using the published action from GitHub Marketplace will download the package from the GitHub packages and so the log will look different.
 >
@@ -171,7 +171,7 @@ This way it can successfully build the Dockerfile for this action which would ot
 
 ### As of writing this, the log for running the docker action looks as follows
 
-> **Note**
+> [!NOTE]
 >
 > This is the log when building the docker image for the action, which only happens on the [test-action workflow](https://github.com/edumserrano/github-issue-forms-parser/actions/workflows/test-action.yml) because using the published action from GitHub Marketplace will download the package from the GitHub packages and so the log will look different.
 >

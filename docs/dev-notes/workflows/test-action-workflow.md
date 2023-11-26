@@ -12,7 +12,7 @@
 
 Since this workflow executes the [Docker container action](https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action) it will build and execute the docker container so if there are any issues with the action's [Dockerfile](/Dockerfile) this workflow will detect it.
 
-> **Note**
+> [!NOTE]
 >
 > For this workflow to be able to test the action when code is pushed I created an alternate `action.yml` at `/action-local` that will build the Docker image from the repo instead of using the Docker image published in the GitHub packages (which is what the `action.yml` at the root of the repo does).
 >

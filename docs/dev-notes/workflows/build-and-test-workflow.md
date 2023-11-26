@@ -42,6 +42,6 @@ This workflow uses a custom secret `CODECOV_TOKEN`. This secret contains a [toke
 - [Upload Issues (`Unable to locate build via Github Actions API`)](https://community.codecov.com/t/upload-issues-unable-to-locate-build-via-github-actions-api/3954)
 - [Error: failed to properly upload](https://github.com/codecov/codecov-action/issues/598)
 
-> **Note**
+> [!NOTE]
 >
 > If the above issue is resolved then the use of the codecov action can be simplified by removing the secret.
