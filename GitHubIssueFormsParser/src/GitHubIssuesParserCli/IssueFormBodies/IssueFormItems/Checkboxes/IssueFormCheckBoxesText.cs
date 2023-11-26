@@ -21,14 +21,14 @@ internal sealed class IssueFormCheckBoxesText
                 if (optionText.StartsWith("- [X]", StringComparison.Ordinal))
                 {
                     label = optionText
-                        .TrimStart("- [X]".ToArray())
+                        .TrimStart([.. "- [X]"])
                         .TrimIssueText();
                     isChecked = true;
                 }
                 else if (optionText.StartsWith("- [ ]", StringComparison.Ordinal))
                 {
                     label = optionText
-                        .TrimStart("- [ ]".ToArray())
+                        .TrimStart([.. "- [ ]"])
                         .TrimIssueText();
                     isChecked = false;
                 }

@@ -7,7 +7,7 @@ public class ParseIssueFormCommand : ICommand
         "issue-body",
         'i',
         IsRequired = true,
-        Validators = new Type[] { typeof(IssueFormBodyOptionValidator) },
+        Validators = [typeof(IssueFormBodyOptionValidator)],
         Description = "The body of the GitHub issue form.")]
     public string IssueFormBody { get; init; } = default!;
 
@@ -15,7 +15,7 @@ public class ParseIssueFormCommand : ICommand
         "template-filepath",
         't',
         IsRequired = true,
-        Validators = new Type[] { typeof(TemplateFilepathOptionValidator) },
+        Validators = [typeof(TemplateFilepathOptionValidator)],
         Description = "The filepath for the GitHub issue form YAML template.")]
     public string TemplateFilepath { get; init; } = default!;
 
