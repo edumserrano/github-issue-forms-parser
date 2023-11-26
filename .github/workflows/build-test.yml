@@ -97,7 +97,7 @@ jobs:
         }
     - name: Set run even if tests fail condition
       id: even-if-tests-fail
-      if: always()
+      if: matrix.os == 'ubuntu-latest' && always()
       run: |
         # Some of the steps below provide feedback on the test run and I want to run them even if
         # some of the previous steps failed. For that I need:
