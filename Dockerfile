@@ -1,8 +1,10 @@
-#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+# See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+# See https://hub.docker.com/_/microsoft-dotnet-runtime/ for list of tags for dotnet runtime
+# See https://hub.docker.com/_/microsoft-dotnet-sdk for list of tags for dotnet sdk
 
-FROM mcr.microsoft.com/dotnet/runtime:7.0-alpine AS base
+FROM mcr.microsoft.com/dotnet/runtime:8.0-alpine AS base
 # install powershell as per https://docs.microsoft.com/en-us/powershell/scripting/install/install-alpine
-ARG PWSH_VERSION=7.3.6
+ARG PWSH_VERSION=7.4.0
 RUN apk add --no-cache \
     ca-certificates \
     less \
@@ -18,14 +20,14 @@ RUN apk add --no-cache \
     icu-libs \
     curl
 RUN apk -X https://dl-cdn.alpinelinux.org/alpine/edge/main add --no-cache lttng-ust
-RUN curl -L https://github.com/PowerShell/PowerShell/releases/download/v${PWSH_VERSION}/powershell-${PWSH_VERSION}-linux-alpine-x64.tar.gz -o /tmp/powershell.tar.gz
+RUN curl -L https://github.com/PowerShell/PowerShell/releases/download/v${PWSH_VERSION}/powershell-${PWSH_VERSION}-linux-musl-x64.tar.gz -o /tmp/powershell.tar.gz
 RUN mkdir -p /opt/microsoft/powershell/7
 RUN tar zxf /tmp/powershell.tar.gz -C /opt/microsoft/powershell/7
 RUN chmod +x /opt/microsoft/powershell/7/pwsh
 RUN ln -s /opt/microsoft/powershell/7/pwsh /usr/bin/pwsh
 # end of install powershell
 
-FROM mcr.microsoft.com/dotnet/sdk:7.0-alpine AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
 WORKDIR /github-issue-forms-parser
 COPY ["GitHubIssueFormsParser/NuGet.Config", "GitHubIssueFormsParser/"]
 COPY ["GitHubIssueFormsParser/src/GitHubIssuesParserCli/GitHubIssuesParserCli.csproj", "GitHubIssueFormsParser/src/GitHubIssuesParserCli/"]
