@@ -1,5 +1,6 @@
 global using System.Text.Json;
 global using System.Text.Json.Serialization;
+global using System.Text.RegularExpressions;
 global using CliFx.Exceptions;
 global using CliFx.Extensibility;
 global using CliFx.Infrastructure;
