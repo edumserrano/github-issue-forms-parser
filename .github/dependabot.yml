@@ -11,6 +11,10 @@ updates:
       - 'dependabot'
       - 'bot:robot:'
       - 'nuget'
+    groups:
+      nuget:
+        patterns:
+          - "*"
   - package-ecosystem: github-actions
     # Workflow files stored in the
     # default location of `.github/workflows`
@@ -21,3 +25,7 @@ updates:
       - 'dependabot'
       - 'bot:robot:'
       - 'github-workflows'
+    groups:
+      github-actions:
+        patterns:
+          - "*"
