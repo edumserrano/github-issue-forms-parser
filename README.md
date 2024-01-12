@@ -61,7 +61,7 @@ A Docker container [GitHub action](https://docs.github.com/en/actions/learn-gith
 **Notes about the JSON output:**
 
 - The keys on the JSON object are id field of the template form element.
-- Checkboxes form elements are outputed as an object whose keys are the [slugified]((https://blog.tersmitten.nl/slugify/)) value of the label of the option.
+- Checkboxes form elements are outputed as an object whose keys are the [slugified](https://blog.tersmitten.nl/slugify/) value of the label of the option.
 - When the form element is optional and no input is provided for the form element then the issue form body will contain a `_No response_` but the parsed output for that key in the JSON string will just be an empty value.
 - **For a better understanding of the output rules see example below.**
 
