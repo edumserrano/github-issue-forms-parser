@@ -42,7 +42,7 @@ jobs:
       with:
         global-json-file: GitHubIssueFormsParser/global.json
     - name: Cache/Restore NuGets
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path:
           ~/.nuget/packages
