@@ -44,6 +44,7 @@ jobs:
     - name: Cache/Restore NuGets
       uses: actions/cache@v4
       with:
+        save-always: true
         path:
           ~/.nuget/packages
         key: ${{ runner.os }}-nuget
