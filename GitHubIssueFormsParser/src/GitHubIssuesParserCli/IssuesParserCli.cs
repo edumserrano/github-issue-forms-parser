@@ -11,7 +11,7 @@ public class IssuesParserCli
 
     public ValueTask<int> RunAsync(IReadOnlyList<string> args = default!)
     {
-        args ??= Array.Empty<string>();
+        args ??= [];
         return CliApplicationBuilder
             .Build()
             .RunAsync(args);
