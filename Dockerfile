@@ -4,7 +4,8 @@
 
 FROM mcr.microsoft.com/dotnet/runtime:8.0-alpine AS base
 # install powershell as per https://docs.microsoft.com/en-us/powershell/scripting/install/install-alpine
-ARG PWSH_VERSION=7.4.0
+# the official docs install libssl1.1 but that started to fail and I tried ussing libssl3 which seems to work
+ARG PWSH_VERSION=7.4.1
 RUN apk add --no-cache \
     ca-certificates \
     less \
@@ -12,7 +13,7 @@ RUN apk add --no-cache \
     krb5-libs \
     libgcc \
     libintl \
-    libssl1.1 \
+    libssl3 \
     libstdc++ \
     tzdata \
     userspace-rcu \
