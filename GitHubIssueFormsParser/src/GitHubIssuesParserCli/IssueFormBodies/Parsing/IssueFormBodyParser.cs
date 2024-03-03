@@ -31,7 +31,7 @@ internal static class IssueFormBodyParser
         return templateItemIdx == templateItems.Count - 1 ? null : templateItems[templateItemIdx + 1];
     }
 
-    private static (int startIdx, int valueLength) GetLevel3HeaderValueIndexes(
+    private static (int StartIdx, int ValueLength) GetLevel3HeaderValueIndexes(
         IssueFormYmlTemplateItemLabel currentH3Header,
         IssueFormYmlTemplateItemLabel? nextH3Header,
         IssueFormBodyText issueFormBodyText)
