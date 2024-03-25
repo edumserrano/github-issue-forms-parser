@@ -37,4 +37,4 @@ When running tests we use 3 loggers:
 
 ## Secrets
 
-This workflow uses a Dependabot secret `CODECOV_TOKEN`. This secret contains a [token from Codecov](https://app.codecov.io/gh/edumserrano/github-issue-forms-parser/settings) with permissions to upload [code coverage to Codecov](https://app.codecov.io/gh/edumserrano/github-issue-forms-parser).
+This workflow uses a Dependabot secret as well as a Repository secret named `CODECOV_TOKEN`. This secret contains a [token from Codecov](https://app.codecov.io/gh/edumserrano/github-issue-forms-parser/settings) with permissions to upload [code coverage to Codecov](https://app.codecov.io/gh/edumserrano/github-issue-forms-parser).
