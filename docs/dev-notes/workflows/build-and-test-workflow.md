@@ -11,9 +11,7 @@
 
 ## Codecov
 
-Codecov integration is done via the [Codecov GitHub app](https://github.com/apps/codecov).
-
-Besides the information available on the [Codecov web app](https://app.codecov.io/gh/edumserrano/github-issue-forms-parser), this integration enables Codecov to:
+Codecov integration is done via the [Codecov GitHub app](https://github.com/apps/codecov). Besides the information available on the [Codecov web app](https://app.codecov.io/gh/edumserrano/github-issue-forms-parser), this integration enables Codecov to:
 
 - [add status checks on pull requests](https://docs.codecov.com/docs/commit-status)
 - [display coverage on pull requests via comments](https://docs.codecov.com/docs/pull-request-comments)
