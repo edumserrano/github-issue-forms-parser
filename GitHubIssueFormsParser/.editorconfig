@@ -614,6 +614,7 @@ dotnet_diagnostic.SA1651.severity = suggestion      # SA1651: Do not use placeho
 # See https://github.com/meziantou/Meziantou.Analyzer/tree/main/docs
 ##########################################
 [*.cs]
+dotnet_diagnostic.MA0032.severity = none    # MA0032 Use an overload with a CancellationToken argument
 dotnet_diagnostic.MA0051.severity = none    # MA0051 Method is too long
 
 ##########################################
