@@ -25,6 +25,13 @@ internal sealed class IssueFormCheckBoxesText
                         .TrimIssueText();
                     isChecked = true;
                 }
+                else if (optionText.StartsWith("- [x]", StringComparison.Ordinal))
+                {
+                    label = optionText
+                        .TrimStart([.. "- [x]"])
+                        .TrimIssueText();
+                    isChecked = true;
+                }
                 else if (optionText.StartsWith("- [ ]", StringComparison.Ordinal))
                 {
                     label = optionText
