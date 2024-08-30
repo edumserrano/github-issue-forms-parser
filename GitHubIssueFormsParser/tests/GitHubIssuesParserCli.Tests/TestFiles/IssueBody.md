@@ -29,6 +29,6 @@ Another line:
 ### Which operating systems have you used?
 
 - [X] macOS
-- [X] Windows
+- [x] Windows
 - [ ] Linux
 - [ ] I don't know
