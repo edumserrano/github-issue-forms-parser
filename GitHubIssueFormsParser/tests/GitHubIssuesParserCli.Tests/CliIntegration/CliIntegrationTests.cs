@@ -117,6 +117,8 @@ public class CliIntegrationTests
 
     /// <summary>
     /// Tests the correct value for the options that can be used with the 'parse-issue-form' command.
+    /// This test uses an issue body where the checkboxes use both an Uppercase and Lowercase 'X' or aren't
+    /// checked.
     /// </summary>
     [Theory]
     [InlineData("-i", "-t")]
