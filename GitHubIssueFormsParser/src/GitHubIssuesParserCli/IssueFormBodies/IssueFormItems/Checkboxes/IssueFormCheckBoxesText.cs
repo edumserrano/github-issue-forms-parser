@@ -12,8 +12,8 @@ internal sealed class IssueFormCheckBoxesText
 
     private static List<IssueFormCheckboxOption> CreateCheckboxOptions(string options)
     {
-        return options
-            .Split(new char[] { NewLines.CR, NewLines.LF }, StringSplitOptions.RemoveEmptyEntries)
+        var checkboxOptions = options
+            .Split([NewLines.CR, NewLines.LF], StringSplitOptions.RemoveEmptyEntries)
             .Select(optionText =>
             {
                 string label;
@@ -45,7 +45,7 @@ internal sealed class IssueFormCheckBoxesText
                 }
 
                 return new IssueFormCheckboxOption(label, isChecked);
-            })
-            .ToList();
+            });
+        return [.. checkboxOptions];
     }
 }
