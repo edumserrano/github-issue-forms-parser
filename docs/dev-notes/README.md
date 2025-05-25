@@ -22,19 +22,19 @@
 
 ### Building with Visual Studio
 
-1) Clone the repo and open the **GitHubIssueFormsParser.sln** solution file at `/GitHubIssueFormsParser`.
+1) Clone the repo and open the **GitHubIssueFormsParser.slnx** solution file at `/GitHubIssueFormsParser`.
 2) Press build on Visual Studio.
 
 ### Building with dotnet CLI
 
 1) Clone the repo and browse to the solution's directory at `/GitHubIssueFormsParser` using your favorite shell.
-2) Run **`dotnet build GitHubIssueFormsParser.sln`** to build the source of the CLI app.
+2) Run **`dotnet build GitHubIssueFormsParser.slnx`** to build the source of the CLI app.
 
 ## Running GitHubIssueFormsParser solution tests
 
 ### Run tests with Visual Studio
 
-1) Clone the repo and open the **GitHubIssueFormsParser.sln** solution file at `/GitHubIssueFormsParser`.
+1) Clone the repo and open the **GitHubIssueFormsParser.slnx** solution file at `/GitHubIssueFormsParser`.
 2) Go to the test explorer in Visual Studio and run tests.
 
 **Note:** [Remote testing](https://docs.microsoft.com/en-us/visualstudio/test/remote-testing?view=vs-2022) with is configured on the solution which enables you to run the tests locally on Linux or on Windows. You can view the configuration file at [testenvironments.json](/GitHubIssueFormsParser/testenvironments.json). To run the tests on Linux you need to have at least `Visual Studio 2022` and:
@@ -45,7 +45,7 @@
 ### Run tests with dotnet CLI
 
 1) Clone the repo and browse to the solution's directory at `/GitHubIssueFormsParser` using your favorite shell.
-2) Run **`dotnet test GitHubIssueFormsParser.sln`** to run tests.
+2) Run **`dotnet test GitHubIssueFormsParser.slnx`** to run tests.
 
 ## Debugging the `GitHubIssuesParserCli` project using Visual Studio
 

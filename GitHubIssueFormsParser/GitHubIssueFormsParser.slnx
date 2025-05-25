@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/GitHubIssuesParserCli/GitHubIssuesParserCli.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/GitHubIssuesParserCli.Tests/GitHubIssuesParserCli.Tests.csproj" />
+  </Folder>
+</Solution>

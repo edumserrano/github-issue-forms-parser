@@ -27,7 +27,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     env:
       SLN_DIR: GitHubIssueFormsParser
-      SLN_FILENAME: GitHubIssueFormsParser.sln
+      SLN_FILENAME: GitHubIssueFormsParser.slnx
       TEST_RESULTS_ARTIFACT_NAME: test-results
       CODE_COVERAGE_ARTIFACT_NAME: code-coverage-report
     steps:
