@@ -22,5 +22,6 @@
       },
       "description": "Avoids 403s from GitHub docs"
     }
-  ]
+  ],
+  "aliveStatusCodes": [429, 200]
 }
