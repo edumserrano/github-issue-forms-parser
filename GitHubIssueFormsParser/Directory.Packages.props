@@ -4,23 +4,23 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="CliFx" Version="2.3.5" />
+    <PackageVersion Include="CliFx" Version="2.3.6" />
     <PackageVersion Include="SlugGenerator" Version="2.0.2" />
     <PackageVersion Include="YamlDotNet" Version="16.3.0" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.0" />
     <PackageVersion Include="xunit" Version="2.9.3" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.2" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.0" />
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
-    <PackageVersion Include="Meziantou.Analyzer" Version="2.0.187" />
-    <PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.13.2" />
-    <PackageVersion Include="Roslynator.Analyzers" Version="4.13.0" />
-    <PackageVersion Include="Roslynator.CodeAnalysis.Analyzers" Version="4.13.0" />
-    <PackageVersion Include="Roslynator.Formatting.Analyzers" Version="4.13.0" />
+    <PackageVersion Include="Meziantou.Analyzer" Version="2.0.201" />
+    <PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.14.15" />
+    <PackageVersion Include="Roslynator.Analyzers" Version="4.13.1" />
+    <PackageVersion Include="Roslynator.CodeAnalysis.Analyzers" Version="4.13.1" />
+    <PackageVersion Include="Roslynator.Formatting.Analyzers" Version="4.13.1" />
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556" />
     <PackageVersion Include="coverlet.msbuild" Version="6.0.4" />
     <PackageVersion Include="NSubstitute" Version="5.3.0" />
     <PackageVersion Include="Shouldly" Version="4.3.0" />
-    <PackageVersion Include="xunit.analyzers" Version="1.18.0" />
+    <PackageVersion Include="xunit.analyzers" Version="1.21.0" />
     <PackageVersion Include="NSubstitute.Analyzers.CSharp" Version="1.0.17" />
     <PackageVersion Include="GitHubActionsTestLogger" Version="2.4.1" />
     <PackageVersion Include="LiquidTestReports.Custom" Version="1.0.9" />

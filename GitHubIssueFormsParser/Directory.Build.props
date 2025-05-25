@@ -74,7 +74,10 @@
     </PackageReference>
     <PackageReference Include="NSubstitute" />
     <PackageReference Include="Shouldly" />
-    <PackageReference Include="xunit.analyzers" />
+    <PackageReference Update="xunit.analyzers">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="NSubstitute.Analyzers.CSharp" />
     <PackageReference Include="GitHubActionsTestLogger" />
     <PackageReference Include="LiquidTestReports.Custom" />
