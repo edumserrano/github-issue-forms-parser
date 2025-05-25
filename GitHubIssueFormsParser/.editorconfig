@@ -26,8 +26,12 @@ trim_trailing_whitespace = true
 ##########################################
 
 # Visual Studio Solution Files
-[*.{sln,slnx}]
+[*.{sln}]
 indent_style = tab
+
+# Latest Visual Studio Solution Files
+[*.slnx]
+indent_size = 2
 
 # Visual Studio XML Project Files
 [*.{csproj,vbproj,vcxproj.filters,proj,projitems,shproj}]
