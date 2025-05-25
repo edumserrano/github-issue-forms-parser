@@ -32,6 +32,8 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0-alpine AS build
 WORKDIR /github-issue-forms-parser
 COPY ["GitHubIssueFormsParser/NuGet.Config", "GitHubIssueFormsParser/"]
 COPY ["GitHubIssueFormsParser/src/GitHubIssuesParserCli/GitHubIssuesParserCli.csproj", "GitHubIssueFormsParser/src/GitHubIssuesParserCli/"]
+COPY ["GitHubIssueFormsParser/Directory.Build.props", "GitHubIssueFormsParser/"]
+COPY ["GitHubIssueFormsParser/Directory.Packages.props", "GitHubIssueFormsParser/"]
 RUN dotnet restore "GitHubIssueFormsParser/src/GitHubIssuesParserCli/GitHubIssuesParserCli.csproj"
 COPY . .
 WORKDIR "/github-issue-forms-parser/GitHubIssueFormsParser/src/GitHubIssuesParserCli"
