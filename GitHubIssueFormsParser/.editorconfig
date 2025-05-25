@@ -26,7 +26,7 @@ trim_trailing_whitespace = true
 ##########################################
 
 # Visual Studio Solution Files
-[*.{sln}]
+[*.sln]
 indent_style = tab
 
 # Latest Visual Studio Solution Files
