@@ -11,7 +11,7 @@
     <PackageVersion Include="xunit" Version="2.9.3" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.4" />
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
-    <PackageVersion Include="Meziantou.Analyzer" Version="2.0.220" />
+    <PackageVersion Include="Meziantou.Analyzer" Version="2.0.221" />
     <PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.14.15" />
     <PackageVersion Include="Roslynator.Analyzers" Version="4.14.0" />
     <PackageVersion Include="Roslynator.CodeAnalysis.Analyzers" Version="4.14.0" />
