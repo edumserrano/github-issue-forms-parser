@@ -124,13 +124,13 @@ jobs:
           -reportTypes:htmlInline
     - name: Upload code coverage report to artifacts
       if: matrix.os == 'ubuntu-latest' && steps.even-if-tests-fail.outputs.condition == 'true' && always()
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: ${{ env.CODE_COVERAGE_ARTIFACT_NAME }}
         path: ${{ steps.code-coverage-report-generator.outputs.test-coverage-report-dir }}
     - name: Upload test results to artifacts
       if: matrix.os == 'ubuntu-latest' && steps.even-if-tests-fail.outputs.condition == 'true' && always()
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: ${{ env.TEST_RESULTS_ARTIFACT_NAME }}
         path: ${{ steps.dotnet-test.outputs.test-results-dir }}
